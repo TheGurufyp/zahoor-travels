@@ -29,11 +29,11 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Search2Icon } from "react-icons";
+import Link from "next/link";
 
 const client = () => {
   return (
     <>
-      
       <Center my={"1.5rem"}>
         <Heading color={"blue.400"}>Manage Vocture</Heading>
       </Center>
@@ -95,9 +95,11 @@ const client = () => {
             // align={"center"}
             mr="1.7rem"
           >
-            <Button bg={"blue.400"} color="white" variant="solid">
-              Create +
-            </Button>
+            <Link href={"/create"}>
+              <Button bg={"blue.400"} color="white" variant="solid">
+                Create +
+              </Button>
+            </Link>
           </Flex>
         </Flex>
         {/* <Divider my={"1rem"} /> */}
