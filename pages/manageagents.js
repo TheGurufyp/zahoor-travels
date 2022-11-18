@@ -31,43 +31,62 @@ function Manageagents() {
       <Tr>
         <Td > 
         <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>nabeel123 </Td>
+        <Td>***** </Td>
         <Td isNumeric>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
           <Button size={"sm"} colorScheme={"red"}> Delete</Button>
        
         </Td>
       </Tr>
+
       <Tr>
         <Td > 
         <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>nabeel123 </Td>
+        <Td>***** </Td>
         <Td isNumeric>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
           <Button size={"sm"} colorScheme={"red"}> Delete</Button>
        
         </Td>
       </Tr>
+
+
       <Tr>
         <Td > 
         <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>nabeel123 </Td>
+        <Td>***** </Td>
         <Td isNumeric>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
           <Button size={"sm"} colorScheme={"red"}> Delete</Button>
        
         </Td>
       </Tr>
+
+
       <Tr>
         <Td > 
         <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>nabeel123 </Td>
+        <Td>***** </Td>
         <Td isNumeric>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
           <Button size={"sm"} colorScheme={"red"}> Delete</Button>
        
         </Td>
       </Tr>
+
+
+      <Tr>
+        <Td > 
+        <Text>  Nabeel Tours And Travels</Text></Td>
+        <Td>***** </Td>
+        <Td isNumeric>
+        <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
+          <Button size={"sm"} colorScheme={"red"}> Delete</Button>
+       
+        </Td>
+      </Tr>
+      
+      
      
     </Tbody>
     <Tfoot>
