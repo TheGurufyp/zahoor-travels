@@ -89,7 +89,7 @@ const create = () => {
             borderRadius={"8px"}
           ></Divider>
 
-          <Flex my={"10px"} justify="space-between" flexWrap={"wrap"}>
+          <Flex my={"20px"} justify="space-between" flexWrap={"wrap"}>
             <Flex
               // border={"1px"}
               align="center"
@@ -235,13 +235,13 @@ const create = () => {
               align="center"
             >
               <Box>PNR No : </Box>
-              <Box ml={"10px"}>
+              <Box>
                 <Input
                   border={"1px"}
                   borderColor="blue.400"
                   htmlSize={7}
                   width="auto"
-                  ml={"30px"}
+                  ml={"10px"}
                 />
               </Box>
             </Flex>
