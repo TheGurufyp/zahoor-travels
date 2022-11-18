@@ -9,11 +9,15 @@ import {
     Td,
     TableCaption,
     TableContainer,
-    Text,Box, Button
+    Text,Box, Button,
+   
   } from '@chakra-ui/react'
+import ConfirmDialog from './components/ConfirmDialog'
+import EditAgentModal from './components/EditAgentModal'
 function Manageagents() {
   return (
    <>
+ 
    <Box mx="10px" mb="30px">
    <TableContainer maxWidth={"1500px"} mx="auto" border={"1px"} borderColor="gray.400" borderRadius={"8px"} mt="50px">
   <Table variant='striped' colorScheme="blue"   >
@@ -33,20 +37,13 @@ function Manageagents() {
         <Text>  Nabeel Tours And Travels</Text></Td>
         <Td>***** </Td>
         <Td isNumeric>
+          <EditAgentModal>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-          <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-       
-        </Td>
-      </Tr>
-
-      <Tr>
-        <Td > 
-        <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>***** </Td>
-        <Td isNumeric>
-        <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-          <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-       
+        </EditAgentModal>
+        <ConfirmDialog>
+        <Button size={"sm"} colorScheme={"red"}> Delete</Button>
+        </ConfirmDialog>
+         
         </Td>
       </Tr>
 
@@ -56,36 +53,30 @@ function Manageagents() {
         <Text>  Nabeel Tours And Travels</Text></Td>
         <Td>***** </Td>
         <Td isNumeric>
+          <EditAgentModal>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-          <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-       
+        </EditAgentModal>
+        <ConfirmDialog>
+        <Button size={"sm"} colorScheme={"red"}> Delete</Button>
+        </ConfirmDialog>
+         
         </Td>
       </Tr>
-
 
       <Tr>
         <Td > 
         <Text>  Nabeel Tours And Travels</Text></Td>
         <Td>***** </Td>
         <Td isNumeric>
+          <EditAgentModal>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-          <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-       
+        </EditAgentModal>
+        <ConfirmDialog>
+        <Button size={"sm"} colorScheme={"red"}> Delete</Button>
+        </ConfirmDialog>
+         
         </Td>
       </Tr>
-
-
-      <Tr>
-        <Td > 
-        <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>***** </Td>
-        <Td isNumeric>
-        <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-          <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-       
-        </Td>
-      </Tr>
-      
       
      
     </Tbody>
