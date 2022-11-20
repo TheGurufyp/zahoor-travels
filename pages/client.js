@@ -30,7 +30,6 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Search2Icon } from "react-icons";
-import Link from "next/link";
 
 const client = () => {
   return (
@@ -96,17 +95,11 @@ const client = () => {
             // align={"center"}
             mr="1.7rem"
           >
-<<<<<<< Updated upstream
             <Link href={"/create"}>
               <Button bg={"blue.400"} color="white" variant="solid">
                 Create +
               </Button>
             </Link>
-=======
-            <Button bg={"blue.400"} color="white" variant="solid">
-              <Link href="/create">Create +</Link>
-            </Button>
->>>>>>> Stashed changes
           </Flex>
         </Flex>
         {/* <Divider my={"1rem"} /> */}
