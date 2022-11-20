@@ -20,86 +20,83 @@ function Adminpanel() {
   boxShadow={isLargerThan673?"lg":"none"} px="10px" mb="20px"
   
   >
-<NextLink href={"/pendingvouchers"}>
-<Button
-//  backgroundColor={"#D30707"}
-colorScheme={"red"}
+    <Box   w={isLargerThan982?"300px":isLargerThan673?"220px":"100%"} my={isLargerThan673?"40px":"10px"}  backgroundColor={"#D30707"}
  height="200px"
-  w={isLargerThan982?"300px":isLargerThan673?"220px":"100%"} 
  borderRadius={"20px"} 
-//  border={"2px"} borderColor="#D30707" color={"#D30707"}
-color={"white"}
+color={"white"}>
+<NextLink href={"/pendingvouchers"}  >
 
-my={isLargerThan673?"40px":"10px"}>
 <Flex direction="column"
 justifyContent={"center"} align="center"
-
-
-> 
+height="100%"> 
 
   <Text  fontWeight="bold" fontSize={isLargerThan982?"1.7rem":"1.3rem"}>Pending Vouchers</Text>
   <Text  fontSize="1.7rem">0</Text>
 
 </Flex>
-</Button>
+
 </NextLink>
+</Box>
 
 
-<NextLink href={"/manageagents"}>
-<Button 
-// backgroundColor={"#5B2DE0"}
-colorScheme={"purple"}
- height="200px" w={isLargerThan982?"300px":isLargerThan673?"220px":"100%"}   borderRadius={"20px"} 
-// border={"2px"} borderColor="#5B2DE0" color={"#5B2DE0"}
-color={"white"}
-mb={isLargerThan673?"":"20px"}
-my={isLargerThan673?"40px":"10px"}>
+<Box   w={isLargerThan982?"300px":isLargerThan673?"220px":"100%"} my={isLargerThan673?"40px":"10px"}  backgroundColor={"#5B2DE0"}
+ height="200px"
+ borderRadius={"20px"} 
+color={"white"}>
+<NextLink href={"/manageagents"}  >
+
 <Flex direction="column"
 justifyContent={"center"} align="center"
+height="100%"> 
 
- 
-> 
-
-  <Text  fontWeight="bold"  fontSize={isLargerThan982?"1.7rem":"1.3rem"}>Agents</Text>
+  <Text  fontWeight="bold" fontSize={isLargerThan982?"1.7rem":"1.3rem"}>Agents</Text>
   <Text  fontSize="1.7rem">0</Text>
 
 </Flex>
-</Button>
-</NextLink>
 
-<NextLink href={"/vouchers"}> 
-<Button 
-backgroundColor={"#282828"}
-// colorScheme={"green"}
-  height="200px" w={isLargerThan982?"300px":isLargerThan673?"220px":"100%"}   borderRadius={"20px"} 
-// border={"2px"} borderColor="#28282" color={"#28282"}
-color={"white"}
-mb={isLargerThan673?"":"20px"}
-my={isLargerThan673?"40px":"10px"}>
-<Flex justifyContent={"center"} align="center" direction="column"> 
+</NextLink>
+</Box>
+
+
+
+<Box   w={isLargerThan982?"300px":isLargerThan673?"220px":"100%"} my={isLargerThan673?"40px":"10px"}  backgroundColor={"#282828"}
+ height="200px"
+ borderRadius={"20px"} 
+color={"white"}>
+<NextLink href={"/vouchers"}  >
+
+<Flex direction="column"
+justifyContent={"center"} align="center"
+height="100%"> 
 
   <Text  fontWeight="bold" fontSize={isLargerThan982?"1.7rem":"1.3rem"}>All Vouchers</Text>
   <Text  fontSize="1.7rem">0</Text>
 
 </Flex>
-</Button>
-</NextLink>
 
-<NextLink href={"/createagent"}> 
-<Button 
-// backgroundColor={"#2DA6EB"}
-colorScheme={"linkedin"}
- height="200px"  w={isLargerThan982?"300px":isLargerThan673?"220px":"100%"}   borderRadius={"20px"} 
-// border={"2px"} borderColor="#2DA6EB" 
-color={"white"}
-mb={isLargerThan673?"":"20px"}
-my={isLargerThan673?"40px":"10px"}>
+</NextLink>
+</Box>
+
+
+
+
+<Box   w={isLargerThan982?"300px":isLargerThan673?"220px":"100%"} my={isLargerThan673?"40px":"10px"}  backgroundColor={"blue.400"}
+ height="200px"
+ borderRadius={"20px"} 
+color={"white"}>
+<NextLink href={"/createagent"}  >
+
+<Flex direction="column"
+justifyContent={"center"} align="center"
+height="100%"> 
 
   <Text  fontWeight="bold" fontSize={isLargerThan982?"1.7rem":"1.3rem"}>Create New Agent</Text>
  
-</Button>
+
+</Flex>
 
 </NextLink>
+</Box>
 
 
   </Flex>

@@ -40,23 +40,7 @@ function Manageagents() {
           <EditAgentModal>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
         </EditAgentModal>
-        <ConfirmDialog>
-        <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-        </ConfirmDialog>
-         
-        </Td>
-      </Tr>
-
-
-      <Tr>
-        <Td > 
-        <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>***** </Td>
-        <Td isNumeric>
-          <EditAgentModal>
-        <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-        </EditAgentModal>
-        <ConfirmDialog>
+        <ConfirmDialog head="Delete Agent ?" desc="Are you sure you want to delete this agent.">
         <Button size={"sm"} colorScheme={"red"}> Delete</Button>
         </ConfirmDialog>
          
@@ -71,12 +55,28 @@ function Manageagents() {
           <EditAgentModal>
         <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
         </EditAgentModal>
-        <ConfirmDialog>
+        <ConfirmDialog head="Delete Agent ?" desc="Are you sure you want to delete this agent.">
         <Button size={"sm"} colorScheme={"red"}> Delete</Button>
         </ConfirmDialog>
          
         </Td>
       </Tr>
+
+      <Tr>
+        <Td > 
+        <Text>  Nabeel Tours And Travels</Text></Td>
+        <Td>***** </Td>
+        <Td isNumeric>
+          <EditAgentModal>
+        <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
+        </EditAgentModal>
+        <ConfirmDialog head="Delete Agent ?" desc="Are you sure you want to delete this agent.">
+        <Button size={"sm"} colorScheme={"red"}> Delete</Button>
+        </ConfirmDialog>
+         
+        </Td>
+      </Tr>
+     
       
      
     </Tbody>
