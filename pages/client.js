@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   Flex,
   Box,
@@ -95,11 +96,17 @@ const client = () => {
             // align={"center"}
             mr="1.7rem"
           >
+<<<<<<< Updated upstream
             <Link href={"/create"}>
               <Button bg={"blue.400"} color="white" variant="solid">
                 Create +
               </Button>
             </Link>
+=======
+            <Button bg={"blue.400"} color="white" variant="solid">
+              <Link href="/create">Create +</Link>
+            </Button>
+>>>>>>> Stashed changes
           </Flex>
         </Flex>
         {/* <Divider my={"1rem"} /> */}

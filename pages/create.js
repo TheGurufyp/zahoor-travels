@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import {
   Center,
   Heading,
@@ -250,6 +251,12 @@ const create = () => {
       </Flex>
     </>
   );
+=======
+import React from "react";
+
+const create = () => {
+  return <>create</>;
+>>>>>>> Stashed changes
 };
 
 export default create;
