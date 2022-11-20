@@ -120,11 +120,11 @@ const Transport = () => {
                   </Box>
                 </Flex>
               </Flex>
-              <Box>
+              <Box mx={"1rem"}>
                 {inputList.length !== 1 && (
                   <Button
                     colorScheme="blue"
-                    paddingInline={"2rem"}
+                    paddingInline={"1rem"}
                     onClick={() => handleRemoveClick(i)}
                   >
                     Remove
