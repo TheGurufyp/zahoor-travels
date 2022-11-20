@@ -275,7 +275,7 @@ const create = () => {
           fontSize={"2rem"}
           fontWeight="semibold"
           bg={"gray.200"}
-          my="1rem"
+          my="1.5rem"
         >
           Transportation Detail
         </Center>
