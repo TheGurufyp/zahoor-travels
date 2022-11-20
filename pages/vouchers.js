@@ -34,22 +34,26 @@ function Vouchers() {
      <Heading bg={"blue.500"} color="white" py="10px" borderRadius={"8px"} textAlign={"center"}   mt="50px">Manage Vouchers</Heading>
 
     <Flex mt="20px" align={"center"}  justify={"space-around"} direction={isLargerThan620?"row":"column"} h={isLargerThan620?"":"240px"}>
-     <Box borderRadius={"8px"} bg="blue.500" p="10px" px="20px" textAlign={"center"} color="white" fontWeight={"semibold"} fontSize="1.1rem"
-     w={isLargerThan620?"":"100%"}
+     <Box borderRadius={"8px"} borderTopRadius={"10px"}   textAlign={"center"}  fontWeight={"semibold"} fontSize="1.3rem"
+     w={isLargerThan620?"":"100%"} border="1px" borderColor={"gray.400"}
      >
-        <Text> Total Vouchers</Text>
+        <Text borderTopRadius={"8px"} color={"white"} bg="blue.500" px="40px"> Total Vouchers</Text>
         <Text > 0</Text>
         </Box>
 
-        <Box borderRadius={"8px"} bg="blue.500" p="10px" px="20px" textAlign={"center"} color="white" fontWeight={"semibold"} fontSize="1.1rem"
-        w={isLargerThan620?"":"100%"}>
-        <Text> Approved Vouchers</Text>
+        <Box borderRadius={"8px"} borderTopRadius={"10px"}   textAlign={"center"}  fontWeight={"semibold"} fontSize="1.3rem"
+     w={isLargerThan620?"":"100%"} border="1px" borderColor={"gray.400"}
+     >
+        <Text borderTopRadius={"8px"} color={"white"} bg="blue.500" px="40px"> Approved Vouchers</Text>
         <Text > 0</Text>
         </Box>
 
-        <Box borderRadius={"8px"} bg="blue.500" p="10px" px="20px" textAlign={"center"} color="white" fontWeight={"semibold"} fontSize="1.1rem"
-        w={isLargerThan620?"":"100%"}>
-        <Text> Pending Vouchers</Text>
+
+
+        <Box borderRadius={"8px"} borderTopRadius={"10px"}   textAlign={"center"}  fontWeight={"semibold"} fontSize="1.3rem"
+     w={isLargerThan620?"":"100%"} border="1px" borderColor={"gray.400"}
+     >
+        <Text borderTopRadius={"8px"} color={"white"} bg="blue.500" px="40px"> Pending Vouchers</Text>
         <Text > 0</Text>
         </Box>
      </Flex>
