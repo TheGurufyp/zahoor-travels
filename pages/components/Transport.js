@@ -123,7 +123,7 @@ const Transport = () => {
               <Box mx={"1rem"}>
                 {inputList.length !== 1 && (
                   <Button
-                    colorScheme="blue"
+                    colorScheme="red"
                     paddingInline={"1rem"}
                     onClick={() => handleRemoveClick(i)}
                   >
