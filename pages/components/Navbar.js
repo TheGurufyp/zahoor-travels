@@ -14,6 +14,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  Button,
   MenuItem,
   MenuItemOption,
   MenuGroup,
@@ -25,42 +26,43 @@ function Navbar() {
   return (
     <>
       <Flex
-        justify={"space-between"}
+        // justify={"space-between"}
         bg="blue.400"
-        sx={basicBoxStyles}
+        // sx={basicBoxStyles}
         filter="auto"
         brightness="90%"
         pos={"sticky"}
       >
         <Flex
-        //   border={"1px"}
-        // minW={"200px"}
-        // justifyContent="center"
-        // align={"center"}
-        // my="1rem"
+          border={"1px"}
+          // minW={"200px"}
+          // justifyContent="center"
+          // align={"center"}
+          // my="1rem"
+          zIndex="-999990000"
         >
-          <Menu border="1px">
+          {/* <HamburgerIcon /> */}
+          {/* <Menu closeOnSelect={false}>
             <MenuButton
-              as={IconButton}
-              aria-label="Options"
-              icon={<HamburgerIcon />}
-              variant="outline"
-            />
-            <MenuList>
-              <MenuItem icon={<AddIcon />} command="⌘T">
-                New Tab
-              </MenuItem>
-              <MenuItem icon={<ExternalLinkIcon />} command="⌘N">
-                New Window
-              </MenuItem>
-              <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
-                Open Closed Tab
-              </MenuItem>
-              <MenuItem icon={<EditIcon />} command="⌘O">
-                Open File...
-              </MenuItem>
+              as={Button}
+              colorScheme="blue"
+              IconButton={<FaUserAlt fill="white" size={"1.5rem"} />}
+            >
+              Zahoor Tours & Travel
+            </MenuButton>
+            <MenuList minWidth="240px">
+              <MenuOptionGroup defaultValue="asc" title="Order" type="radio">
+                <MenuItemOption value="asc">Ascending</MenuItemOption>
+                <MenuItemOption value="desc">Descending</MenuItemOption>
+              </MenuOptionGroup>
+              <MenuDivider />
+              <MenuOptionGroup title="Country" type="checkbox">
+                <MenuItemOption value="email">Email</MenuItemOption>
+                <MenuItemOption value="phone">Phone</MenuItemOption>
+                <MenuItemOption value="country">Country</MenuItemOption>
+              </MenuOptionGroup>
             </MenuList>
-          </Menu>
+          </Menu> */}
         </Flex>
 
         <Flex

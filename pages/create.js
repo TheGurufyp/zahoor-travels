@@ -14,7 +14,7 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import React from "react";
+import { React } from "react";
 import { ArrowLeftIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { SlCalender } from "react-icons/sl";
 // import Navbar from "./components/Navbar";
@@ -28,8 +28,32 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import Transport from "./components/Transport";
 
 const create = () => {
+  const [inputList, setInputList] = useState([{ firstName: "", lastName: "" }]);
+
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+
+  // handle click event of the Remove button
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { firstName: "", lastName: "" }]);
+  };
+
   return (
     <>
       {/* //main Heading */}
@@ -247,6 +271,124 @@ const create = () => {
             </Flex>
           </Flex>
         </Box>
+        <Center
+          fontSize={"2rem"}
+          fontWeight="semibold"
+          bg={"gray.200"}
+          my="1rem"
+        >
+          Transportation Detail
+        </Center>
+        {inputList.map((x, i) => {
+          // <Transport />;
+          ///start
+          // console.log("x", x, "i", i);
+          if (inputList.length !== 0) {
+            return (
+              <>
+                <Flex>
+                  <Flex
+                    // border={"1px"}
+                    align="center"
+                    // mx={"1rem"}
+                    justify={"center"}
+                    w={"30%"}
+
+                    //  direction={"column"}
+                  >
+                    <Box> Date : </Box>
+                    <Box ml={"1rem"}>
+                      <Input
+                        type={"date"}
+                        border=" 1px"
+                        borderColor={"blue.400"}
+                      />
+                    </Box>
+                  </Flex>
+                  <Flex
+                    // border={"1px"}
+                    align="center"
+                    // justify={"space-around"}
+                    // mx={"2rem"}
+                    // my={"2rem"}
+                    w={"40%"}
+                    justify="center"
+                  >
+                    <Box mx={"1rem"}>From :</Box>
+                    <Flex justify="center" align={"center"}>
+                      <Box>
+                        <Select
+                          placeholder="USA"
+                          border={"1px"}
+                          borderColor="blue.400"
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </Box>
+                      <Box mx={"0.5rem"}>To</Box>
+                      <Box mx={"0.5rem"}>
+                        <Select
+                          name="firstName"
+                          placeholder="AED"
+                          border={"1px"}
+                          borderColor="blue.400"
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </Box>
+                    </Flex>
+                  </Flex>
+
+                  <Flex
+                    // border={"1px"}
+                    align="center"
+                    w={"30%"}
+                    my="2rem"
+                    justify={"center"}
+                  >
+                    <Box>Type of Transfer : </Box>
+                    <Flex mx={"1rem"}>
+                      <Box>
+                        <Select
+                          placeholder="Blue"
+                          border={"1px"}
+                          borderColor="blue.400"
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </Box>
+                    </Flex>
+                    {inputList.length !== 0 && (
+                      <Button
+                        colorScheme="blue"
+                        paddingInline={"2rem"}
+                        onClick={() => handleRemoveClick(i)}
+                      >
+                        Remove
+                      </Button>
+                    )}
+                  </Flex>
+                </Flex>
+              </>
+            );
+          }
+        })}
+        <Flex justify={"right"} mr="5rem">
+          <Button
+            colorScheme="blue"
+            paddingInline={"2rem"}
+            onClick={handleAddClick}
+          >
+            Add New
+          </Button>
+        </Flex>
+        ;
       </Flex>
     </>
   );
