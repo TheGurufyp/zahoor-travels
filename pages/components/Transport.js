@@ -44,13 +44,16 @@ const Transport = () => {
       {inputList.map((x, i) => {
         return (
           <Flex
-            //    border={"1px"}
+            // border={"1px"}
             direction="column"
+            // wrap={"wrap"}
           >
             <Flex
               //  border={"1px"}
               justify="space-between"
               align="center"
+              // direction={"column"}
+              className="flex-2"
             >
               <Flex
                 my={"0.5rem"}
@@ -58,12 +61,16 @@ const Transport = () => {
                 w="90%"
                 justify="space-between"
                 align="center"
+                className="flex-3"
+                // direction={"column"}
               >
                 <Flex
                   //   border={"1px"}
                   justify="space-between"
                   align="center"
-                  ml="5rem"
+                  // ml="5rem"
+                  className="Flex-1"
+                  // direction={"column"}
                 >
                   <Box mx={"1rem"} w="30%">
                     Date :
@@ -84,7 +91,8 @@ const Transport = () => {
                   // border={"1px"}
                   justify="center"
                   align="center"
-                  ml="6rem"
+                  // ml="6rem"
+                  className="Flex-1"
                 >
                   <Box mx={"1rem"}>From - To :</Box>
                   <Box>
@@ -103,7 +111,12 @@ const Transport = () => {
                   </Box>
                 </Flex>
 
-                <Flex justify="center" align="center" ml="5rem">
+                <Flex
+                  justify="center"
+                  align="center"
+                  // ml="5rem"
+                  className="Flex-1"
+                >
                   <Box mx="1rem">Type of Transfer : </Box>
                   <Box>
                     <Select
@@ -132,7 +145,7 @@ const Transport = () => {
                 )}
               </Box>
             </Flex>
-            <Flex justify={"right"} mr="8rem" my={"1rem"}>
+            <Flex justify={"right"} mr="8rem" my={"1rem"} className="flex-4">
               {inputList.length - 1 === i && (
                 <Button
                   colorScheme="blue"

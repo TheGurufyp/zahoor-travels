@@ -113,13 +113,20 @@ const create = () => {
             borderRadius={"8px"}
           ></Divider>
 
-          <Flex my={"20px"} justify="space-between" flexWrap={"wrap"}>
+          <Flex
+            my={"20px"}
+            className="main-sec"
+            justify="space-between"
+            flexWrap={"wrap"}
+          >
             <Flex
               // border={"1px"}
               align="center"
               // mx={"1rem"}
               justify={"center"}
-              w={"30%"}
+              //w={"30%"}
+              className="Flex-7"
+              my={"2rem"}
 
               //  direction={"column"}
             >
@@ -129,12 +136,14 @@ const create = () => {
               </Box>
             </Flex>
             <Flex
-              w={"30%"}
+              //w={"30%"}
               // border={"1px"}
               //  direction={"column"}
               justify={"center"}
               align="center"
-              // mx={"2rem"}
+              mx={"1rem"}
+              my="1rem"
+              className="Flex-7"
             >
               <Box mx={"1rem"}>Depart Time : </Box>
               <Flex align={"center"}>
@@ -150,13 +159,14 @@ const create = () => {
               align="center"
               // justify={"space-around"}
               // mx={"2rem"}
-              // my={"2rem"}
-              w={"30%"}
+              my={"1rem"}
+              //w={"30%"}
               justify="center"
+              className="Flex-7"
             >
-              <Box mx={"1rem"}>Sector : </Box>
+              <Box>Sector</Box>
               <Flex justify="space-around" align={"center"}>
-                <Box>
+                <Box ml={"1rem"}>
                   <Select
                     placeholder="USA"
                     border={"1px"}
@@ -189,11 +199,12 @@ const create = () => {
               align="center"
               // mx={"1rem"}
               justify={"center"}
-              w={"30%"}
+              //w={"30%"}
               //  direction={"column"}
-              my="2rem"
+              my="1rem"
+              className="Flex-7"
             >
-              <Box>Arrival Date : </Box>
+              <Box>Arrival Date :</Box>
               <Box ml={"1rem"}>
                 <Input type={"date"} border=" 1px" borderColor={"blue.400"} />
               </Box>
@@ -203,12 +214,13 @@ const create = () => {
              */}
 
             <Flex
-              w={"30%"}
+              //w={"30%"}
               // border={"1px"}
               //  direction={"column"}
               justify={"center"}
               align="center"
-              my={"2rem"}
+              my={"1rem"}
+              className="Flex-7"
             >
               <Box mx={"1rem"}>Arrival Time : </Box>
               <Flex align={"center"}>
@@ -222,11 +234,12 @@ const create = () => {
             <Flex
               // border={"1px"}
               align="center"
-              w={"30%"}
-              my="2rem"
+              //w={"30%"}
+              my="1rem"
               justify={"center"}
+              className="Flex-7"
             >
-              <Box>Flight No : </Box>
+              <Box>Flight No </Box>
               <Flex mx={"1rem"}>
                 <Box>
                   <Select
@@ -253,10 +266,11 @@ const create = () => {
 
             <Flex
               // border={"1px"}
-              w={"30%"}
-              // my="2rem"
+              //w={"30%"}
+              my="2rem"
               justify={"center"}
               align="center"
+              className="Flex-7"
             >
               <Box>PNR No : </Box>
               <Box>
