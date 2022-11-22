@@ -41,7 +41,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import Transport from "./components/Transport";
+import Transport from "../components/Transport";
 import { Radio, RadioGroup } from "@chakra-ui/react";
 
 const create = () => {

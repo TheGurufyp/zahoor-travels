@@ -20,9 +20,9 @@ import {
     Divider,
    
   } from '@chakra-ui/react'
-import ConfirmDialog from './components/ConfirmDialog'
-import EditAgentModal from './components/EditAgentModal'
-import VoucherSearch from './components/VoucherSearch'
+import ConfirmDialog from '../components/ConfirmDialog'
+import EditAgentModal from '../components/EditAgentModal'
+import VoucherSearch from '../components/VoucherSearch'
 
 function Pendingvouchers() {
   return (

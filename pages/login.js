@@ -1,6 +1,57 @@
-import React from "react";
-import { Box, Button, Flex, Heading, Image, Input } from "@chakra-ui/react";
+import React,{useEffect,useContext} from "react";
+import { Box, Button, Flex, Heading, Image, Input ,useToast } from "@chakra-ui/react";
+import axios from "axios"
+import { useFormik } from 'formik';
+import { useRouter } from 'next/router'
+import {userContext} from "../context/userState"
+
+
 function Login() {
+
+  const toast = useToast()
+  const { user,setuser } = useContext(userContext);
+  const router = useRouter()
+
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password:'',
+    },
+    onSubmit: (values) => {
+      axios.post(`${process.env.NEXT_PUBLIC_HOST}/userlogin`, {
+        username: values.username,
+        password: values.password
+      })
+      .then(function (response) {
+        let data=response.data;
+        if(data.success){
+          setuser(data.payload)
+          router.push("/client")
+        }
+        else{
+         
+          toast({
+            title: 'ERROR',
+            position:"top",
+            description: data.payload,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        }
+      })
+      .catch(function (error) {
+        toast({
+          title: error.message,
+          position:"top",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+      });
+    },
+  })
+  
   return (
     <>
       <Flex h="100vh" border={"5px"} borderColor="red" minH="700px">
@@ -24,7 +75,7 @@ function Login() {
             width: 30%;
             background-color: white;
             margin: 30px 0px;
-            height: 600px;
+            height: 500px;
           }
           #heading {
             /* border: 1px solid black; */
@@ -52,69 +103,9 @@ function Login() {
             margin-bottom: 8px;
             width: fit-content;
           }
-          #input-box input {
-            padding: 10px 10px;
-            color: rgb(0, 0, 0);
-            font-weight: normal;
-            letter-spacing: 0.5px;
-            outline: none;
-            border: 2px solid rgb(182, 182, 182);
-            font-size: 1rem;
-            border-radius: 4px;
-            width: 100%;
-            transition: border 0.3s;
-          }
+          
 
-          /* #border::before{
-  content: '';
-  position: absolute;
- border: 2px solid transparent;
-  width: 100%;
-  height: 100%;
-  
-} */
-
-          /* #border{
-border: 1px solid #b9b9b9;
-position: relative;
-border-radius: 4px;
-z-index: 5;
-} */
-          /* #border input{
-  width: 99%;
-} */
-
-          /* #border:hover::before {
-  border: 2px solid #000B49;
-  border-radius: 4px;
- 
-}
-#border:hover{
-  border: 1px solid transparent;
-} */
-
-          input[type="text"] {
-            margin-bottom: 20px;
-            /* border: 2px solid blue; */
-          }
-
-          #input-box input:focus {
-            border: 2px solid #000b49;
-          }
-
-          #forgot-password {
-            /* border: 1px solid red; */
-            width: 50%;
-            margin: 0px auto;
-            text-align: center;
-            font-weight: x-large;
-            cursor: pointer;
-            padding-top: 20px;
-          }
-          #forgot-password a {
-            text-decoration: none;
-            color: #000b49;
-          }
+        
           #btn-1 {
             /* border: 1px solid black; */
             width: 60%;
@@ -122,23 +113,7 @@ z-index: 5;
             margin-top: 30px;
             /* margin-bottom: 300px; */
           }
-          #btn-1 button {
-            /* border: 1px solid yellow; */
-            width: 100%;
-            border: 2px solid #000b49;
-            padding: 20px 20px;
-            border-radius: 30px;
-            font-weight: 500;
-            background-color: #000b49;
-            color: rgb(255, 255, 255);
-            font-size: 1rem;
-          }
-
-          #btn-1 button:hover {
-            background-color: white;
-            color: #000b49;
-          }
-
+         
           #hnsoft {
             /* border: 1px solid red; */
             text-align: center;
@@ -181,29 +156,33 @@ z-index: 5;
         `}</style>
 
         <div id="container">
-          <form id="login-page">
+          <form id="login-page"  onSubmit={formik.handleSubmit}>
             <div id="heading">
               <Heading color={"blue.400"}>Login</Heading>
             </div>
             <div id="input-box">
-              <label for="Email">Username</label>
+              <label htmlFor="Email">Username</label>
 
-              <Input mb="10px" type="text" name="username" variant={"filled"} />
+              <Input mb="10px" type="text" name="username" variant={"filled"} onChange={formik.handleChange}
+        value={formik.values.username}/>
 
-              <label for="Password">Password</label>
+              <label htmlFor="Password">Password</label>
 
-              <Input type="password" name="password" variant={"filled"} />
+              <Input type="password" name="password" variant={"filled"} onChange={formik.handleChange}
+        value={formik.values.password}/>
             </div>
-            <div id="forgot-password">
+            {/* <div id="forgot-password">
               <a href="#">Forgot Password ?</a>
-            </div>
+            </div> */}
             <div id="btn-1">
               <Button
+              mt="35px"
                 w="85%"
                 h="50px"
                 display={"block"}
                 mx="auto"
                 colorScheme={"blue"}
+                type="submit"
               >
                 Login
               </Button>

@@ -3,7 +3,7 @@ import {Box, Button, Flex, Heading, Image, Input} from "@chakra-ui/react"
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router'
 import {userContext} from "../context/userState"
-const axios = require('axios');
+import axios from "axios"
 
 function Adminlogin() {
 

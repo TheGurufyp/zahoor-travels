@@ -21,8 +21,8 @@ import {
     Flex,useMediaQuery
    
   } from '@chakra-ui/react'
-import ConfirmDialog from './components/ConfirmDialog'
-import VoucherSearch from './components/VoucherSearch'
+import ConfirmDialog from '../components/ConfirmDialog'
+import VoucherSearch from '../components/VoucherSearch'
 function Vouchers() {
 
     const [isLargerThan620] = useMediaQuery('(min-width: 620px)')

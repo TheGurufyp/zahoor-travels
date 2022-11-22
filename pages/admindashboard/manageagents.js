@@ -15,8 +15,8 @@ import {
   // import {read,utils} from 'xlsx'
   import * as XLSX from "xlsx"
   import axios from "axios"
-import ConfirmDialog from './components/ConfirmDialog'
-import EditAgentModal from './components/EditAgentModal'
+import ConfirmDialog from '../components/ConfirmDialog'
+import EditAgentModal from '../components/EditAgentModal'
 
 
 function Manageagents() {
@@ -115,7 +115,6 @@ axios.post(`${process.env.NEXT_PUBLIC_HOST}/uploadmutamers`,{
   toast({
     position: "top",
       title: error.message,
-      description: 'error',
       status: "error",
       duration: 5000,
       isClosable: true,

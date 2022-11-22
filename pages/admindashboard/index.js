@@ -1,14 +1,16 @@
 import { Box, Button, Flex, Heading, Link, Text ,useMediaQuery } from '@chakra-ui/react'
 import  NextLink from 'next/link';
 import React,{useContext,useEffect,useLayoutEffect} from 'react'
-import {userContext} from "../context/userState"
+import {userContext} from "../../context/userState"
 import { useRouter } from 'next/router'
-function Adminpanel(props) {
+
+function Index(props) {
   const [isLargerThan982] = useMediaQuery('(min-width: 982px)');
   const [isLargerThan673] = useMediaQuery('(min-width: 673px)')
   const { user,setuser } = useContext(userContext);
   const router = useRouter();
-
+ 
+  
 
 //   useLayoutEffect(() => {
   
@@ -38,7 +40,7 @@ function Adminpanel(props) {
  height="200px"
  borderRadius={"20px"} 
 color={"white"}>
-<NextLink href={"/pendingvouchers"}  >
+<NextLink href={`${router.pathname}/pendingvouchers`}>
 
 <Flex direction="column"
 justifyContent={"center"} align="center"
@@ -57,7 +59,7 @@ height="100%">
  height="200px"
  borderRadius={"20px"} 
 color={"white"}>
-<NextLink href={"/manageagents"}  >
+<NextLink href={`${router.pathname}/manageagents`}  >
 
 <Flex direction="column"
 justifyContent={"center"} align="center"
@@ -77,7 +79,7 @@ height="100%">
  height="200px"
  borderRadius={"20px"} 
 color={"white"}>
-<NextLink href={"/vouchers"}  >
+<NextLink href={`${router.pathname}/vouchers`}  >
 
 <Flex direction="column"
 justifyContent={"center"} align="center"
@@ -98,7 +100,7 @@ height="100%">
  height="200px"
  borderRadius={"20px"} 
 color={"white"}>
-<NextLink href={"/createagent"}  >
+<NextLink href={`${router.pathname}/createagent`}  >
 
 <Flex direction="column"
 justifyContent={"center"} align="center"
@@ -121,7 +123,7 @@ height="100%">
   )
 }
 
-export default Adminpanel;
+export default Index;
 
 export async function getServerSideProps(context) {
  
