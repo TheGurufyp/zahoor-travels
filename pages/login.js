@@ -1,4 +1,4 @@
-import React,{useEffect,useContext} from "react";
+import React,{useEffect,useContext,useState} from "react";
 import { Box, Button, Flex, Heading, Image, Input ,useToast } from "@chakra-ui/react";
 import axios from "axios"
 import { useFormik } from 'formik';
@@ -7,6 +7,9 @@ import {userContext} from "../context/userState"
 
 
 function Login() {
+
+
+  const [apiInProgress, setapiInProgress] = useState(false)
 
   const toast = useToast()
   const { user,setuser } = useContext(userContext);
@@ -18,6 +21,7 @@ function Login() {
       password:'',
     },
     onSubmit: (values) => {
+      setapiInProgress(true);
       axios.post(`${process.env.NEXT_PUBLIC_HOST}/userlogin`, {
         username: values.username,
         password: values.password
@@ -25,11 +29,12 @@ function Login() {
       .then(function (response) {
         let data=response.data;
         if(data.success){
+          setapiInProgress(false);
           setuser(data.payload)
-          router.push("/client")
+          router.push("/userdashboard")
         }
         else{
-         
+          setapiInProgress(false);
           toast({
             title: 'ERROR',
             position:"top",
@@ -41,6 +46,7 @@ function Login() {
         }
       })
       .catch(function (error) {
+        setapiInProgress(false);
         toast({
           title: error.message,
           position:"top",
@@ -58,7 +64,7 @@ function Login() {
         <style jsx>{`
           #container {
             /* border: 2px solid violet; */
-            height: 100%;
+            height: 90%;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -107,10 +113,11 @@ function Login() {
 
         
           #btn-1 {
-            /* border: 1px solid black; */
-            width: 60%;
+            //  border: 1px solid black; 
+            width: 100%;
             margin: 0px auto;
             margin-top: 30px;
+            text-align:center;
             /* margin-bottom: 300px; */
           }
          
@@ -175,17 +182,22 @@ function Login() {
               <a href="#">Forgot Password ?</a>
             </div> */}
             <div id="btn-1">
-              <Button
-              mt="35px"
-                w="85%"
+              <Button 
+              // mt="35px"
+                w="55%"
                 h="50px"
-                display={"block"}
+                // display={"block"}
                 mx="auto"
                 colorScheme={"blue"}
                 type="submit"
+                spinnerPlacement='end'
+                isLoading={apiInProgress}
+                loadingText='Loading'
+               
               >
                 Login
               </Button>
+             
             </div>
 
             <Box
