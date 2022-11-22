@@ -514,7 +514,7 @@ const create = () => {
         borderColor={"gray.300"}
         width={"90%"}
         marginInline="auto"
-        my={"1rem"}
+        // my={"1rem"}
       >
         <Center fontSize={"2rem"} fontWeight="semibold" bg={"gray.200"}>
           Ziyaraat
