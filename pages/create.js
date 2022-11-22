@@ -9,10 +9,13 @@ import {
   Divider,
   Input,
   Select,
+  Wrap,
+  WrapItem,
   HStack,
   Option,
   InputGroup,
   InputLeftElement,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import {
   NumberInput,
@@ -126,176 +129,153 @@ const create = () => {
             bg="blue"
             borderRadius={"8px"}
           ></Divider>
-
           <Flex
-            // border={"1px solid black"}
-            my={"20px"}
-            className="main-sec"
-            justify="center"
-            flexWrap={"wrap"}
-            align="center"
+            // justify={"center"}
+            my="2rem"
+            // border={"1px"}
+            width="96%"
+            marginInline={"auto"}
           >
-            <Flex
-              // border={"1px"}
-              align="center"
-              // mx={"1rem"}
-              justify={"center"}
-              //w={"30%"}
-              className="Flex-7"
-              my={"2rem"}
+            <Wrap spacing="30px" className="fl-1">
+              <WrapItem>
+                <Center w="300px" h="80px">
+                  <Box>
+                    Depart Date :{" "}
+                    <Input
+                      type={"date"}
+                      border=" 1px"
+                      borderColor={"blue.400"}
+                    />
+                  </Box>
+                </Center>
+              </WrapItem>
+              <WrapItem>
+                <Center w="300px" h="80px" bg>
+                  <Box>
+                    Depart Time :
+                    <Input
+                      border={"1px"}
+                      borderColor="blue.500"
+                      type={"time"}
+                    ></Input>
+                  </Box>
+                </Center>
+              </WrapItem>
+              <WrapItem>
+                <Center w="300px" h="80px">
+                  <Flex
+                    // border={"1px"}
+                    // align="center"
+                    // justify={"space-around"}
+                    // mx={"2rem"}
+                    // my={"1rem"}
+                    // mx={"1.5rem"}
+                    // w={"30%"}
+                    // justify="center"
+                    className="Flex-7"
+                    direction="column"
+                  >
+                    <Box>Sector :</Box>
+                    <Flex align={"center"}>
+                      <Select
+                        placeholder="USA"
+                        border={"1px"}
+                        borderColor="blue.400"
+                      >
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                      <Box mx={"0.5rem"}></Box>
+                      <Select
+                        placeholder="AED"
+                        border={"1px"}
+                        borderColor="blue.400"
+                      >
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                    </Flex>
+                  </Flex>
+                </Center>
+              </WrapItem>
+              <WrapItem>
+                <Center w="310px" h="80px">
+                  <Flex
+                    // border={"1px"}
+                    // align="center"
+                    //w={"30%"}
+                    // mx={"1.5rem"}
+                    // my="1rem"
+                    // justify={"center"}
+                    className="Flex-7"
+                    direction={"column"}
+                  >
+                    <Box>Flight No : </Box>
+                    <Flex>
+                      <Select
+                        placeholder="6S"
+                        border={"1px"}
+                        borderColor="blue.400"
+                        // w={"auto"}
+                        // size={"lg"}
+                      >
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                      <Box mx={"0.5rem"}></Box>
+                      <Input
+                        border={"1px"}
+                        borderColor="blue.400"
+                        htmlSize={10}
+                        // width="auto"
+                      />
+                    </Flex>
+                  </Flex>
+                </Center>
+              </WrapItem>
 
-              //  direction={"column"}
-            >
-              <Box>
-                Depart Date :{" "}
-                <Input type={"date"} border=" 1px" borderColor={"blue.400"} />
-              </Box>
-            </Flex>
-
-            <Flex
-              //w={"30%"}
-              // border={"1px"}
-              //  direction={"column"}
-              justify={"center"}
-              align="center"
-              // mx={"1rem"}
-              my="1rem"
-              mx={"2rem"}
-              className="Flex-7"
-            >
-              <Box
-              // mx={"1rem"}
-              >
-                Depart Time :
-                <Input
-                  border={"1px"}
-                  borderColor="blue.500"
-                  type={"time"}
-                ></Input>
-              </Box>
-            </Flex>
-
-            <Flex
-              // border={"1px"}
-              // align="center"
-              // justify={"space-around"}
-              // mx={"2rem"}
-              my={"1rem"}
-              mx={"2rem"}
-              //w={"30%"}
-              // justify="center"
-              className="Flex-7"
-              direction="column"
-            >
-              <Box>Sector :</Box>
-              <Flex align={"center"}>
-                <Select placeholder="USA" border={"1px"} borderColor="blue.400">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-                <Box mx={"0.5rem"}></Box>
-                <Select placeholder="AED" border={"1px"} borderColor="blue.400">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-              </Flex>
-            </Flex>
-
-            {/* /////// */}
-
-            <Flex
-              mx={"2rem"}
-              // border={"1px"}
-              align="center"
-              // mx={"1rem"}
-              justify={"center"}
-              //w={"30%"}
-              //  direction={"column"}
-              my="1rem"
-              className="Flex-7"
-            >
-              <Box>
-                Arrival Date :{" "}
-                <Input type={"date"} border=" 1px" borderColor={"blue.400"} />
-              </Box>
-            </Flex>
-
-            {/* /////
-             */}
-
-            <Flex
-              //w={"30%"}
-              // border={"1px"}
-              //  direction={"column"}
-              mx={"2rem"}
-              justify={"center"}
-              align="center"
-              my={"1rem"}
-              className="Flex-7"
-            >
-              <Box>
-                Arrival Time :{" "}
-                <Input
-                  border={"1px"}
-                  borderColor="blue.500"
-                  type={"time"}
-                ></Input>
-              </Box>
-            </Flex>
-            <Flex
-              // border={"1px"}
-              // align="center"
-              //w={"30%"}
-              mx={"4rem"}
-              my="1rem"
-              // justify={"center"}
-              className="Flex-7"
-              direction={"column"}
-            >
-              <Box>Flight No : </Box>
-              <Flex>
-                <Select
-                  placeholder="6S"
-                  border={"1px"}
-                  borderColor="blue.400"
-                  // w={"auto"}
-                  // size={"lg"}
-                >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-                <Box mx={"0.5rem"}></Box>
-                <Input
-                  border={"1px"}
-                  borderColor="blue.400"
-                  htmlSize={40}
-                  width="auto"
-                />
-              </Flex>
-            </Flex>
-
-            <Flex
-              // border={"1px"}
-              // w={"40%"}
-              my="2rem"
-              justify={"center"}
-              // align="center"
-              className="Flex-7"
-            >
-              <Box>
-                PNR No :
-                <Input
-                  border={"1px"}
-                  borderColor="blue.400"
-                  htmlSize={10}
-                  // width="120%"
-                  // ml={"10px"}
-                />
-              </Box>
-            </Flex>
+              <WrapItem>
+                <Center w="300px" h="80px">
+                  <Box>
+                    Arrival Date :{" "}
+                    <Input
+                      type={"date"}
+                      border=" 1px"
+                      borderColor={"blue.400"}
+                    />
+                  </Box>
+                </Center>
+              </WrapItem>
+              <WrapItem>
+                <Center w="280px" h="80px">
+                  <Box>
+                    Arrival Time :{" "}
+                    <Input
+                      border={"1px"}
+                      borderColor="blue.500"
+                      type={"time"}
+                    ></Input>
+                  </Box>
+                </Center>
+              </WrapItem>
+              <WrapItem>
+                <Center w="300px" h="80px">
+                  <Box>
+                    PNR No :
+                    <Input
+                      border={"1px"}
+                      borderColor="blue.400"
+                      htmlSize={20}
+                      // width="120%"
+                      // ml={"10px"}
+                    />
+                  </Box>{" "}
+                </Center>
+              </WrapItem>
+            </Wrap>
           </Flex>
         </Box>
         <Box>
@@ -314,11 +294,12 @@ const create = () => {
           {/* //Start handleRemoveClick */}
 
           <Flex
-            border={"1px"}
-            borderColor="gray.100"
+            // border={"1px"}
+            // borderColor="gray.100"
             my={"20px"}
             className="main-sec"
             justify="center"
+            align={"center"}
             // flexDirection={"column"}
             flexWrap={"wrap"}
           >
@@ -348,7 +329,7 @@ const create = () => {
               // mx={"1rem"}
               my="1rem"
               className="Flex-7"
-              mx={"3rem"}
+              mx={"1.5rem"}
             >
               <Box mx={"1rem"}>
                 Return Time :
@@ -365,11 +346,11 @@ const create = () => {
               // align="center"
               // justify={"space-around"}
               // mx={"2rem"}
-              my={"1rem"}
+              my={"0.5rem"}
               //w={"30%"}
               // justify="center"
               className="Flex-7"
-              mx="3rem"
+              mx="1.5rem"
               direction={"column"}
             >
               <Box>Return Sector :</Box>
@@ -394,11 +375,11 @@ const create = () => {
               // border={"1px"}
               // align="center"
               //w={"30%"}
-              my="2rem"
+              my="1rem"
               direction={"column"}
               // justify={"center"}
               className="Flex-7"
-              mx={"3rem"}
+              mx={"2rem"}
             >
               <Box>Flight No :</Box>
               <Flex>
@@ -521,7 +502,7 @@ const create = () => {
         </Center>
         <Flex my="1rem" justify={"center"}>
           <RadioGroup defaultValue="0">
-            <Stack spacing={200} direction="row">
+            <Stack spacing={50} direction="row">
               <Radio fontWeight={"bold"} value="0">
                 None
               </Radio>

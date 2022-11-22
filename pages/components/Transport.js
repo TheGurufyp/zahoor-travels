@@ -144,16 +144,22 @@ const Transport = () => {
                 </Flex>
               </Flex>
               <Flex
-              // border={"1px"}
-              // justify="center"
-              // align={"center"}
-              // direction="column"
+                // border={"1px"}
+                justify="end"
+                align={"end"}
+                // direction="column"
               >
-                <Box my={"0.6rem"}></Box>
-                <Box
-                // mx={"1rem"}
-                // border="1px"
+                {/* <Box mt={"rem"}></Box> */}
+                <Flex
+                  // justify={'center'}
+                  // mx={"1rem"}
+                  // border="1px"
+                  // justify="end"
+                  align={"end"}
+                  flexDirection="column"
                 >
+                  <Box>-</Box>
+                  {/* <Box></Box> */}
                   {inputList.length !== 1 && (
                     <Button
                       colorScheme="red"
@@ -163,14 +169,14 @@ const Transport = () => {
                       Remove
                     </Button>
                   )}
-                </Box>
+                </Flex>
               </Flex>
             </Flex>
             <Flex
               // justify={"right"}
               // align={"center"}
               // mx="8rem"
-              my={"1rem"}
+              my={"2rem"}
               className="flex-4"
               // border={"1px"}
               // mr={"1rem"}
