@@ -1,7 +1,42 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import {Box, Button, Flex, Heading, Image, Input} from "@chakra-ui/react"
+import { useFormik } from 'formik';
+import { useRouter } from 'next/router'
+import {userContext} from "../context/userState"
+const axios = require('axios');
 
 function Adminlogin() {
+
+  const { user,setuser } = useContext(userContext);
+  const router = useRouter()
+
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password:'',
+    },
+    onSubmit: (values) => {
+      axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminlogin`, {
+        username: values.username,
+        password: values.password
+      })
+      .then(function (response) {
+        let data=response.data;
+        if(data.success){
+          setuser(data.payload)
+          router.push("/adminpanel")
+        }
+        else{
+          console.log("not success")
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+  })
+
+
   return (
     <>
     
@@ -201,7 +236,7 @@ padding-top: 20px;
 
     <div id="container">
 
-<form id="login-page">
+<form id="login-page" onSubmit={formik.handleSubmit}>
 
     
        <div id="heading">
@@ -210,20 +245,22 @@ padding-top: 20px;
         <Heading color={"blue.400"}>Admin Login</Heading>
       </div>
       <div id="input-box">
-        <label for="Email">Username</label>
+        <label htmlFor="username">Username</label>
        
-       <Input mb="10px" type="text" name="username" variant={"filled"}  />
+       <Input mb="10px" type="text" name="username" variant={"filled"} onChange={formik.handleChange}
+        value={formik.values.username} />
      
-        <label for="Password">Password</label>
+        <label htmlFor="password">Password</label>
        
-        <Input type="password" name="password" variant={"filled"}/>
+        <Input type="password" name="password" variant={"filled"} onChange={formik.handleChange}
+        value={formik.values.password}/>
      
       </div>
       {/* <div id="forgot-password">
         <a href="#">Forgot Password ?</a>
       </div> */}
       <div id="btn-1">
-           <Button mt="50px" w="85%" h="50px" display={"block"} mx="auto" colorScheme={"blue"}>Login</Button>
+           <Button mt="50px" w="85%" h="50px" display={"block"} mx="auto" colorScheme={"blue"} type="submit">Login</Button>
        </div>
      
     

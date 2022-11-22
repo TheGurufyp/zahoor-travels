@@ -1,11 +1,25 @@
 import { Box, Button, Flex, Heading, Link, Text ,useMediaQuery } from '@chakra-ui/react'
 import  NextLink from 'next/link';
-import React from 'react'
-
-function Adminpanel() {
+import React,{useContext,useEffect,useLayoutEffect} from 'react'
+import {userContext} from "../context/userState"
+import { useRouter } from 'next/router'
+function Adminpanel(props) {
   const [isLargerThan982] = useMediaQuery('(min-width: 982px)');
   const [isLargerThan673] = useMediaQuery('(min-width: 673px)')
- 
+  const { user,setuser } = useContext(userContext);
+  const router = useRouter();
+
+
+//   useLayoutEffect(() => {
+  
+//   if(!user){
+//     router.push("/adminlogin")
+//   }
+
+  
+// }, [])
+
+
   return (
   <>
  
@@ -107,4 +121,13 @@ height="100%">
   )
 }
 
-export default Adminpanel
+export default Adminpanel;
+
+export async function getServerSideProps(context) {
+ 
+
+
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}

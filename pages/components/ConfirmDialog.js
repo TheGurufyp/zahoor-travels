@@ -9,7 +9,7 @@ import {
   AlertDialogCloseButton,Box
   } from '@chakra-ui/react'
 function ConfirmDialog({children,head,desc,clickedYes}) {
-    console.log(children);
+    
     const { isOpen, onOpen, onClose } = useDisclosure();
     const cancelRef = React.useRef()
   return (
