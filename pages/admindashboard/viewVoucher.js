@@ -159,7 +159,7 @@ const viewVoucher = () => {
         </TableContainer>
         <Center
           //   bg={"gray.100"}
-          mt="2rem"
+          mt="1rem"
           py={"1rem"}
           // border={"1px"}
         >
