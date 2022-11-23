@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Box, basicBoxStyles } from "@chakra-ui/react";
 import { FaUserAlt } from "react-icons/fa";
+import { BiLogOutCircle, RiLogoutBoxFill } from "react-icons/ri";
 import {
   IconButton,
   HamburgerIcon,
@@ -26,49 +27,19 @@ function Navbar() {
   return (
     <>
       <Flex
+        zIndex={"1000"}
         // justify={"space-between"}
         bg="blue.400"
         // sx={basicBoxStyles}
-        filter="auto"
-        brightness="90%"
+        // filter="auto"
+        // brightness="90%"
         pos={"sticky"}
       >
         <Flex
-          border={"1px"}
-          // minW={"200px"}
-          // justifyContent="center"
-          // align={"center"}
-          // my="1rem"
-          zIndex="-999990000"
-        >
-          {/* <HamburgerIcon /> */}
-          {/* <Menu closeOnSelect={false}>
-            <MenuButton
-              as={Button}
-              colorScheme="blue"
-              IconButton={<FaUserAlt fill="white" size={"1.5rem"} />}
-            >
-              Zahoor Tours & Travel
-            </MenuButton>
-            <MenuList minWidth="240px">
-              <MenuOptionGroup defaultValue="asc" title="Order" type="radio">
-                <MenuItemOption value="asc">Ascending</MenuItemOption>
-                <MenuItemOption value="desc">Descending</MenuItemOption>
-              </MenuOptionGroup>
-              <MenuDivider />
-              <MenuOptionGroup title="Country" type="checkbox">
-                <MenuItemOption value="email">Email</MenuItemOption>
-                <MenuItemOption value="phone">Phone</MenuItemOption>
-                <MenuItemOption value="country">Country</MenuItemOption>
-              </MenuOptionGroup>
-            </MenuList>
-          </Menu> */}
-        </Flex>
-
-        <Flex
           //    border={"1px"}
-          bg={"blue.300"}
-          p="2px"
+          // bg={"blue.300"}
+          className="nav"
+          // p="2px"
           borderRadius={"8px"}
           align="center"
           mx={"1rem"}
@@ -81,10 +52,24 @@ function Navbar() {
             color={"white"}
             fontSize="1.5rem"
             mx="1.0rem"
-            textDecoration={"underline"}
+            // textDecoration={"underline"}
             cursor="pointer"
+            zIndex={"1000"}
           >
-            Zahoor Tours & Travel
+            <Menu isLazy>
+              <MenuButton>Zahoor Tours & Travel</MenuButton>
+              <MenuList bg="blue.400">
+                {/* MenuItems are not rendered unless Menu is open */}
+                <MenuItem color={"black"} bg="blue.400">
+                  <Flex justify={"center"} align="center">
+                    <Box>
+                      <RiLogoutBoxFill fill="white" />
+                    </Box>
+                    <Box color="white">Logout</Box>
+                  </Flex>
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Box>
         </Flex>
       </Flex>
