@@ -129,6 +129,7 @@ const create = () => {
             bg="blue"
             borderRadius={"8px"}
           ></Divider>
+
           <Flex
             // justify={"center"}
             my="2rem"
@@ -136,7 +137,12 @@ const create = () => {
             width="96%"
             marginInline={"auto"}
           >
-            <Wrap spacing="30px" className="fl-1">
+            <Wrap
+              spacing="10px"
+              className="fl-1"
+              // border={"1px"}
+              justify="center"
+            >
               <WrapItem>
                 <Center w="300px" h="80px">
                   <Box>
@@ -186,7 +192,7 @@ const create = () => {
                         <option value="option2">Option 2</option>
                         <option value="option3">Option 3</option>
                       </Select>
-                      <Box mx={"0.5rem"}></Box>
+                      <Box mx={"0.2rem"}></Box>
                       <Select
                         placeholder="AED"
                         border={"1px"}
@@ -201,7 +207,7 @@ const create = () => {
                 </Center>
               </WrapItem>
               <WrapItem>
-                <Center w="310px" h="80px">
+                <Center w="300px" h="80px">
                   <Flex
                     // border={"1px"}
                     // align="center"
@@ -211,6 +217,7 @@ const create = () => {
                     // justify={"center"}
                     className="Flex-7"
                     direction={"column"}
+                    ml="30px"
                   >
                     <Box>Flight No : </Box>
                     <Flex>
@@ -225,7 +232,7 @@ const create = () => {
                         <option value="option2">Option 2</option>
                         <option value="option3">Option 3</option>
                       </Select>
-                      <Box mx={"0.5rem"}></Box>
+                      <Box mx={"0.2rem"}></Box>
                       <Input
                         border={"1px"}
                         borderColor="blue.400"
@@ -250,7 +257,7 @@ const create = () => {
                 </Center>
               </WrapItem>
               <WrapItem>
-                <Center w="280px" h="80px">
+                <Center w="300px" h="80px">
                   <Box>
                     Arrival Time :{" "}
                     <Input
@@ -448,15 +455,33 @@ const create = () => {
             </Flex>
           </Flex>
 
-          <Divider my={"2.5rem"}></Divider>
+          <Divider
+            width={"50%"}
+            marginInline="auto"
+            border="1px"
+            my={"3rem"}
+            borderColor={"blue.400"}
+            bg="blue"
+            borderRadius={"8px"}
+          ></Divider>
           {/* //below count */}
           <Flex justify={"center"} align="center" wrap={"wrap"} mb="1.5rem">
             <Box>
-              Shirka : <Input variant="outline" placeholder="Outline" />
+              Shirka :{" "}
+              <Input
+                variant="outline"
+                border={"1px"}
+                borderColor="blue.400"
+                placeholder="Outline"
+              />
             </Box>
             <Box mx={"2rem"}>
               Party :{" "}
-              <Select placeholder="Select option">
+              <Select
+                placeholder="Select option"
+                border={"1px"}
+                borderColor="blue.400"
+              >
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
@@ -464,14 +489,24 @@ const create = () => {
             </Box>
             <Box mx={"2rem"} my="2rem">
               IATA :{" "}
-              <Select placeholder="Select option">
+              <Select
+                border={"1px"}
+                borderColor="blue.400"
+                placeholder="Select option"
+              >
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
               </Select>
             </Box>
             <Box>
-              Service No : <Input variant="outline" placeholder="Outline" />
+              Service No :{" "}
+              <Input
+                border={"1px"}
+                borderColor="blue.400"
+                variant="outline"
+                placeholder="Outline"
+              />
             </Box>
           </Flex>
           {/* End */}
@@ -480,7 +515,7 @@ const create = () => {
           fontSize={"2rem"}
           fontWeight="semibold"
           bg={"gray.200"}
-          my="1.5rem"
+          // my="1.5rem"
         >
           Transportation Detail
         </Center>

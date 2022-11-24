@@ -10,9 +10,11 @@ import {
   Input,
   Select,
   Option,
+  Grid,
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
+import { Stack, HStack, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { React, useState } from "react";
 import { ArrowLeftIcon, ChevronDownIcon } from "@chakra-ui/icons";
@@ -43,61 +45,30 @@ const Transport = () => {
     <>
       {inputList.map((x, i) => {
         return (
-          <Flex
-            // border={"1px"}
-            // justify="space-between"
-            align={"center"}
-            direction="column"
-            // wrap="wrap"
-            // w={"100%"}
-            my="1rem"
-          >
-            <Flex
-              // border={"1px"}
-              width="100%"
-              align="center"
-              wrap={"wrap"}
-              justify={"space-around"}
-              // direction={"column"}
-              className="flex-2"
+          <Flex py={"1rem"} wrap="wrap">
+            <Grid
+              flexWrap={"wrap"}
+              templateColumns="repeat(5, 0.1fr)"
+              gap={6}
+              justifyContent="center"
+              width={"100%"}
             >
-              <Flex
-                // border={"1px"}
-                justify="center"
-                // align="center"
-                // ml="5rem"
-                className="Flex-1"
-                direction={"column"}
-                w={"20%"}
-                // ml="15rem"
-              >
-                <Box>Date :</Box>
-                <Flex>
-                  <Input
-                    type={"date"}
-                    // className="ml10"
-                    // name="from_to"
-                    border={"1px"}
-                    borderColor="blue.400"
-                    // placeholder="Enter Last Name"
-                    // width={"120%"}
-                    // value={x.from_to}
-                    onChange={(e) => handleInputChange(e, i)}
-                  />
-                </Flex>
-              </Flex>
+              <Box w="170px" h="50">
+                <Input
+                  type={"date"}
+                  // className="ml10"
+                  // name="from_to"
+                  border={"1px"}
+                  borderColor="blue.400"
+                  // placeholder="Enter Last Name"
+                  // width={"120%"}
+                  // value={x.from_to}
+                  onChange={(e) => handleInputChange(e, i)}
+                />
+              </Box>
 
-              <Flex
-                // border={"1px"}
-                w={"25%"}
-                // justify="center"
-                // align="center"
-                // ml="6rem"
-                className="Flex-1"
-                // mx={"10rem"}
-                direction={"column"}
-              >
-                <Box>From - To :</Box>
+              <Box w="170px" h="50">
+                {/* <Box>From - To :</Box> */}
                 <Flex>
                   <Select
                     placeholder="Jed City-Jed APT"
@@ -115,86 +86,89 @@ const Transport = () => {
                     <option value="option3">Option 3</option>
                   </Select>
                 </Flex>
-              </Flex>
+              </Box>
 
-              <Flex
-                // border={"1px"}
-                w={"30%"}
-                // justify="center"
-                direction="column"
-                // align="center"
-                // ml="5rem"
-                // mx={"3rem"}
-                className="Flex-1"
-              >
-                <Center>Type of Transfer : </Center>
-                <Flex>
-                  <Select
-                    placeholder="Blue"
-                    // border={"1px"}
-                    borderColor="blue.400"
-                    name="types"
-                    value={x.types}
-                    // width="200px"
+              <Box w="170px" h="50">
+                {/* <Box>Types of Transfer : </Box> */}
+                <Select
+                  placeholder="Blue"
+                  // border={"1px"}
+                  borderColor="blue.400"
+                  name="types"
+                  value={x.types}
+                  // width="200px"
+                >
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </Select>
+              </Box>
+
+              <Box w="100px" h="50">
+                {inputList.length !== 1 && (
+                  <Button
+                    colorScheme="red"
+                    paddingInline={"1rem"}
+                    onClick={() => handleRemoveClick(i)}
                   >
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </Select>
-                </Flex>
-              </Flex>
-              <Flex
-                // border={"1px"}
-                justify="end"
-                align={"end"}
-                // direction="column"
-              >
-                {/* <Box mt={"rem"}></Box> */}
-                <Flex
-                  // justify={'center'}
-                  // mx={"1rem"}
-                  // border="1px"
-                  // justify="end"
-                  align={"end"}
-                  flexDirection="column"
-                >
-                  <Box>-</Box>
-                  {/* <Box></Box> */}
-                  {inputList.length !== 1 && (
-                    <Button
-                      colorScheme="red"
-                      paddingInline={"1rem"}
-                      onClick={() => handleRemoveClick(i)}
-                    >
-                      Remove
-                    </Button>
-                  )}
-                </Flex>
-              </Flex>
-            </Flex>
-            <Flex
-              // justify={"right"}
-              // align={"center"}
-              // mx="8rem"
-              my={"2rem"}
-              className="flex-4"
-              // border={"1px"}
-              // mr={"1rem"}
-            >
-              {inputList.length - 1 === i && (
-                <Button
-                  colorScheme="blue"
-                  paddingInline={"2rem"}
-                  onClick={handleAddClick}
-                >
-                  Add New
-                </Button>
-              )}
-            </Flex>
+                    Remove
+                  </Button>
+                )}
+              </Box>
+
+              <Box w="50px" h="50">
+                {inputList.length - 1 === i && (
+                  <Button
+                    colorScheme="blue"
+                    paddingInline={"2rem"}
+                    onClick={handleAddClick}
+                  >
+                    Add New
+                  </Button>
+                )}
+              </Box>
+            </Grid>
           </Flex>
+
+          // <HStack
+          //   spacing="24px"
+          //   justify="center"
+          //   py={"2rem"}
+          //   border="1px"
+          //   align={"center"}
+          // >
+          //   <Box w="140px" h="40px">
+          //     <Box>Date :</Box>
+
+          //     <Input
+          //       type={"date"}
+          //       // className="ml10"
+          //       // name="from_to"
+          //       border={"1px"}
+          //       borderColor="blue.400"
+          //       // placeholder="Enter Last Name"
+          //       // width={"120%"}
+          //       // value={x.from_to}
+          //       onChange={(e) => handleInputChange(e, i)}
+          //     />
+          //   </Box>
+          //   <Box w="140px" h="40px">
+
+          //   </Box>
+          //   <Box w="140px" h="40px">
+
+          //   </Box>
+          //   <Box w="140px" h="40px">
+
+          //   </Box>
+          //   <Box w="140px" h="40px">
+
+          //   </Box>
+          // </HStack>
+
+          // {/* <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div> */}
         );
       })}
-      {/* <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div> */}
     </>
   );
 };
