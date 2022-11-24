@@ -24,7 +24,7 @@ function Adminlogin() {
         let data=response.data;
         if(data.success){
           setuser(data.payload)
-          router.push("/adminpanel")
+          router.push("/admindashboard")
         }
         else{
           console.log("not success")
