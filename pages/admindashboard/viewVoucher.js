@@ -169,28 +169,28 @@ const viewVoucher = () => {
           <Table size="sm">
             <Thead bg={"blue.400"}>
               <Tr>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Entry Port
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Sector
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Flight No
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Dept-Date Pak
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Dep-Time Pak
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Arrival Date
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Arrival Time
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   PNR
                 </Th>
               </Tr>
@@ -266,26 +266,26 @@ const viewVoucher = () => {
           <Table size="sm">
             <Thead bg={"blue.400"}>
               <Tr>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   PKG-TYPE
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   City
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Hotel
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Check-In-Date
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Check-Out-Date
                 </Th>
 
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   Nights
                 </Th>
-                <Th fontWeight={"semibold"} color="white">
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
                   room-Type
                 </Th>
               </Tr>
