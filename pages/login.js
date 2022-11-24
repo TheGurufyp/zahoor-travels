@@ -178,15 +178,11 @@ function Login() {
               <Input type="password" name="password" variant={"filled"} onChange={formik.handleChange}
         value={formik.values.password}/>
             </div>
-            {/* <div id="forgot-password">
-              <a href="#">Forgot Password ?</a>
-            </div> */}
+           
             <div id="btn-1">
               <Button 
-              // mt="35px"
                 w="55%"
                 h="50px"
-                // display={"block"}
                 mx="auto"
                 colorScheme={"blue"}
                 type="submit"
