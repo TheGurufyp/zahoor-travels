@@ -26,7 +26,7 @@ function Index() {
     <>
       <Center
         bg={"gray.100"}
-        mt="2rem"
+        py="2rem"
         // border={"1px"}
       >
         <Heading>Information About Vouchers</Heading>
