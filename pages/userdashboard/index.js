@@ -29,7 +29,7 @@ function Index() {
         py="2rem"
         // border={"1px"}
       >
-        <Heading>Information About Vouchers</Heading>
+        <Heading size={"lg"}>Information About Vouchers</Heading>
       </Center>
       {/* <Divider /> */}
       <Box
@@ -135,7 +135,7 @@ function Index() {
           mt="2rem"
           // border={"1px"}
         >
-          <Heading>Information About Pilgrims</Heading>
+          <Heading size={"lg"}>Information About Pilgrims</Heading>
         </Center>
         <Wrap
           my={"2rem"}
@@ -262,7 +262,7 @@ function Index() {
           // mt="3rem"
           // border={"1px"}
         >
-          <Heading>Voucher Summary</Heading>
+          <Heading size={"lg"}>Voucher Summary</Heading>
         </Center>
 
         <TableContainer
