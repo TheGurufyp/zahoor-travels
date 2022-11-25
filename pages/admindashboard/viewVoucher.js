@@ -29,6 +29,7 @@ const viewVoucher = () => {
         align={"center"}
         py="1rem"
         bg={"gray.200"}
+        wrap="wrap"
       >
         <Box
           bg={"blue.400"}
@@ -78,11 +79,12 @@ const viewVoucher = () => {
           justify={"space-between"}
           //   border={"1px"}
           align="center"
-          py={"1.2rem"}
+          // py={"1.2rem"}
+          mt={"1rem"}
         >
           <Box ml={"1.5rem"}>
             <Center>
-              <Heading size={"lg"}>ZAHOOR TOURS & TRAVEL</Heading>
+              <Heading size={"md"}>ZAHOOR TOURS & TRAVEL</Heading>
             </Center>
           </Box>
           <Flex mx={"1.5rem"}>
@@ -121,7 +123,12 @@ const viewVoucher = () => {
             Group Head/Phone No
           </Box>
         </Flex>
-        <TableContainer my={"1rem"} width="97%" marginInline={"auto"}>
+        <TableContainer
+          my={"1rem"}
+          width="97%"
+          marginInline={"auto"}
+          // border="1px"
+        >
           <Table size="sm">
             <Thead bg={"blue.400"}>
               <Tr>
@@ -145,7 +152,7 @@ const viewVoucher = () => {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody>
+            <Tbody border={"1px"} borderColor="gray.200">
               <Tr>
                 <Td>1</Td>
                 <Td>0</Td>
@@ -163,7 +170,7 @@ const viewVoucher = () => {
           py={"1rem"}
           // border={"1px"}
         >
-          <Heading>KSA Arrival information</Heading>
+          <Heading size={"md"}>KSA Arrival information</Heading>
         </Center>
         <TableContainer width="97%" marginInline={"auto"}>
           <Table size="sm">
@@ -195,7 +202,7 @@ const viewVoucher = () => {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody>
+            <Tbody border={"1px"} borderColor="gray.200">
               <Tr>
                 <Td>MUX</Td>
                 <Td>JED</Td>
@@ -215,7 +222,7 @@ const viewVoucher = () => {
           py={"1rem"}
           // border={"1px"}
         >
-          <Heading>Departure Information</Heading>
+          <Heading size={"md"}>Departure Information</Heading>
         </Center>
         <TableContainer width="97%" marginInline={"auto"}>
           <Table size="sm">
@@ -242,7 +249,7 @@ const viewVoucher = () => {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody>
+            <Tbody border={"1px"} borderColor="gray.200">
               <Tr>
                 <Td>JED</Td>
                 <Td>MUX</Td>
@@ -260,49 +267,116 @@ const viewVoucher = () => {
           py={"1rem"}
           // border={"1px"}
         >
-          <Heading>Accommodation Detail</Heading>
+          <Heading size={"md"}>Transportation Detail</Heading>
         </Center>
         <TableContainer width="97%" marginInline={"auto"}>
           <Table size="sm">
             <Thead bg={"blue.400"}>
               <Tr>
                 <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  PKG-TYPE
+                  Date
                 </Th>
                 <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  City
+                  Transport Trip
                 </Th>
                 <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  Hotel
-                </Th>
-                <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  Check-In-Date
-                </Th>
-                <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  Check-Out-Date
-                </Th>
-
-                <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  Nights
-                </Th>
-                <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  room-Type
+                  Transport By
                 </Th>
               </Tr>
             </Thead>
-            <Tbody>
+            <Tbody border={"1px"} borderColor="gray.200">
               <Tr>
-                <Td>All</Td>
-                <Td>Makkah</Td>
-                <Td>Masarat Kingdon 214/ Similar</Td>
                 <Td>25-Nov-2022</Td>
-                <Td>10:25 PM</Td>
-                <Td>8</Td>
-                <Td>Sharing</Td>
+                <Td>JED-MAK</Td>
+                <Td>BUS</Td>
+              </Tr>
+              <Tr>
+                <Td>25-Nov-2022</Td>
+                <Td>JED-MAK</Td>
+                <Td>BUS</Td>
               </Tr>
             </Tbody>
           </Table>
         </TableContainer>
+        <Center
+          //   bg={"gray.100"}
+          mt="2rem"
+          py={"1rem"}
+          // border={"1px"}
+        >
+          <Heading size={"md"}>Mutamer's ( Pilgrims) Detail</Heading>
+        </Center>
+        <TableContainer width="97%" marginInline={"auto"}>
+          <Table size="sm">
+            <Thead bg={"blue.400"}>
+              <Tr>
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
+                  Date
+                </Th>
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
+                  Transport Trip
+                </Th>
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
+                  Transport By
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody border={"1px"} borderColor="gray.200">
+              <Tr>
+                <Td>25-Nov-2022</Td>
+                <Td>JED-MAK</Td>
+                <Td>BUS</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
+
+        <Flex
+          justify={"left"}
+          direction="column"
+          width={"97%"}
+          marginInline="auto"
+          my="2rem"
+          // border={"1px"}
+          // borderColor="gray.200"
+        >
+          <Flex>
+            <Box
+              w={"15%"}
+              bg="blue.400"
+              color={"white"}
+              fontWeight="semibold"
+              // border={"1px"}
+              pl={"1rem"}
+              // borderColor="blue.400"
+            >
+              Ziarat
+            </Box>
+            <Box
+              pl={"1rem"}
+              border={"1px"}
+              borderColor="gray.200"
+              w={"85%"}
+            ></Box>
+          </Flex>
+          <Box my={"0.7px"}></Box>
+          <Flex>
+            <Box
+              w={"15%"}
+              bg="blue.400"
+              color={"white"}
+              fontWeight="semibold"
+              // border={"1px"}
+              pl={"1rem"}
+              // borderColor="blue.400"
+            >
+              Remarks
+            </Box>
+            <Box pl={"1rem"} border={"1px"} borderColor="gray.200" w={"85%"}>
+              RIAZ SB C/O IRAM SB
+            </Box>
+          </Flex>
+        </Flex>
       </Box>
     </>
   );
