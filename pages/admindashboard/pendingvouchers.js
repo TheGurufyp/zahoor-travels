@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState,useEffect}from 'react'
 import {
     Table,
     Thead,
@@ -25,6 +25,9 @@ import EditAgentModal from '../components/EditAgentModal'
 import VoucherSearch from '../components/VoucherSearch'
 
 function Pendingvouchers() {
+
+
+
   return (
    
     
@@ -296,4 +299,42 @@ function Pendingvouchers() {
   )
 }
 
-export default Pendingvouchers
+export default Pendingvouchers;
+
+
+
+export async function getServerSideProps(context) {
+  const token=context.req.cookies.token;
+  if(!token){
+    return {
+      redirect: {
+        destination: '/adminlogin',
+        permanent: false,
+      },
+    }
+  }
+  let responseFromServer;
+ try {
+   const response= await axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminVerifyToken`,{},{ headers: {token:token}});
+   
+   if(response.data.success){
+    responseFromServer={success:true};
+   }
+   else{
+     return {
+       redirect: {
+         destination: '/adminlogin',
+         permanent: false,
+       },
+    }
+     
+  }
+  
+} catch (error) {
+  responseFromServer={success:false};
+ }
+
+  return {
+    props: {responseFromServer}, 
+  }
+}

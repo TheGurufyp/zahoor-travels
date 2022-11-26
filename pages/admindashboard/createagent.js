@@ -262,4 +262,41 @@ padding-top: 20px;
   )
 }
 
-export default Createagent
+export default Createagent;
+
+
+export async function getServerSideProps(context) {
+  const token=context.req.cookies.token;
+  if(!token){
+    return {
+      redirect: {
+        destination: '/adminlogin',
+        permanent: false,
+      },
+    }
+  }
+  let responseFromServer;
+ try {
+   const response= await axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminVerifyToken`,{},{ headers: {token:token}});
+   
+   if(response.data.success){
+    responseFromServer={success:true};
+   }
+   else{
+     return {
+       redirect: {
+         destination: '/adminlogin',
+         permanent: false,
+       },
+    }
+     
+  }
+  
+} catch (error) {
+  responseFromServer={success:false};
+ }
+
+  return {
+    props: {responseFromServer}, 
+  }
+}

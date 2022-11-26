@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 import {
     Table,
     Thead,
@@ -18,14 +18,26 @@ import {
     MenuOptionGroup,
     MenuDivider,
     Divider,
-    Flex,useMediaQuery
+    Flex,useMediaQuery,Spinner 
    
   } from '@chakra-ui/react'
 import ConfirmDialog from '../components/ConfirmDialog'
 import VoucherSearch from '../components/VoucherSearch'
 function Vouchers() {
+  const [isLargerThan620] = useMediaQuery('(min-width: 620px)');
+  
+  const [rendercomplete, setrendercomplete] = useState(false);
 
-    const [isLargerThan620] = useMediaQuery('(min-width: 620px)')
+    useEffect(() => {
+      setrendercomplete(true);
+    
+     
+    }, [])
+
+    if(!rendercomplete){
+      return <></>
+    }
+    
   return (
     <>
  
@@ -129,4 +141,42 @@ function Vouchers() {
   )
 }
 
-export default Vouchers
+export default Vouchers;
+
+
+
+export async function getServerSideProps(context) {
+  const token=context.req.cookies.token;
+  if(!token){
+    return {
+      redirect: {
+        destination: '/adminlogin',
+        permanent: false,
+      },
+    }
+  }
+  let responseFromServer;
+ try {
+   const response= await axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminVerifyToken`,{},{ headers: {token:token}});
+   
+   if(response.data.success){
+    responseFromServer={success:true};
+   }
+   else{
+     return {
+       redirect: {
+         destination: '/adminlogin',
+         permanent: false,
+       },
+    }
+     
+  }
+  
+} catch (error) {
+  responseFromServer={success:false};
+ }
+
+  return {
+    props: {responseFromServer}, 
+  }
+}

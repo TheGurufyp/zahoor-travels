@@ -3,25 +3,15 @@ import  NextLink from 'next/link';
 import React,{useContext,useEffect,useLayoutEffect} from 'react'
 import {userContext} from "../../context/userState"
 import { useRouter } from 'next/router'
-
+import axios from 'axios';
+import Cookies from 'cookies'
 function Index(props) {
   const [isLargerThan982] = useMediaQuery('(min-width: 982px)');
   const [isLargerThan673] = useMediaQuery('(min-width: 673px)')
   const { user,setuser } = useContext(userContext);
   const router = useRouter();
  
-  
-
-//   useLayoutEffect(() => {
-  
-//   if(!user){
-//     router.push("/adminlogin")
-//   }
-
-  
-// }, [])
-
-
+ 
   return (
   <>
  
@@ -126,10 +116,37 @@ height="100%">
 export default Index;
 
 export async function getServerSideProps(context) {
- 
-
+  const token=context.req.cookies.token;
+  if(!token){
+    return {
+      redirect: {
+        destination: '/adminlogin',
+        permanent: false,
+      },
+    }
+  }
+  let responseFromServer;
+ try {
+   const response= await axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminVerifyToken`,{},{ headers: {token:token}});
+   
+   if(response.data.success){
+    responseFromServer={success:true};
+   }
+   else{
+     return {
+       redirect: {
+         destination: '/adminlogin',
+         permanent: false,
+       },
+    }
+     
+  }
+  
+} catch (error) {
+  responseFromServer={success:false};
+ }
 
   return {
-    props: {}, // will be passed to the page component as props
+    props: {responseFromServer}, 
   }
 }

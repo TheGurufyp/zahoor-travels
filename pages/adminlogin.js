@@ -1,12 +1,14 @@
-import React,{useContext} from 'react'
-import {Box, Button, Flex, Heading, Image, Input} from "@chakra-ui/react"
+import React,{useContext,useState} from 'react'
+import {Box, Button, Flex, Heading, Image, Input,useToast} from "@chakra-ui/react"
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router'
 import {userContext} from "../context/userState"
 import axios from "axios"
-
+import cookieCutter from 'cookie-cutter'
 function Adminlogin() {
+  const [apiInProgress, setapiInProgress] = useState(false)
 
+  const toast = useToast()
   const { user,setuser } = useContext(userContext);
   const router = useRouter()
 
@@ -16,6 +18,7 @@ function Adminlogin() {
       password:'',
     },
     onSubmit: (values) => {
+      setapiInProgress(true);
       axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminlogin`, {
         username: values.username,
         password: values.password
@@ -24,14 +27,35 @@ function Adminlogin() {
         let data=response.data;
         if(data.success){
           setuser(data.payload)
-          router.push("/admindashboard")
+          setapiInProgress(false);
+          cookieCutter.set('token', data.payload.token)
+          router.push("/admindashboard");
+          // router.push({
+          //   pathname: '/admindashboard',
+          //   query: { token:data.payload.token },
+          // })
         }
         else{
-          console.log("not success")
+          setapiInProgress(false);
+          toast({
+            title: 'ERROR',
+            position:"top",
+            description: data.payload,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
         }
       })
       .catch(function (error) {
-        console.log(error);
+        setapiInProgress(false);
+        toast({
+          title: error.message,
+          position:"top",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
       });
     },
   })
@@ -90,99 +114,19 @@ height: 550px;
 margin-bottom: 8px;
 width: fit-content;
 }
-#input-box input{
 
-  padding: 10px 10px;
-color: rgb(0, 0, 0);
-font-weight:normal;
-letter-spacing: 0.5px;
-outline: none;
-border: 2px solid rgb(182, 182, 182);
-font-size: 1rem;
-border-radius: 4px;
-width: 100%;
-transition: border 0.3s;
-}
 
-/* #border::before{
-  content: '';
-  position: absolute;
- border: 2px solid transparent;
+#btn-1 {
+  //  border: 1px solid black; 
   width: 100%;
-  height: 100%;
-  
-} */
-
-
-/* #border{
-border: 1px solid #b9b9b9;
-position: relative;
-border-radius: 4px;
-z-index: 5;
-} */
-/* #border input{
-  width: 99%;
-} */
-
-
-
-/* #border:hover::before {
-  border: 2px solid #000B49;
-  border-radius: 4px;
- 
-}
-#border:hover{
-  border: 1px solid transparent;
-} */
-
-input[type="text"]{
-  margin-bottom: 20px;
-  /* border: 2px solid blue; */
-}
-
-#input-box input:focus{
-  border: 2px solid #000B49;
-}
-
-#forgot-password{
-/* border: 1px solid red; */
-width: 50%;
-margin: 0px auto;
-text-align: center;
-font-weight: x-large;
-cursor: pointer;
-padding-top: 20px;
-}
-#forgot-password a{
-  text-decoration: none;
-  color: #000B49;
-
-}
-#btn-1{
-  /* border: 1px solid black; */
-  width: 60%;
   margin: 0px auto;
   margin-top: 30px;
+  text-align:center;
   /* margin-bottom: 300px; */
 }
-#btn-1 button{
-  /* border: 1px solid yellow; */
-  width: 100%;
-  border: 2px solid #000B49;
-  padding: 20px 20px;
-  border-radius: 30px;
-  font-weight:500;
-  background-color: #000B49;
-  color: rgb(255, 255, 255);
-  font-size: 1rem;
-}
 
-#btn-1 button:hover{
-  background-color: white;
-  color: #000B49;
- 
-  
-}
+
+
 
 #hnsoft{
   /* border: 1px solid red; */
@@ -260,7 +204,19 @@ padding-top: 20px;
         <a href="#">Forgot Password ?</a>
       </div> */}
       <div id="btn-1">
-           <Button mt="50px" w="85%" h="50px" display={"block"} mx="auto" colorScheme={"blue"} type="submit">Login</Button>
+      <Button 
+                w="55%"
+                h="50px"
+                mx="auto"
+                colorScheme={"blue"}
+                type="submit"
+                spinnerPlacement='end'
+                isLoading={apiInProgress}
+                loadingText='Loading'
+               
+              >
+                Login
+              </Button>
        </div>
      
     
@@ -293,4 +249,8 @@ padding-top: 20px;
   )
 }
 
-export default Adminlogin
+export default Adminlogin;
+
+
+
+
