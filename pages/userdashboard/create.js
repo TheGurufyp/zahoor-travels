@@ -17,6 +17,7 @@ import {
   InputLeftElement,
   SimpleGrid,
 } from "@chakra-ui/react";
+import { useFormik } from "formik";
 import {
   NumberInput,
   NumberInputField,
@@ -47,6 +48,31 @@ import { Radio, RadioGroup } from "@chakra-ui/react";
 const create = () => {
   const [count, setcount] = useState(0);
   const [inputList, setInputList] = useState([{ firstName: "", lastName: "" }]);
+
+  const formik = useFormik({
+    initialValues: {
+      depardate: "",
+      departime: "",
+      sector1: "",
+      sector2: "",
+      flight1: "",
+      flight2: "",
+      arrivedate: "",
+      arrivetime: "",
+      pnr1: "",
+      returndate: "",
+      returntime: "",
+      returnsector1: "",
+      returnsector2: "",
+      returnflight1: "",
+      returnflight2: "",
+      pnr2: "",
+      shirka: "",
+      party: "",
+      iata: "",
+      service: "",
+    },
+  });
 
   function countNight() {
     setcount(count + 1);
@@ -106,460 +132,498 @@ const create = () => {
       </Flex>
 
       {/* main Box */}
+      <form onSubmit={formik.handleSubmit}>
+        <Flex
+          direction={"column"}
+          border="1px"
+          borderColor={"gray.300"}
+          width={"90%"}
+          marginInline="auto"
+        >
+          <Center fontSize={"2rem"} fontWeight="semibold" bg={"gray.200"}>
+            Flight Information
+          </Center>
+          <Box>
+            <Box ml={"1.5rem"} fontWeight="medium" my={"5px"}>
+              Departure
+            </Box>
+            <Divider
+              width={"96%"}
+              marginInline="auto"
+              border="1px"
+              borderColor={"blue.400"}
+              bg="blue"
+              borderRadius={"8px"}
+            ></Divider>
 
-      <Flex
-        direction={"column"}
-        border="1px"
-        borderColor={"gray.300"}
-        width={"90%"}
-        marginInline="auto"
-      >
-        <Center fontSize={"2rem"} fontWeight="semibold" bg={"gray.200"}>
-          Flight Information
-        </Center>
-        <Box>
-          <Box ml={"1.5rem"} fontWeight="medium" my={"5px"}>
-            Departure
-          </Box>
-          <Divider
-            width={"96%"}
-            marginInline="auto"
-            border="1px"
-            borderColor={"blue.400"}
-            bg="blue"
-            borderRadius={"8px"}
-          ></Divider>
-
-          <Flex
-            // justify={"center"}
-            my="2rem"
-            // border={"1px"}
-            width="96%"
-            marginInline={"auto"}
-          >
-            <Wrap
-              spacing="10px"
-              className="fl-1"
+            <Flex
+              // justify={"center"}
+              my="2rem"
               // border={"1px"}
-              justify="center"
+              width="96%"
+              marginInline={"auto"}
             >
-              <WrapItem>
-                <Center w="300px" h="80px">
-                  <Box>
-                    Depart Date :{" "}
-                    <Input
-                      type={"date"}
-                      border=" 1px"
-                      borderColor={"blue.400"}
-                    />
-                  </Box>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center w="300px" h="80px" bg>
-                  <Box>
-                    Depart Time :
-                    <Input
-                      border={"1px"}
-                      borderColor="blue.500"
-                      type={"time"}
-                    ></Input>
-                  </Box>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center w="300px" h="80px">
-                  <Flex
-                    // border={"1px"}
-                    // align="center"
-                    // justify={"space-around"}
-                    // mx={"2rem"}
-                    // my={"1rem"}
-                    // mx={"1.5rem"}
-                    // w={"30%"}
-                    // justify="center"
-                    className="Flex-7"
-                    direction="column"
-                  >
-                    <Box>Sector :</Box>
-                    <Flex align={"center"}>
-                      <Select
-                        placeholder="USA"
+              <Wrap
+                spacing="10px"
+                className="fl-1"
+                // border={"1px"}
+                justify="center"
+              >
+                <WrapItem>
+                  <Center w="300px" h="80px">
+                    <Box>
+                      Depart Date :{" "}
+                      <Input
+                        type={"date"}
+                        border=" 1px"
+                        name="depardate"
+                        borderColor={"blue.400"}
+                      />
+                    </Box>
+                  </Center>
+                </WrapItem>
+                <WrapItem>
+                  <Center w="300px" h="80px" bg>
+                    <Box>
+                      Depart Time :
+                      <Input
                         border={"1px"}
-                        borderColor="blue.400"
-                      >
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                      <Box mx={"0.2rem"}></Box>
-                      <Select
-                        placeholder="AED"
-                        border={"1px"}
-                        borderColor="blue.400"
-                      >
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
+                        borderColor="blue.500"
+                        type={"time"}
+                        name="departime"
+                      ></Input>
+                    </Box>
+                  </Center>
+                </WrapItem>
+                <WrapItem>
+                  <Center w="300px" h="80px">
+                    <Flex
+                      // border={"1px"}
+                      // align="center"
+                      // justify={"space-around"}
+                      // mx={"2rem"}
+                      // my={"1rem"}
+                      // mx={"1.5rem"}
+                      // w={"30%"}
+                      // justify="center"
+                      className="Flex-7"
+                      direction="column"
+                    >
+                      <Box>Sector :</Box>
+                      <Flex align={"center"}>
+                        <Select
+                          placeholder="USA"
+                          border={"1px"}
+                          borderColor="blue.400"
+                          name="sector1"
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                        <Box mx={"0.2rem"}></Box>
+                        <Select
+                          placeholder="AED"
+                          border={"1px"}
+                          borderColor="blue.400"
+                          name="sector2"
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </Flex>
                     </Flex>
-                  </Flex>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center w="300px" h="80px">
-                  <Flex
-                    // border={"1px"}
-                    // align="center"
-                    //w={"30%"}
-                    // mx={"1.5rem"}
-                    // my="1rem"
-                    // justify={"center"}
-                    className="Flex-7"
-                    direction={"column"}
-                    ml="30px"
-                  >
-                    <Box>Flight No : </Box>
-                    <Flex>
-                      <Select
-                        placeholder="6S"
+                  </Center>
+                </WrapItem>
+                <WrapItem>
+                  <Center w="300px" h="80px">
+                    <Flex
+                      // border={"1px"}
+                      // align="center"
+                      //w={"30%"}
+                      // mx={"1.5rem"}
+                      // my="1rem"
+                      // justify={"center"}
+                      className="Flex-7"
+                      direction={"column"}
+                      ml="30px"
+                    >
+                      <Box>Flight No : </Box>
+                      <Flex>
+                        <Select
+                          placeholder="6S"
+                          border={"1px"}
+                          borderColor="blue.400"
+                          // w={"auto"}
+                          // size={"lg"}
+                          name="flight1"
+                        >
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                        <Box mx={"0.2rem"}></Box>
+                        <Input
+                          border={"1px"}
+                          borderColor="blue.400"
+                          htmlSize={10}
+                          name="flight2"
+                          // width="auto"
+                        />
+                      </Flex>
+                    </Flex>
+                  </Center>
+                </WrapItem>
+
+                <WrapItem>
+                  <Center w="300px" h="80px">
+                    <Box>
+                      Arrival Date :{" "}
+                      <Input
+                        type={"date"}
+                        border=" 1px"
+                        borderColor={"blue.400"}
+                        name="arrivedate"
+                      />
+                    </Box>
+                  </Center>
+                </WrapItem>
+                <WrapItem>
+                  <Center w="300px" h="80px">
+                    <Box>
+                      Arrival Time :{" "}
+                      <Input
                         border={"1px"}
-                        borderColor="blue.400"
-                        // w={"auto"}
-                        // size={"lg"}
-                      >
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
-                      </Select>
-                      <Box mx={"0.2rem"}></Box>
+                        borderColor="blue.500"
+                        type={"time"}
+                        name="arrivetime"
+                      ></Input>
+                    </Box>
+                  </Center>
+                </WrapItem>
+                <WrapItem>
+                  <Center w="300px" h="80px">
+                    <Box>
+                      PNR No :
                       <Input
                         border={"1px"}
                         borderColor="blue.400"
-                        htmlSize={10}
-                        // width="auto"
+                        htmlSize={20}
+                        name="pnr1"
+                        // width="120%"
+                        // ml={"10px"}
                       />
-                    </Flex>
-                  </Flex>
-                </Center>
-              </WrapItem>
-
-              <WrapItem>
-                <Center w="300px" h="80px">
-                  <Box>
-                    Arrival Date :{" "}
-                    <Input
-                      type={"date"}
-                      border=" 1px"
-                      borderColor={"blue.400"}
-                    />
-                  </Box>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center w="300px" h="80px">
-                  <Box>
-                    Arrival Time :{" "}
-                    <Input
-                      border={"1px"}
-                      borderColor="blue.500"
-                      type={"time"}
-                    ></Input>
-                  </Box>
-                </Center>
-              </WrapItem>
-              <WrapItem>
-                <Center w="300px" h="80px">
-                  <Box>
-                    PNR No :
-                    <Input
-                      border={"1px"}
-                      borderColor="blue.400"
-                      htmlSize={20}
-                      // width="120%"
-                      // ml={"10px"}
-                    />
-                  </Box>{" "}
-                </Center>
-              </WrapItem>
-            </Wrap>
-          </Flex>
-        </Box>
-        <Box>
-          <Box ml={"1.5rem"} fontWeight="medium" my={"5px"}>
-            Return
+                    </Box>{" "}
+                  </Center>
+                </WrapItem>
+              </Wrap>
+            </Flex>
           </Box>
-          <Divider
-            width={"96%"}
-            marginInline="auto"
-            border="1px"
-            borderColor={"blue.400"}
-            bg="blue"
-            borderRadius={"8px"}
-          ></Divider>
+          <Box>
+            <Box ml={"1.5rem"} fontWeight="medium" my={"5px"}>
+              Return
+            </Box>
+            <Divider
+              width={"96%"}
+              marginInline="auto"
+              border="1px"
+              borderColor={"blue.400"}
+              bg="blue"
+              borderRadius={"8px"}
+            ></Divider>
 
-          {/* //Start handleRemoveClick */}
-
-          <Flex
-            // border={"1px"}
-            // borderColor="gray.100"
-            my={"20px"}
-            className="main-sec"
-            justify="center"
-            align={"center"}
-            // flexDirection={"column"}
-            flexWrap={"wrap"}
-          >
-            <Flex
-              // border={"1px"}
-              align="center"
-              // mx={"1rem"}
-              // justify={"center"}
-              //w={"30%"}
-              className="Flex-7"
-              my={"1rem"}
-
-              //  direction={"column"}
-            >
-              <Box>
-                Return Date :{" "}
-                <Input type={"date"} border=" 1px" borderColor={"blue.400"} />
-              </Box>
-            </Flex>
-
-            <Flex
-              //w={"30%"}
-              // border={"1px"}
-              //  direction={"column"}
-              // justify={"center"}
-              // align="center"
-              // mx={"1rem"}
-              my="1rem"
-              className="Flex-7"
-              mx={"1.5rem"}
-            >
-              <Box mx={"1rem"}>
-                Return Time :
-                <Input
-                  border={"1px"}
-                  borderColor="blue.500"
-                  type={"time"}
-                ></Input>
-              </Box>
-            </Flex>
+            {/* //Start handleRemoveClick */}
 
             <Flex
               // border={"1px"}
-              // align="center"
-              // justify={"space-around"}
-              // mx={"2rem"}
-              my={"0.5rem"}
-              //w={"30%"}
-              // justify="center"
-              className="Flex-7"
-              mx="1.5rem"
-              direction={"column"}
+              // borderColor="gray.100"
+              my={"20px"}
+              className="main-sec"
+              justify="center"
+              align={"center"}
+              // flexDirection={"column"}
+              flexWrap={"wrap"}
             >
-              <Box>Return Sector :</Box>
-              <Flex>
-                <Select placeholder="USA" border={"1px"} borderColor="blue.400">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
-                <Box mx={"0.5rem"}></Box>
-                <Select placeholder="AED" border={"1px"} borderColor="blue.400">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
+              <Flex
+                // border={"1px"}
+                align="center"
+                // mx={"1rem"}
+                // justify={"center"}
+                //w={"30%"}
+                className="Flex-7"
+                my={"1rem"}
+
+                //  direction={"column"}
+              >
+                <Box>
+                  Return Date :{" "}
+                  <Input
+                    type={"date"}
+                    border=" 1px"
+                    name="returndate"
+                    borderColor={"blue.400"}
+                  />
+                </Box>
+              </Flex>
+
+              <Flex
+                //w={"30%"}
+                // border={"1px"}
+                //  direction={"column"}
+                // justify={"center"}
+                // align="center"
+                // mx={"1rem"}
+                my="1rem"
+                className="Flex-7"
+                mx={"1.5rem"}
+              >
+                <Box mx={"1rem"}>
+                  Return Time :
+                  <Input
+                    border={"1px"}
+                    borderColor="blue.500"
+                    type={"time"}
+                    name="returntime"
+                  ></Input>
+                </Box>
+              </Flex>
+
+              <Flex
+                // border={"1px"}
+                // align="center"
+                // justify={"space-around"}
+                // mx={"2rem"}
+                my={"0.5rem"}
+                //w={"30%"}
+                // justify="center"
+                className="Flex-7"
+                mx="1.5rem"
+                direction={"column"}
+              >
+                <Box>Return Sector :</Box>
+                <Flex>
+                  <Select
+                    placeholder="USA"
+                    border={"1px"}
+                    borderColor="blue.400"
+                    name="returnsector1"
+                  >
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                  <Box mx={"0.5rem"}></Box>
+                  <Select
+                    placeholder="AED"
+                    border={"1px"}
+                    borderColor="blue.400"
+                    name="returnsector2"
+                  >
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                </Flex>
+              </Flex>
+
+              {/* /////// */}
+
+              <Flex
+                // border={"1px"}
+                // align="center"
+                //w={"30%"}
+                my="1rem"
+                direction={"column"}
+                // justify={"center"}
+                className="Flex-7"
+                mx={"2rem"}
+              >
+                <Box>Flight No :</Box>
+                <Flex>
+                  <Select
+                    placeholder="6S"
+                    border={"1px"}
+                    borderColor="blue.400"
+                    // w={"auto"}
+                    size={"md"}
+                    name="returnflight1"
+                  >
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                  <Box mx="0.5rem"></Box>
+                  <Input
+                    border={"1px"}
+                    borderColor="blue.400"
+                    htmlSize={15}
+                    width="auto"
+                    name="returnflight2"
+                  />
+                </Flex>
+              </Flex>
+
+              <Flex
+                // border={"1px"}
+                // w={"40%"}
+                my="2rem"
+                // justify={"center"}
+                align="center"
+                className="Flex-7"
+                mx={"2rem"}
+              >
+                <Box>
+                  PNR No :
+                  <Input
+                    border={"1px"}
+                    borderColor="blue.400"
+                    htmlSize={7}
+                    // width="120%"
+                    // ml={"10px"}
+                    name="pnr2"
+                  />
+                </Box>
               </Flex>
             </Flex>
 
-            {/* /////// */}
-
             <Flex
-              // border={"1px"}
-              // align="center"
-              //w={"30%"}
-              my="1rem"
-              direction={"column"}
-              // justify={"center"}
-              className="Flex-7"
-              mx={"2rem"}
+              //  border={"1px"}
+              w="80%"
+              marginInline={"auto"}
+              justify="center"
             >
-              <Box>Flight No :</Box>
-              <Flex>
-                <Select
-                  placeholder="6S"
+              <Button colorScheme={"blue"} onClick={countNight}>
+                Count Night
+              </Button>
+              <Flex
+                justify={"center"}
+                align="center"
+                mx={"1rem"}
+                border={"1px"}
+                borderColor="blue.400"
+                borderRadius={"8px"}
+                paddingInline="2rem"
+              >
+                {count}
+              </Flex>
+            </Flex>
+
+            <Divider
+              width={"50%"}
+              marginInline="auto"
+              border="1px"
+              my={"3rem"}
+              borderColor={"blue.400"}
+              bg="blue"
+              borderRadius={"8px"}
+            ></Divider>
+            {/* //below count */}
+            <Flex justify={"center"} align="center" wrap={"wrap"} mb="1.5rem">
+              <Box>
+                Shirka :{" "}
+                <Input
+                  variant="outline"
                   border={"1px"}
                   borderColor="blue.400"
-                  // w={"auto"}
-                  size={"md"}
+                  placeholder="Outline"
+                  name="shirka"
+                />
+              </Box>
+              <Box mx={"2rem"}>
+                Party :{" "}
+                <Select
+                  placeholder="Select option"
+                  border={"1px"}
+                  borderColor="blue.400"
+                  name="party"
                 >
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
                   <option value="option3">Option 3</option>
                 </Select>
-                <Box mx="0.5rem"></Box>
-                <Input
+              </Box>
+              <Box mx={"2rem"} my="2rem">
+                IATA :{" "}
+                <Select
                   border={"1px"}
                   borderColor="blue.400"
-                  htmlSize={15}
-                  width="auto"
-                />
-              </Flex>
-            </Flex>
-
-            <Flex
-              // border={"1px"}
-              // w={"40%"}
-              my="2rem"
-              // justify={"center"}
-              align="center"
-              className="Flex-7"
-              mx={"2rem"}
-            >
+                  placeholder="Select option"
+                  name="iata"
+                >
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </Select>
+              </Box>
               <Box>
-                PNR No :
+                Service No :{" "}
                 <Input
                   border={"1px"}
                   borderColor="blue.400"
-                  htmlSize={7}
-                  // width="120%"
-                  // ml={"10px"}
+                  variant="outline"
+                  placeholder="Outline"
+                  name="service"
                 />
               </Box>
             </Flex>
-          </Flex>
-
-          <Flex
-            //  border={"1px"}
-            w="80%"
-            marginInline={"auto"}
-            justify="center"
+            {/* End */}
+          </Box>
+          <Center
+            fontSize={"2rem"}
+            fontWeight="semibold"
+            bg={"gray.200"}
+            // my="1.5rem"
           >
-            <Button colorScheme={"blue"} onClick={countNight}>
-              Count Night
-            </Button>
-            <Flex
-              justify={"center"}
-              align="center"
-              mx={"1rem"}
-              border={"1px"}
-              borderColor="blue.400"
-              borderRadius={"8px"}
-              paddingInline="2rem"
-            >
-              {count}
+            Transportation Detail
+          </Center>
+          <Transport />
+        </Flex>
+
+        {/* ziyarat */}
+
+        <Flex
+          direction={"column"}
+          border="1px"
+          borderColor={"gray.300"}
+          width={"90%"}
+          marginInline="auto"
+          // my={"1rem"}
+        >
+          <Center fontSize={"2rem"} fontWeight="semibold" bg={"gray.200"}>
+            Ziyaraat
+          </Center>
+          <Flex my="1rem" justify={"center"}>
+            <RadioGroup defaultValue="0">
+              <Stack spacing={50} direction="row">
+                <Radio fontWeight={"bold"} value="0">
+                  None
+                </Radio>
+                <Radio fontWeight={"bold"} value="1">
+                  Madina Ziarat
+                </Radio>
+                <Radio fontWeight={"bold"} value="2">
+                  Makkah & Madina Ziarat
+                </Radio>
+                <Radio fontWeight={"bold"} value="3">
+                  Makkah Ziarat
+                </Radio>
+              </Stack>
+            </RadioGroup>
+          </Flex>
+          <Flex
+            direction={"column"}
+            width="90%"
+            marginInline={"auto"}
+            my="1rem"
+          >
+            <Box fontWeight={"bold"}>Remarks : </Box>
+            <Flex>
+              <Input borderColor="blue.400"></Input>
             </Flex>
           </Flex>
-
-          <Divider
-            width={"50%"}
-            marginInline="auto"
-            border="1px"
-            my={"3rem"}
-            borderColor={"blue.400"}
-            bg="blue"
-            borderRadius={"8px"}
-          ></Divider>
-          {/* //below count */}
-          <Flex justify={"center"} align="center" wrap={"wrap"} mb="1.5rem">
-            <Box>
-              Shirka :{" "}
-              <Input
-                variant="outline"
-                border={"1px"}
-                borderColor="blue.400"
-                placeholder="Outline"
-              />
-            </Box>
-            <Box mx={"2rem"}>
-              Party :{" "}
-              <Select
-                placeholder="Select option"
-                border={"1px"}
-                borderColor="blue.400"
-              >
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </Select>
-            </Box>
-            <Box mx={"2rem"} my="2rem">
-              IATA :{" "}
-              <Select
-                border={"1px"}
-                borderColor="blue.400"
-                placeholder="Select option"
-              >
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-              </Select>
-            </Box>
-            <Box>
-              Service No :{" "}
-              <Input
-                border={"1px"}
-                borderColor="blue.400"
-                variant="outline"
-                placeholder="Outline"
-              />
-            </Box>
-          </Flex>
-          {/* End */}
-        </Box>
-        <Center
-          fontSize={"2rem"}
-          fontWeight="semibold"
-          bg={"gray.200"}
-          // my="1.5rem"
-        >
-          Transportation Detail
-        </Center>
-        <Transport />
-      </Flex>
-
-      {/* ziyarat */}
-
-      <Flex
-        direction={"column"}
-        border="1px"
-        borderColor={"gray.300"}
-        width={"90%"}
-        marginInline="auto"
-        // my={"1rem"}
-      >
-        <Center fontSize={"2rem"} fontWeight="semibold" bg={"gray.200"}>
-          Ziyaraat
-        </Center>
-        <Flex my="1rem" justify={"center"}>
-          <RadioGroup defaultValue="0">
-            <Stack spacing={50} direction="row">
-              <Radio fontWeight={"bold"} value="0">
-                None
-              </Radio>
-              <Radio fontWeight={"bold"} value="1">
-                Madina Ziarat
-              </Radio>
-              <Radio fontWeight={"bold"} value="2">
-                Makkah & Madina Ziarat
-              </Radio>
-              <Radio fontWeight={"bold"} value="3">
-                Makkah Ziarat
-              </Radio>
-            </Stack>
-          </RadioGroup>
         </Flex>
-        <Flex direction={"column"} width="90%" marginInline={"auto"} my="1rem">
-          <Box fontWeight={"bold"}>Remarks : </Box>
-          <Flex>
-            <Input borderColor="blue.400"></Input>
-          </Flex>
-        </Flex>
-      </Flex>
+      </form>
     </>
   );
 };

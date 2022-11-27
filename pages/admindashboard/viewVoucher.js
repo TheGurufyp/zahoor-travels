@@ -16,7 +16,8 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-const viewVoucher = () => {
+const viewVoucher = (props) => {
+  let VoucherList = props.allData.payload;
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -69,6 +70,8 @@ const viewVoucher = () => {
         </Flex>
       </Flex>
       {/* Main Container */}
+      {/* {props.allData.payload.map((data) => { 
+        return( */}
       <Box
         // border={"1px"}
         // borderColor="gray.200"
@@ -378,8 +381,22 @@ const viewVoucher = () => {
           </Flex>
         </Flex>
       </Box>
+      {/* )}} */}
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  // console.log(context.query);
+  const id = context.query.id;
+  let data = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST}/adminviewvoucher?id=${id}`
+  );
+  let allData = await data.json();
+
+  return {
+    props: { allData }, // will be passed to the page component as props
+  };
+}
 
 export default viewVoucher;
