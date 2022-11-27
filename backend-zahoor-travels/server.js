@@ -10,6 +10,7 @@ const adminVerifyToken = require("./routes/admin/adminVerifyToken");
 const cors = require("cors");
 const VoucherRoute = require("./routes/admin/allVouchers");
 const adminviewvoucher = require("./routes/admin/adminviewvoucher");
+const getagents=require("./routes/admin/getagents")
 
 connectTodatabase(); // connecting to Database
 const corsOptions = {
@@ -25,6 +26,7 @@ const PORT = process.env.PORT || 5000;
 app.use("/createadmin", createadmin);
 app.use("/adminlogin", adminlogin);
 app.use("/adminVerifyToken", adminVerifyToken);
+app.use("/getagents",getagents)
 
 // Routes for User
 app.use("/createuser", createuser);

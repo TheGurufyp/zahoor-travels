@@ -14,7 +14,9 @@ router.get("/getAdminVouchers", (req, res, next) => {
         res.send({ success: true, payload: data });
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      res.send({ success: false,payload:"internal server error" });
+    });
 });
 
 module.exports = router;
