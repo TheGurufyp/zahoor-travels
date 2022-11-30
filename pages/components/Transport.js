@@ -47,7 +47,7 @@ const Transport = () => {
     <>
       {inputList.map((x, i) => {
         return (
-          <Flex py={"1rem"} wrap="wrap">
+          <Flex key={i} py={"1rem"} wrap="wrap">
             <Grid
               flexWrap={"wrap"}
               templateColumns="repeat(5, 0.1fr)"

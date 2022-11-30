@@ -16,7 +16,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-const viewVoucher = (props) => {
+const ViewVoucher = (props) => {
   let VoucherList = props.allData.payload;
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -307,7 +307,7 @@ const viewVoucher = (props) => {
           py={"1rem"}
           // border={"1px"}
         >
-          <Heading size={"md"}>Mutamer's ( Pilgrims) Detail</Heading>
+          <Heading size={"md"}>Mutamer&#39;s ( Pilgrims) Detail</Heading>
         </Center>
         <TableContainer width="97%" marginInline={"auto"}>
           <Table size="sm">
@@ -399,4 +399,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default viewVoucher;
+export default ViewVoucher;

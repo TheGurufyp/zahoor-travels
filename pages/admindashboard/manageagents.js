@@ -1,4 +1,4 @@
-import React,{useRef} from 'react'
+import React,{useRef,useContext} from 'react'
 import {
     Table,
     Thead,
@@ -17,29 +17,72 @@ import {
   import axios from "axios"
 import ConfirmDialog from '../components/ConfirmDialog'
 import EditAgentModal from '../components/EditAgentModal'
+import { parseCookies } from "../../helpers/index"
+import { userContext } from "../../context/userState";
+import { useRouter } from 'next/router'
 
-
-function Manageagents() {
-
+function Manageagents({responseFromServer}) {
+  const router = useRouter()
+ const agents=responseFromServer;
   const toast = useToast()
+  const { user,token } = useContext(userContext);
   const inputFileref=useRef();
+
+
+const clickedYes=(user_id)=>{
+  axios.post(`${process.env.NEXT_PUBLIC_HOST}/deleteagent`,{
+    user_id:user_id
+  },{headers:{token:token}})
+  .then((res)=>{
+    
+    let response=res.data;
+  
+    if(response.success){
+      toast({
+        position: "top",
+          title: "SUCCESSFULL",
+          description: response.payload,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+      });
+      // router.reload();
+    }
+    else{
+      
+      toast({
+        position: "top",
+          title: "ERROR",
+          description:response.payload,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+      });
+    }
+  
+  })
+  
+  .catch((error)=>{
+    
+    toast({
+      position: "top",
+        title: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+    });
+  })
+}
+
 
   const clickfileinput=()=>{
     inputFileref.current.click();
-    console.log(inputFileref.current)
+    
   }
 
-// const handlechange= async(e)=>{
 
-//   let file=e.target.files[0];
-// let data= await file.arrayBuffer();
-// let workbook = read(data);
-// let worksheet= workbook.Sheets[workbook.SheetNames[0]];
-// let json=utils.sheet_to_json(worksheet);
-// console.log(worksheet);
-// }
+const submitFile=(e,username)=>{
 
-const submitFile=(e)=>{
   const file=e.target.files[0];
 if(!file) return;
   if(file.type!=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" )
@@ -88,8 +131,8 @@ promise
 
 axios.post(`${process.env.NEXT_PUBLIC_HOST}/uploadmutamers`,{
   mutamers:data,
-  username:"nabeel"
-})
+  username:username
+},{headers:{token:token}})
 .then((res)=>{
   
   let response=res.data;
@@ -105,7 +148,15 @@ axios.post(`${process.env.NEXT_PUBLIC_HOST}/uploadmutamers`,{
     });
   }
   else{
-
+    
+    toast({
+      position: "top",
+        title: "ERROR",
+        description:response.payload,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+    });
   }
 
 })
@@ -123,7 +174,7 @@ axios.post(`${process.env.NEXT_PUBLIC_HOST}/uploadmutamers`,{
 
 })
 .catch((e)=>{
-  
+  console.log(e)
   toast({
     position: "top",
       title: "ERROR IN FILE",
@@ -144,6 +195,10 @@ axios.post(`${process.env.NEXT_PUBLIC_HOST}/uploadmutamers`,{
   <Table variant='striped' colorScheme="blue"   >
    
     <TableCaption mt="0px" fontSize={"2rem"} placement={"top"}>Manage Agents</TableCaption>
+    {
+  agents.length <= 0 ? <TableCaption mt="0px" fontSize={"1rem"} placement={"bottom"}>No Agents Found</TableCaption>
+:
+<>
     <Thead>
     
       <Tr>
@@ -153,76 +208,44 @@ axios.post(`${process.env.NEXT_PUBLIC_HOST}/uploadmutamers`,{
       </Tr>
     </Thead>
     <Tbody>
-    <Tr>
-        <Td > 
-        <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>***** </Td>
-        <Td isNumeric>
 
-        <Button onClick={clickfileinput} mr="6px" size={"sm"} colorScheme={"purple"}> upload excel file</Button>
-        <Input ref={inputFileref} display={"none"} type="file" onInput={(e)=>{submitFile(e);}} />
-          <EditAgentModal>
+  
+  {agents.map((agent,index)=>{
+    return (
+      <Tr key={agent._id}>
+      <Td > 
+      <Text>  {agent.username}</Text></Td>
+      <Td>***** </Td>
+      <Td isNumeric>
 
-        <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-        </EditAgentModal>
-        <ConfirmDialog head="Delete Agent ?" desc="Are you sure you want to delete this agent.">
-        <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-        </ConfirmDialog>
-         
-        </Td>
+      <Button onClick={clickfileinput} mr="6px" size={"sm"} colorScheme={"purple"}> upload excel file</Button>
+      <Input ref={inputFileref} display={"none"} type="file" onInput={(e)=>{submitFile(e,agent.username);}} />
+        <EditAgentModal user_id={agent._id}>
 
-
-      </Tr>
-
-
-
-      <Tr>
-        <Td > 
-        <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>***** </Td>
-        <Td isNumeric>
-
-        <Button onClick={clickfileinput} mr="6px" size={"sm"} colorScheme={"purple"}> upload excel file</Button>
-        <Input ref={inputFileref} display={"none"} type="file" onInput={(e)=>{submitFile(e);}} />
-          <EditAgentModal>
-
-        <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-        </EditAgentModal>
-        <ConfirmDialog head="Delete Agent ?" desc="Are you sure you want to delete this agent.">
-        <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-        </ConfirmDialog>
-         
-        </Td>
+      <Button  mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
+      </EditAgentModal>
+      <ConfirmDialog head="Delete Agent ?" desc="Are you sure you want to delete this agent." user_id={agent._id} clickedYes={clickedYes}>
+      <Button size={"sm"} colorScheme={"red"}> Delete</Button>
+      </ConfirmDialog>
+       
+      </Td>
 
 
-      </Tr>
+    </Tr>
+    )
+  })}
+
+   
 
 
 
-      <Tr>
-        <Td > 
-        <Text>  Nabeel Tours And Travels</Text></Td>
-        <Td>***** </Td>
-        <Td isNumeric>
-
-        <Button onClick={clickfileinput} mr="6px" size={"sm"} colorScheme={"purple"}> upload excel file</Button>
-        <Input ref={inputFileref} display={"none"} type="file" onInput={(e)=>{submitFile(e);}} />
-          <EditAgentModal>
-
-        <Button mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
-        </EditAgentModal>
-        <ConfirmDialog head="Delete Agent ?" desc="Are you sure you want to delete this agent.">
-        <Button size={"sm"} colorScheme={"red"}> Delete</Button>
-        </ConfirmDialog>
-         
-        </Td>
-
-
-      </Tr>
+      
      
       
      
     </Tbody>
+    </>
+}
     <Tfoot>
      
     </Tfoot>
@@ -240,37 +263,43 @@ export default Manageagents;
 
 
 export async function getServerSideProps(context) {
-  const token=context.req.cookies.token;
-  if(!token){
-    return {
-      redirect: {
-        destination: '/adminlogin',
-        permanent: false,
-      },
-    }
-  }
-  let responseFromServer;
- try {
-   const response= await axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminVerifyToken`,{},{ headers: {token:token}});
-   
-   if(response.data.success){
-    responseFromServer={success:true};
-   }
-   else{
-     return {
-       redirect: {
-         destination: '/adminlogin',
-         permanent: false,
-       },
-    }
-     
-  }
-  
-} catch (error) {
-  responseFromServer={success:false};
- }
 
-  return {
-    props: {responseFromServer}, 
+  const cookie = parseCookies(context.req);
+  
+    const token=cookie.token;
+    if(!token){
+      return {
+        redirect: {
+          destination: '/adminlogin',
+          permanent: false,
+        },
+      }
+    }
+    let responseFromServer;
+   try {
+     const response= await axios.get(`${process.env.NEXT_PUBLIC_HOST}/getagents`,{ headers: {token:token}});
+  
+     if(response.data.success){
+      responseFromServer=response.data.payload;
+      // console.log(responseFromServer)
+  
+     }
+     else{
+       return {
+         redirect: {
+           destination: '/adminlogin',
+           permanent: false,
+         },
+      }
+       
+    }
+    
+  } catch (error) {
+    responseFromServer={success:false};
+  
+   }
+  
+    return {
+      props: {responseFromServer}, 
+    }
   }
-}

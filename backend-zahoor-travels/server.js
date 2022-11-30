@@ -11,6 +11,11 @@ const cors = require("cors");
 const VoucherRoute = require("./routes/admin/allVouchers");
 const adminviewvoucher = require("./routes/admin/adminviewvoucher");
 const getagents=require("./routes/admin/getagents")
+const createagent=require("./routes/admin/createagent")
+const deleteagent=require("./routes/admin/deleteagent")
+const updateagent=require("./routes/admin/updateagent")
+const adminlogout=require("./routes/admin/adminlogout")
+const userlogout=require("./routes/user/userlogout")
 
 connectTodatabase(); // connecting to Database
 const corsOptions = {
@@ -27,11 +32,16 @@ app.use("/createadmin", createadmin);
 app.use("/adminlogin", adminlogin);
 app.use("/adminVerifyToken", adminVerifyToken);
 app.use("/getagents",getagents)
+app.use("/createagent",createagent)
+app.use("/deleteagent",deleteagent);
+app.use("/updateagent",updateagent);
+app.use("/adminlogout",adminlogout);
 
 // Routes for User
 app.use("/createuser", createuser);
 app.use("/userlogin", userlogin);
 app.use("/uploadmutamers", uploadmutamers);
+app.use("/userlogout",userlogout);
 
 // Routes for Vouchers
 app.use(VoucherRoute);

@@ -3,17 +3,17 @@ const router = express.Router()
 const Admin= require("../../database/Models/Admin");
 
 const jwt = require('jsonwebtoken');
-
+const privateKey = "hunfaisagoodboy"; // will be in dotenv in future
 
 router.post("/",async(req,res)=>{
 
-
     const token=req.headers.token;
-if(token){
-
+    if(token){
+        
+       
     try {
         const tokenDecoded = jwt.verify(token, privateKey);
-        req.tokenDecoded=tokenDecoded;
+       
        await Admin.updateOne({username:tokenDecoded.username}, { $unset: { token: 1 } });
        
        res.send({success:true,payload:"logout successful"})

@@ -7,6 +7,8 @@ const authAdmin=async(req,res,next)=>{
 
 
     const token=req.headers.token;
+
+
 if(token){
 
     try {
@@ -22,6 +24,7 @@ if(token){
        }
     } catch (error) {
         res.send({success:false,payload:"Internal server error"});
+     
     }
 
 

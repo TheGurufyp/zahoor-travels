@@ -13,6 +13,8 @@ import { userContext } from "../../context/userState";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Cookies from "cookies";
+import { parseCookies } from "../../helpers/index"
+
 function Index(props) {
   const [isLargerThan982] = useMediaQuery("(min-width: 982px)");
   const [isLargerThan673] = useMediaQuery("(min-width: 673px)");
@@ -156,38 +158,39 @@ function Index(props) {
 
 export default Index;
 
-// export async function getServerSideProps(context) {
-//   const token=context.req.cookies.token;
-//   if(!token){
-//     return {
-//       redirect: {
-//         destination: '/adminlogin',
-//         permanent: false,
-//       },
-//     }
-//   }
-//   let responseFromServer;
-//  try {
-//    const response= await axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminVerifyToken`,{},{ headers: {token:token}});
+export async function getServerSideProps(context) {
+  const cookie = parseCookies(context.req);
+  const token=cookie.token;
+  if(!token){
+    return {
+      redirect: {
+        destination: '/adminlogin',
+        permanent: false,
+      },
+    }
+  }
+  let responseFromServer;
+ try {
+   const response= await axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminVerifyToken`,{},{ headers: {token:token}});
 
-//    if(response.data.success){
-//     responseFromServer={success:true};
-//    }
-//    else{
-//      return {
-//        redirect: {
-//          destination: '/adminlogin',
-//          permanent: false,
-//        },
-//     }
+   if(response.data.success){
+    responseFromServer={success:true};
+   }
+   else{
+     return {
+       redirect: {
+         destination: '/adminlogin',
+         permanent: false,
+       },
+    }
 
-//   }
+  }
 
-// } catch (error) {
-//   responseFromServer={success:false};
-//  }
+} catch (error) {
+  responseFromServer={success:false};
+ }
 
-//   return {
-//     props: {responseFromServer},
-//   }
-// }
+  return {
+    props: {responseFromServer},
+  }
+}

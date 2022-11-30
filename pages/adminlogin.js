@@ -12,12 +12,14 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { userContext } from "../context/userState";
 import axios from "axios";
-import cookieCutter from "cookie-cutter";
-function Adminlogin() {
-  const [apiInProgress, setapiInProgress] = useState(false);
+import { useCookies } from "react-cookie"
 
+
+function Adminlogin() {
+  const [cookie, setCookie] = useCookies(["token","username"])
+  const [apiInProgress, setapiInProgress] = useState(false);
   const toast = useToast();
-  const { user, setuser } = useContext(userContext);
+  const { user, setuser,token, settoken } = useContext(userContext);
   const router = useRouter();
 
   const formik = useFormik({
@@ -36,8 +38,18 @@ function Adminlogin() {
           let data = response.data;
           if (data.success) {
             setuser(data.payload);
+            settoken(data.payload.token);
             setapiInProgress(false);
-            cookieCutter.set("token", data.payload.token);
+            // cookieCutter.set("token", data.payload.token,{path:'/'});
+            setCookie("token",data.payload.token, {
+              path: "/",
+              sameSite: true,
+            });
+            setCookie("username",data.payload.username, {
+              path: "/",
+              sameSite: true,
+            });
+
             router.push("/admindashboard");
             // router.push({
             //   pathname: '/admindashboard',

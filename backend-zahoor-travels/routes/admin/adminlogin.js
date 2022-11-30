@@ -32,7 +32,8 @@ router.post("/",adminAlreadyExists,async(req,res)=>{
                             success: true,
                             payload: {
                                 token,
-                                username:req.user.username
+                                username:req.user.username,
+                                isAdmin:true
                             }
                         });
                     }

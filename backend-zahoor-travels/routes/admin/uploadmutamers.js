@@ -10,8 +10,8 @@ const authAdmin = require('../../middleware/admin/authAdmin');
 router.post("/",authAdmin,async(req,res)=>{ // auth will apply in future
 
   if(req.success)
-
- { const {mutamers,username}=req.body;
+  { const {mutamers,username}=req.body;
+ 
 
    User.findOneAndUpdate({username:username},{$set:{mutamers:mutamers}},function(err,data){
 if(err){   
@@ -23,7 +23,6 @@ if(err){
     }
   });
 
-  res.send({success:false,payload:"Internal server error"});
 
 }
 else{

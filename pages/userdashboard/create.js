@@ -45,6 +45,7 @@ import { useState } from "react";
 import Transport from "../components/Transport";
 import { Radio, RadioGroup } from "@chakra-ui/react";
 
+<<<<<<< Updated upstream
 const initialValues = {
   friends: [
     {
@@ -56,6 +57,9 @@ const initialValues = {
 };
 
 const create = () => {
+=======
+const Create = () => {
+>>>>>>> Stashed changes
   const [count, setcount] = useState(0);
   const [FieldList, setFieldList] = useState([{ firstName: "", lastName: "" }]);
 
@@ -792,4 +796,4 @@ const create = () => {
   );
 };
 
-export default create;
+export default Create;

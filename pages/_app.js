@@ -6,6 +6,9 @@ import {UserState} from "../context/userState"
 import { useRouter } from 'next/router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import { CookiesProvider } from "react-cookie"
+
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
   useEffect(() => {
@@ -29,14 +32,21 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router])
 
+
+const showHeader =   router.pathname === '/adminlogin' ? false :  router.pathname === '/login'?false : true;
+
+
+
   return (
   <>
 
       <ChakraProvider>
+      <CookiesProvider>
       <UserState>
-        <Navbar/>
+    {  showHeader &&  <Navbar/>}
   <Component {...pageProps} />
   </UserState>
+  </CookiesProvider>
 </ChakraProvider>
 
   </>

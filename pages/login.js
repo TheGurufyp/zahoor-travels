@@ -4,15 +4,15 @@ import axios from "axios"
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router'
 import {userContext} from "../context/userState"
-
+import { useCookies } from "react-cookie"
 
 function Login() {
 
-
+  const [cookie, setCookie] = useCookies(["token","username"])
   const [apiInProgress, setapiInProgress] = useState(false)
 
   const toast = useToast()
-  const { user,setuser } = useContext(userContext);
+  const { user,setuser,settoken } = useContext(userContext);
   const router = useRouter()
 
   const formik = useFormik({
@@ -31,6 +31,15 @@ function Login() {
         if(data.success){
           setapiInProgress(false);
           setuser(data.payload)
+          settoken(data.payload.token)
+          setCookie("token",data.payload.token, {
+            path: "/",
+            sameSite: true,
+          });
+          setCookie("username",data.payload.username, {
+            path: "/",
+            sameSite: true,
+          });
           router.push("/userdashboard")
         }
         else{

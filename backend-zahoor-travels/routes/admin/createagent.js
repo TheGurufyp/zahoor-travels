@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const authAdmin = require("../../middleware/admin/authAdmin");
 
 router.post("/", [userAlreadyExists,authAdmin], async (req, res) => {
-  if (req.userAlreadyExists == false) {
+  if (req.userAlreadyExists === false) {
     // create new agent
 
     if (req.body.password) {

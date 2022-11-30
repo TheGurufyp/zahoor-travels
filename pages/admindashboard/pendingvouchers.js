@@ -23,10 +23,12 @@ import {
 import ConfirmDialog from '../components/ConfirmDialog'
 import EditAgentModal from '../components/EditAgentModal'
 import VoucherSearch from '../components/VoucherSearch'
+import { parseCookies } from "../../helpers/index"
 
 function Pendingvouchers() {
 
-
+const [searchVouchers, setsearchVouchers] = useState()
+const [searchInProgress, setsearchInProgress] = useState(false);
 
   return (
    
@@ -41,7 +43,7 @@ function Pendingvouchers() {
 
 <Box mt="30px">
 
-<VoucherSearch/>
+<VoucherSearch setsearchInProgress={setsearchInProgress}/>
 
 </Box>
 
@@ -303,38 +305,44 @@ export default Pendingvouchers;
 
 
 
-export async function getServerSideProps(context) {
-  const token=context.req.cookies.token;
-  if(!token){
-    return {
-      redirect: {
-        destination: '/adminlogin',
-        permanent: false,
-      },
-    }
-  }
-  let responseFromServer;
- try {
-   const response= await axios.post(`${process.env.NEXT_PUBLIC_HOST}/adminVerifyToken`,{},{ headers: {token:token}});
-   
-   if(response.data.success){
-    responseFromServer={success:true};
-   }
-   else{
-     return {
-       redirect: {
-         destination: '/adminlogin',
-         permanent: false,
-       },
-    }
-     
-  }
-  
-} catch (error) {
-  responseFromServer={success:false};
- }
+// export async function getServerSideProps(context) {
 
-  return {
-    props: {responseFromServer}, 
-  }
-}
+//   const cookie = parseCookies(context.req);
+  
+//     const token=cookie.token;
+//     if(!token){
+//       return {
+//         redirect: {
+//           destination: '/adminlogin',
+//           permanent: false,
+//         },
+//       }
+//     }
+//     let responseFromServer;
+//    try {
+//      const response= await axios.get(`${process.env.NEXT_PUBLIC_HOST}/getpendingvouchers`,{ headers: {token:token}});
+  
+//      if(response.data.success){
+//       responseFromServer=response.data.payload;
+//       // console.log(responseFromServer)
+  
+//      }
+//      else{
+//        return {
+//          redirect: {
+//            destination: '/adminlogin',
+//            permanent: false,
+//          },
+//       }
+       
+//     }
+    
+//   } catch (error) {
+//     responseFromServer={success:false};
+  
+//    }
+  
+//     return {
+//       props: {responseFromServer}, 
+//     }
+//   }
