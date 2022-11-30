@@ -16,8 +16,8 @@ router.get("/adminviewvoucher", (req, res, next) => {
       }
       //   console.log(result);
     })
-    .catch((err) =>{
-      res.send({ success: false,payload:"internal server error" });
+    .catch((err) => {
+      res.send({ success: false, payload: "internal server error" });
     });
 });
 

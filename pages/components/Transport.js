@@ -19,7 +19,9 @@ import Link from "next/link";
 import { React, useState } from "react";
 import { ArrowLeftIcon, ChevronDownIcon } from "@chakra-ui/icons";
 const Transport = () => {
-  const [inputList, setInputList] = useState([{ date: "", from_to: "" }]);
+  const [inputList, setInputList] = useState([
+    { date: "", from_to: "", types: "" },
+  ]);
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -96,6 +98,7 @@ const Transport = () => {
                   borderColor="blue.400"
                   name="types"
                   value={x.types}
+                  onChange={(e) => handleInputChange(e, i)}
                   // width="200px"
                 >
                   <option value="option1">Option 1</option>
@@ -129,46 +132,9 @@ const Transport = () => {
               </Box>
             </Grid>
           </Flex>
-
-          // <HStack
-          //   spacing="24px"
-          //   justify="center"
-          //   py={"2rem"}
-          //   border="1px"
-          //   align={"center"}
-          // >
-          //   <Box w="140px" h="40px">
-          //     <Box>Date :</Box>
-
-          //     <Input
-          //       type={"date"}
-          //       // className="ml10"
-          //       // name="from_to"
-          //       border={"1px"}
-          //       borderColor="blue.400"
-          //       // placeholder="Enter Last Name"
-          //       // width={"120%"}
-          //       // value={x.from_to}
-          //       onChange={(e) => handleInputChange(e, i)}
-          //     />
-          //   </Box>
-          //   <Box w="140px" h="40px">
-
-          //   </Box>
-          //   <Box w="140px" h="40px">
-
-          //   </Box>
-          //   <Box w="140px" h="40px">
-
-          //   </Box>
-          //   <Box w="140px" h="40px">
-
-          //   </Box>
-          // </HStack>
-
-          // {/* <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div> */}
         );
       })}
+      <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>;
     </>
   );
 };
