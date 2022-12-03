@@ -15,9 +15,11 @@ import {
   FieldGroup,
   FieldLeftElement,
   SimpleGrid,
+  Grid,
+  Input,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
-import { Formik, Field, Form } from "formik";
+import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import {
   NumberField,
   NumberFieldField,
@@ -44,78 +46,49 @@ import {
 import { useState } from "react";
 import Transport from "../components/Transport";
 import { Radio, RadioGroup } from "@chakra-ui/react";
+import axios, { Axios } from "axios";
 
-<<<<<<< Updated upstream
-const initialValues = {
-  friends: [
-    {
-      name: "",
-      email: "",
-      date: "",
-    },
-  ],
-};
-
-const create = () => {
-=======
 const Create = () => {
->>>>>>> Stashed changes
   const [count, setcount] = useState(0);
-  const [FieldList, setFieldList] = useState([{ firstName: "", lastName: "" }]);
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     depardate: "",
-  //     departime: "",
-  //     sector1: "",
-  //     sector2: "",
-  //     flight1: "",
-  //     flight2: "",
-  //     arrivedate: "",
-  //     arrivetime: "",
-  //     pnr1: "",
-  //     returndate: "",
-  //     returntime: "",
-  //     returnsector1: "",
-  //     returnsector2: "",
-  //     returnflight1: "",
-  //     returnflight2: "",
-  //     pnr2: "",
-  //     shirka: "",
-  //     party: "",
-  //     iata: "",
-  //     service: "",
-  //     radio: "",
-  //     remark: "",
-  //   },
-  //   onSubmit: (values) => {
-  //     console.log(values);
-  //     alert(JSON.stringify(values, null, 2));
-  //   },
-  // });
+  const [inputList, setInputList] = useState([
+    { date: "", from_to: "", types: "" },
+  ]);
 
-  function countNight() {
-    setcount(count + 1);
-  }
-  // handle Field change
-  const handleFieldChange = (e, index) => {
+  const transportation = [];
+
+  // handle input change
+  const handleInputChange = (e, index) => {
     const { name, value } = e.target;
-    const list = [...FieldList];
+    const list = [...inputList];
     list[index][name] = value;
-    setFieldList(list);
+    setInputList(list);
   };
 
   // handle click event of the Remove button
   const handleRemoveClick = (index) => {
-    const list = [...FieldList];
+    const list = [...inputList];
     list.splice(index, 1);
-    setFieldList(list);
+    setInputList(list);
+    // arr.push(list);
   };
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setFieldList([...FieldList, { firstName: "", lastName: "" }]);
+    setInputList([...inputList, { date: "", from_to: "", types: "" }]);
   };
+
+  // console.log(inputList);
+
+  inputList.map((items) => {
+    // console.log(items);
+    transportation.push(items);
+  });
+  // console.log(transportation);
+
+  function countNight() {
+    setcount(count + 1);
+  }
 
   return (
     <>
@@ -157,29 +130,66 @@ const Create = () => {
           departime: "",
           sector1: "",
           sector2: "",
-          flight1: "",
-          flight2: "",
-          arrivedate: "",
-          arrivetime: "",
-          pnr1: "",
-          returndate: "",
-          returntime: "",
-          returnsector1: "",
-          returnsector2: "",
-          returnflight1: "",
-          returnflight2: "",
-          pnr2: "",
-          shirka: "",
-          party: "",
-          iata: "",
-          service: "",
-          radio: "",
-          remark: "",
-          initialValues,
+          // flight1: "",
+          // flight2: "",
+          // arrivedate: "",
+          // arrivetime: "",
+          // pnr1: "",
+          // returndate: "",
+          // returntime: "",
+          // returnsector1: "",
+          // returnsector2: "",
+          // returnflight1: "",
+          // returnflight2: "",
+          // pnr2: "",
+          // shirka: "",
+          // party: "",
+          // iata: "",
+          // service: "",
+          // radio: "",
+          // remark: "",
         }}
         onSubmit={async (values) => {
-          await new Promise((resolve) => setTimeout(resolve, 500));
-          alert(JSON.stringify(values, null, 2));
+          // console.log(values);
+          axios
+            .post(`${process.env.NEXT_PUBLIC_HOST}/getInputFields`, {
+              departime: values.depardate,
+            })
+            .then(function (response) {
+              let data = response.data;
+              console.log("data", data);
+              // if (data.success) {
+              //   setuser(data.payload);
+              //   settoken(data.payload.token);
+              //   setapiInProgress(false);
+              //   // cookieCutter.set("token", data.payload.token,{path:'/'});
+              //   setCookie("token",data.payload.token, {
+              //     path: "/",
+              //     sameSite: true,
+              //   });
+              //   setCookie("username",data.payload.username, {
+              //     path: "/",
+              //     sameSite: true,
+              //   });
+
+              // router.push("/admindashboard");
+              // router.push({
+              //   pathname: '/admindashboard',
+              //   query: { token:data.payload.token },
+              // })
+              // } else {
+              //   setapiInProgress(false);
+              //   toast({
+              //     title: "ERROR",
+              //     position: "top",
+              //     description: data.payload,
+              //     status: "error",
+              //     duration: 9000,
+              //     isClosable: true,
+              //   });
+              // }
+            })
+            .catch((err) => console.log(err));
         }}
       >
         <Form
@@ -652,70 +662,96 @@ const Create = () => {
               Transportation Detail
             </Center>
 
-            {/* <Transport /> */}
+            {inputList.map((x, i) => {
+              return (
+                <Flex key={i} py={"1rem"} wrap="wrap">
+                  <Grid
+                    flexWrap={"wrap"}
+                    templateColumns="repeat(5, 0.1fr)"
+                    gap={6}
+                    justifyContent="center"
+                    width={"100%"}
+                  >
+                    <Box w="170px" h="50">
+                      <Input
+                        type={"date"}
+                        // className="ml10"
+                        name="date"
+                        border={"1px"}
+                        borderColor="blue.400"
+                        // placeholder="Enter Last Name"
+                        // width={"120%"}
+                        // value={x.from_to}
+                        onChange={(e) => handleInputChange(e, i)}
+                      />
+                    </Box>
 
-            {({ values }) => (
-              <div>
-                <FieldArray name="friends">
-                  {({ insert, remove, push }) => (
-                    <div>
-                      {values.friends.length > 0 &&
-                        values.friends.map((friend, index) => (
-                          <div className="row" key={index}>
-                            <div className="col">
-                              <label htmlFor={`friends.${index}.name`}>
-                                Name
-                              </label>
-                              <Field
-                                name={`friends.${index}.name`}
-                                placeholder="Jane Doe"
-                                type="text"
-                              />
-                              <ErrorMessage
-                                name={`friends.${index}.name`}
-                                component="div"
-                                className="field-error"
-                              />
-                            </div>
-                            <div className="col">
-                              <label htmlFor={`friends.${index}.email`}>
-                                Email
-                              </label>
-                              <Field
-                                name={`friends.${index}.email`}
-                                placeholder="jane@acme.com"
-                                type="email"
-                              />
-                              <ErrorMessage
-                                name={`friends.${index}.name`}
-                                component="div"
-                                className="field-error"
-                              />
-                            </div>
-                            <div className="col">
-                              <button
-                                type="button"
-                                className="secondary"
-                                onClick={() => remove(index)}
-                              >
-                                X
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      <button
-                        type="button"
-                        className="secondary"
-                        onClick={() => push({ name: "", email: "" })}
+                    <Box w="170px" h="50">
+                      {/* <Box>From - To :</Box> */}
+                      <Flex>
+                        <Select
+                          // placeholder="select option"
+                          // border={"1px"}
+                          borderColor="blue.400"
+                          name="from_to"
+                          value={x.from_to}
+                          // padding="10rem"
+                          // width="200px"
+                          // size="50"
+                          onChange={(e) => handleInputChange(e, i)}
+                        >
+                          <option>Select Option</option>
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
+                      </Flex>
+                    </Box>
+
+                    <Box w="170px" h="50">
+                      {/* <Box>Types of Transfer : </Box> */}
+                      <Select
+                        placeholder="Blue"
+                        // border={"1px"}
+                        borderColor="blue.400"
+                        name="types"
+                        value={x.types}
+                        onChange={(e) => handleInputChange(e, i)}
+                        // width="200px"
                       >
-                        Add Friend
-                      </button>
-                    </div>
-                  )}
-                </FieldArray>
-                <button type="submit">Invite</button>
-              </div>
-            )}
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                      </Select>
+                    </Box>
+
+                    <Box w="100px" h="50">
+                      {inputList.length !== 1 && (
+                        <Button
+                          colorScheme="red"
+                          paddingInline={"1rem"}
+                          onClick={() => handleRemoveClick(i)}
+                        >
+                          Remove
+                        </Button>
+                      )}
+                    </Box>
+
+                    <Box w="50px" h="50">
+                      {inputList.length - 1 === i && (
+                        <Button
+                          colorScheme="blue"
+                          paddingInline={"2rem"}
+                          onClick={handleAddClick}
+                        >
+                          Add New
+                        </Button>
+                      )}
+                    </Box>
+                  </Grid>
+                </Flex>
+              );
+            })}
 
             {/* end */}
           </Flex>
@@ -792,6 +828,7 @@ const Create = () => {
         </Form>
         {/* </Formik> */}
       </Formik>
+      {/* {console.log(inputList)} */}
     </>
   );
 };
