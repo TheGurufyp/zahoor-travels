@@ -75,14 +75,10 @@ const clickedYes=(user_id)=>{
 }
 
 
-  const clickfileinput=()=>{
-    inputFileref.current.click();
-    
-  }
 
 
 const submitFile=(e,username)=>{
-
+console.log(username)
   const file=e.target.files[0];
 if(!file) return;
   if(file.type!=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" )
@@ -187,6 +183,11 @@ axios.post(`${process.env.NEXT_PUBLIC_HOST}/uploadmutamers`,{
 
 }
 
+const clickfileinput=(e)=>{
+  
+  e.target.nextSibling.click();
+  
+}
   return (
    <>
  
@@ -219,7 +220,7 @@ axios.post(`${process.env.NEXT_PUBLIC_HOST}/uploadmutamers`,{
       <Td isNumeric>
 
       <Button onClick={clickfileinput} mr="6px" size={"sm"} colorScheme={"purple"}> upload excel file</Button>
-      <Input ref={inputFileref} display={"none"} type="file" onInput={(e)=>{submitFile(e,agent.username);}} />
+      <Input ref={inputFileref}  display={"none"} type="file" onInput={(e)=>{submitFile(e,agent.username);}} />
         <EditAgentModal user_id={agent._id}>
 
       <Button  mr="6px" size={"sm"} colorScheme={"yellow"}> Edit</Button>
