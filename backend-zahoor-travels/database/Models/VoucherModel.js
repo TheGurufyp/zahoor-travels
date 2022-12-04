@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 
 const VoucherSchema = new mongoose.Schema(
   {
-    v_id: {
-      type: String,
-      required: true,
-    },
     agentName: {
       // type: mongoose.Schema.Types.ObjectId,
       type: String,
@@ -17,6 +13,10 @@ const VoucherSchema = new mongoose.Schema(
       // required:true
     },
     returnDate: {
+      type: String,
+      // required:true
+    },
+    returnTime: {
       type: String,
       // required:true
     },
@@ -58,13 +58,21 @@ const VoucherSchema = new mongoose.Schema(
     serviceNo: {
       type: String,
     },
-    flightNo: {
+    DepFilght1: { type: String },
+    DepFilght2: { type: String },
+    returnFlight1: { type: String },
+    returnFlight2: { type: String },
+
+    Depsector1: { type: String },
+    Depsector2: { type: String },
+    returnSector1: { type: String },
+    returnSector2: { type: String },
+    countNight: { type: String },
+
+    Deppnr: {
       type: String,
     },
-    sector: [{ type: String }],
-    returnSector: [{ type: String }],
-
-    pnr: {
+    returnpnr: {
       type: String,
     },
     //   mutamers:[{
@@ -81,13 +89,7 @@ const VoucherSchema = new mongoose.Schema(
 
     remarks: String,
 
-    tranportationDetail: [
-      {
-        tdate: String,
-        transportTrip: String,
-        transportBy: String,
-      },
-    ],
+    tranportationDetail: [],
 
     shirka: String,
 
@@ -98,21 +100,7 @@ const VoucherSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-var voucher = mongoose.model("voucher", VoucherSchema, "voucher");
-module.exports = mongoose.model("voucher", VoucherSchema);
-
-// var ListVoucher = new voucher({
-//   v_id: "Vo_12396BC",
-//   agentName: "ali hamza",
-//   arrivalDate: "30 Jan 22",
-//   returnDate: "3 Dec 22	",
-//   totalPersons: "1",
-//   totalAdults: "33",
-//   totalChildren: "1",
-//   totalInfants: "22",
-//   totalNights: "2",
-//   status: "Approved",
-// });
+module.exports = mongoose.model("vouchers", VoucherSchema);
 
 // // save model to database
 // ListVoucher.save(function (err, book) {
