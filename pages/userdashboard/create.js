@@ -781,7 +781,7 @@ const Create = (props) => {
                    
                     return (
                       <Tr>
-                        <Td>{result.SrNo}</Td>
+                        <Td>{result["SrNo."]}</Td>
                         <Td>{result["Pilgrim Name"]}</Td>
                         <Td>{result["Passport No."]}</Td>
                         <Td>{result["Group Name"]}</Td>
