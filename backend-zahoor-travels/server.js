@@ -17,6 +17,7 @@ const updateagent = require("./routes/admin/updateagent");
 const adminlogout = require("./routes/admin/adminlogout");
 const userlogout = require("./routes/user/userlogout");
 const saveVoucher = require("./routes/user/fetchuserdata");
+const agentMautamar = require("./routes/user/getMautamers");
 
 connectTodatabase(); // connecting to Database
 const corsOptions = {
@@ -48,6 +49,7 @@ app.use("/userlogout", userlogout);
 app.use(VoucherRoute);
 app.use(adminviewvoucher);
 app.use(saveVoucher);
+app.use(agentMautamar);
 
 // general route
 app.get("/", (req, res) => {

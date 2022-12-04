@@ -12,7 +12,7 @@ export const UserState = (props) => {
     settoken(cookies.token);
     setuser({ username: cookies.username });
   }, []);
-  //   console.log(cookies);
+  // console.log(cookies);
   return (
     <userContext.Provider value={{ user, setuser, token, settoken }}>
       {props.children}

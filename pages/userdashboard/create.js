@@ -13,6 +13,7 @@ import {
   Input,
   TableContainer,
   Table,
+  Checkbox,
   Thead,
   Tr,
   Th,
@@ -20,11 +21,11 @@ import {
   Td,
   Tfoot,
 } from "@chakra-ui/react";
-import { useCookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 import { Formik, Field, Form } from "formik";
 
 import Link from "next/link";
-import { React } from "react";
+import { React, useEffect } from "react";
 
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 
@@ -34,7 +35,8 @@ import axios, { Axios } from "axios";
 
 // import parsecookie from "../../context/userState";
 
-const Create = () => {
+const Create = (props) => {
+  const [mautamers, setmautamers] = useState([0]);
   const [count, setcount] = useState(0);
 
   const [inputList, setInputList] = useState([
@@ -66,7 +68,6 @@ const Create = () => {
 
   // console.log(inputList);
 
-  const [cookie, setCookie] = useCookies(["username"]);
   // console.log("cookie", cookie.username);
   // console.log(parsecookie);
 
@@ -74,8 +75,28 @@ const Create = () => {
     // console.log(items);
     transportation.push(items);
   });
+  const [cookie, setCookie] = useCookies(["username"]);
   // console.log(transportation);
 
+  // Simple POST request with a JSON body using fetch
+
+  useEffect(() => {
+    // POST request using fetch inside useEffect React hook
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userToken: cookie.token }),
+    };
+    fetch(`${process.env.NEXT_PUBLIC_HOST}/getAgentMautamers`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setmautamers([data]);
+      });
+
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+  }, []);
+
+  // console.log("mautamer", typeof mautamers);
   return (
     <>
       {/* //main Heading */}
@@ -136,7 +157,7 @@ const Create = () => {
           remark: "",
         }}
         onSubmit={async (values) => {
-          console.log(values);
+          // console.log(values);
           axios
             .post(`${process.env.NEXT_PUBLIC_HOST}/createVoucher`, {
               depardate: values.depardate,
@@ -166,7 +187,7 @@ const Create = () => {
             })
             .then(function (response) {
               let data = response.data;
-              console.log("data", data);
+              // console.log("data", data);
               // if (data.success) {
               //   setuser(data.payload);
               //   settoken(data.payload.token);
@@ -650,7 +671,7 @@ const Create = () => {
                 <Button
                   colorScheme={"blue"}
                   onClick={(event) => {
-                    console.log(depardate);
+                    // console.log(depardate);
                   }}
                 >
                   Count Night
@@ -756,33 +777,22 @@ const Create = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  <Tr>
-                    <Td>1</Td>
-                    <Td>Hunfa Jalil</Td>
-                    <Td>LK1914191</Td>
-                    <Td>IRAm 010</Td>
-                    <Td>inches</Td>
-                    <Td>ADT</Td>
-                    <Td> </Td>
-                  </Tr>
-                  <Tr>
-                    <Td>1</Td>
-                    <Td>Hunfa Jalil</Td>
-                    <Td>LK1914191</Td>
-                    <Td>IRAm 010</Td>
-                    <Td>inches</Td>
-                    <Td>ADT</Td>
-                    <Td> </Td>
-                  </Tr>
-                  <Tr>
-                    <Td>1</Td>
-                    <Td>Hunfa Jalil</Td>
-                    <Td>LK1914191</Td>
-                    <Td>IRAm 010</Td>
-                    <Td>inches</Td>
-                    <Td>ADT</Td>
-                    <Td> </Td>
-                  </Tr>
+                  {mautamers.map((result) => {
+                    console.log(result);
+                    return (
+                      <Tr>
+                        <Td>{result.SrNo}</Td>
+                        <Td>{result.Pilgrim_Name}</Td>
+                        <Td>{result.Passport_No}</Td>
+                        <Td>{result.Group_Name}</Td>
+                        <Td></Td>
+                        <Td>ADT</Td>
+                        <Td>
+                          <Checkbox defaultChecked></Checkbox>{" "}
+                        </Td>
+                      </Tr>
+                    );
+                  })}
                 </Tbody>
               </Table>
             </TableContainer>
