@@ -31,7 +31,7 @@ import {
 } from "@chakra-ui/react";
 import { Search2Icon } from "react-icons";
 
-const client = () => {
+const Client = () => {
   return (
     <>
       <Center my={"1.5rem"}>
@@ -167,4 +167,4 @@ const client = () => {
   );
 };
 
-export default client;
+export default Client;

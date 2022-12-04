@@ -33,6 +33,7 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import VoucherSearch from "../components/VoucherSearch";
 // import Link from "next/link";
 function Vouchers(props) {
+
   // console.log(typeof props.allData.payload);
   // let VoucherList = props.allData.payload;
   // let populationArr = Object.entries(props.allData.payload);
@@ -45,6 +46,7 @@ function Vouchers(props) {
   const [rendercomplete, setrendercomplete] = useState(false);
 
   useEffect(() => {
+    console.log(props)
     setrendercomplete(true);
   }, []);
 
@@ -252,7 +254,7 @@ export default Vouchers;
 export async function getServerSideProps(context) {
   let data = await fetch(`${process.env.NEXT_PUBLIC_HOST}/getAdminVouchers`);
   let allData = await data.json();
-
+console.log(allData)
   return {
     props: { allData }, // will be passed to the page component as props
   };
