@@ -27,7 +27,7 @@ import { parseCookies } from "../../helpers/index"
 
 function Pendingvouchers() {
 
-const [searchVouchers, setsearchVouchers] = useState()
+const [filterVouchers, setfilterVouchers] = useState();
 const [searchInProgress, setsearchInProgress] = useState(false);
 
   return (
@@ -43,7 +43,7 @@ const [searchInProgress, setsearchInProgress] = useState(false);
 
 <Box mt="30px">
 
-<VoucherSearch setsearchInProgress={setsearchInProgress}/>
+<VoucherSearch filterVouchers={filterVouchers} setfilterVouchers={setfilterVouchers}/>
 
 </Box>
 

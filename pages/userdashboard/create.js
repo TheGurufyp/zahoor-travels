@@ -36,7 +36,7 @@ import axios, { Axios } from "axios";
 // import parsecookie from "../../context/userState";
 
 const Create = (props) => {
-  const [mautamers, setmautamers] = useState([0]);
+  const [mautamers, setmautamers] = useState([]);
   const [count, setcount] = useState(0);
 
   const [inputList, setInputList] = useState([
@@ -90,7 +90,7 @@ const Create = (props) => {
     fetch(`${process.env.NEXT_PUBLIC_HOST}/getAgentMautamers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        setmautamers([data]);
+        setmautamers(data);
       });
 
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
@@ -777,14 +777,14 @@ const Create = (props) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {mautamers.map((result) => {
-                    console.log(result);
+                  {mautamers.map((result,i) => {
+                   
                     return (
                       <Tr>
                         <Td>{result.SrNo}</Td>
-                        <Td>{result.Pilgrim_Name}</Td>
-                        <Td>{result.Passport_No}</Td>
-                        <Td>{result.Group_Name}</Td>
+                        <Td>{result["Pilgrim Name"]}</Td>
+                        <Td>{result["Passport No."]}</Td>
+                        <Td>{result["Group Name"]}</Td>
                         <Td></Td>
                         <Td>ADT</Td>
                         <Td>
