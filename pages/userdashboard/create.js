@@ -67,7 +67,6 @@ const Create = (props) => {
 
   // console.log(inputList);
 
-  // console.log("cookie", cookie.username);
   // console.log(parsecookie);
 
   inputList.map((items) => {
@@ -75,6 +74,7 @@ const Create = (props) => {
     transportation.push(items);
   });
   const [cookie, setCookie] = useCookies(["username"]);
+  // console.log("cookie", cookie.id);
   // const mautamarField = [];
   // console.log(transportation);
 
@@ -102,7 +102,7 @@ const Create = (props) => {
   let totalChilds = 0;
   let totalInfants = 0;
   let totalAdults = 0;
-  var uniq = "TA" + new Date().getTime();
+  var uniq = "TA" + "-" + new Date().getTime();
   // console.log("unique", uniq);
 
   const [date, setdate] = useState([]);
@@ -219,6 +219,7 @@ const Create = (props) => {
               totalChild: totalChilds,
               v_id: uniq,
               totalNight: count,
+              userID: cookie.id,
             })
             .then(function (response) {
               let data = response.data;

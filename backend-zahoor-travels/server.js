@@ -18,6 +18,7 @@ const adminlogout = require("./routes/admin/adminlogout");
 const userlogout = require("./routes/user/userlogout");
 const saveVoucher = require("./routes/user/fetchuserdata");
 const agentMautamar = require("./routes/user/getMautamers");
+const getUserVoucher = require("../backend-zahoor-travels/routes/user/userVoucher");
 
 connectTodatabase(); // connecting to Database
 const corsOptions = {
@@ -50,6 +51,7 @@ app.use(VoucherRoute);
 app.use(adminviewvoucher);
 app.use(saveVoucher);
 app.use(agentMautamar);
+app.use(getUserVoucher);
 
 // general route
 app.get("/", (req, res) => {

@@ -43,16 +43,16 @@ function Vouchers(props) {
   const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
 
   const [rendercomplete, setrendercomplete] = useState(false);
-  const [filterV, setfilterV] = useState([])
+  const [filterV, setfilterV] = useState([]);
 
   useEffect(() => {
-    
     setrendercomplete(true);
   }, []);
 
   if (!rendercomplete) {
     return <></>;
   }
+  // console.log(props);
   return (
     <>
       <Box maxWidth={"1500px"} mx={"auto"} px="10px">
@@ -142,7 +142,11 @@ function Vouchers(props) {
         </Flex>
 
         <Box mt="20px">
-          <VoucherSearch vocuhers={props.allData.payload} filterV={filterV} setfilterV={setfilterV}/>
+          <VoucherSearch
+            vocuhers={props.allData.payload}
+            filterV={filterV}
+            setfilterV={setfilterV}
+          />
         </Box>
 
         <TableContainer mt="20px">
@@ -182,126 +186,115 @@ function Vouchers(props) {
               </Tr>
             </Thead>
             <Tbody>
-              { filterV?.length>0?
-               filterV?.map((data) => {
-                return (
-                  <Tr key={data._id}>
-                    <Td className="tableborder">
-                      <Text>{data.v_id}</Text>
-                    </Td>
-                    <Td className="tableborder">
-                      {data.agentName ? data.agentName : " "}{" "}
-                    </Td>
-                    <Td className="tableborder">
-                      {" "}
-                      {data.arrivalDate ? data.arrivalDate : " "}
-                    </Td>
-                    <Td className="tableborder">
-                      {" "}
-                      {data.returnDate ? data.returnDate : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalPersons ? data.totalPersons : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalAdults ? data.totalAdults : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalChildren ? data.totalChildren : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalInfants ? data.totalInfants : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalNights ? data.totalNights : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      <Text fontWeight={"bold"} color="green">
-                        {data.status}
-                      </Text>{" "}
-                    </Td>
+              {filterV?.length > 0
+                ? filterV?.map((data) => {
+                    return (
+                      <Tr key={data._id}>
+                        <Td className="tableborder">
+                          <Text>{data.v_id}</Text>
+                        </Td>
+                        <Td className="tableborder">
+                          {data.agentName ? data.agentName : " "}{" "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data.arrivalDate ? data.arrivalDate : " "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data.returnDate ? data.returnDate : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalPersons ? data.totalPersons : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalAdults ? data.totalAdults : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalChildren ? data.totalChildren : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalInfants ? data.totalInfants : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalNights ? data.totalNights : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          <Text fontWeight={"bold"} color="green">
+                            {data.status}
+                          </Text>{" "}
+                        </Td>
 
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.status === "Approved" ? (
-                        <Button size={"sm"} colorScheme="blue">
-                          <Link
-                            href={`/admindashboard/viewVoucher?id=${data._id}`}
-                          >
-                            View
-                          </Link>
-                        </Button>
-                      ) : (
-                        <Tooltip label={"Not approved"}>
-                          <Button size={"sm"} colorScheme="red" disabled>
-                            Disable
+                        <Td className="tableborder" textAlign={"center"}>
+                          <Button size={"sm"} colorScheme="blue">
+                            <Link
+                              href={`/admindashboard/viewVoucher?id=${data._id}`}
+                            >
+                              View
+                            </Link>
                           </Button>
-                        </Tooltip>
-                      )}
-                    </Td>
-                  </Tr>
-                );
-              })
+                        </Td>
+                      </Tr>
+                    );
+                  })
+                : props.allData.payload?.map((data) => {
+                    return (
+                      <Tr key={data._id}>
+                        <Td className="tableborder">
+                          <Text>{data.v_id}</Text>
+                        </Td>
+                        <Td className="tableborder">
+                          {data.agentName ? data.agentName : " "}{" "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data.arrivalDate ? data.arrivalDate : " "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data.returnDate ? data.returnDate : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalPersons ? data.totalPersons : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalAdults ? data.totalAdults : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalChildren ? data.totalChildren : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalInfants ? data.totalInfants : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalNights ? data.totalNights : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          <Text fontWeight={"bold"} color="green">
+                            {data.status}
+                          </Text>{" "}
+                        </Td>
 
-
-              :
-              props.allData.payload?.map((data) => {
-                return (
-                  <Tr key={data._id}>
-                    <Td className="tableborder">
-                      <Text>{data.v_id}</Text>
-                    </Td>
-                    <Td className="tableborder">
-                      {data.agentName ? data.agentName : " "}{" "}
-                    </Td>
-                    <Td className="tableborder">
-                      {" "}
-                      {data.arrivalDate ? data.arrivalDate : " "}
-                    </Td>
-                    <Td className="tableborder">
-                      {" "}
-                      {data.returnDate ? data.returnDate : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalPersons ? data.totalPersons : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalAdults ? data.totalAdults : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalChildren ? data.totalChildren : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalInfants ? data.totalInfants : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.totalNights ? data.totalNights : " "}
-                    </Td>
-                    <Td className="tableborder" textAlign={"center"}>
-                      <Text fontWeight={"bold"} color="green">
-                        {data.status}
-                      </Text>{" "}
-                    </Td>
-
-                    <Td className="tableborder" textAlign={"center"}>
-                      {data.status === "Approved" ? (
-                        <Button size={"sm"} colorScheme="blue">
-                          <Link
-                            href={`/admindashboard/viewVoucher?id=${data._id}`}
-                          >
-                            View
-                          </Link>
-                        </Button>
-                      ) : (
-                        <Tooltip label={"Not approved"}>
-                          <Button size={"sm"} colorScheme="red" disabled>
-                            Disable
-                          </Button>
-                        </Tooltip>
-                      )}
-                    </Td>
-                  </Tr>
-                );
-              })}
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.status === "Approved" ? (
+                            <Button size={"sm"} colorScheme="blue">
+                              <Link
+                                href={`/admindashboard/viewVoucher?id=${data._id}`}
+                              >
+                                View
+                              </Link>
+                            </Button>
+                          ) : (
+                            <Tooltip label={"Not approved"}>
+                              <Button size={"sm"} colorScheme="red" disabled>
+                                Disable
+                              </Button>
+                            </Tooltip>
+                          )}
+                        </Td>
+                      </Tr>
+                    );
+                  })}
             </Tbody>
             <Tfoot></Tfoot>
           </Table>

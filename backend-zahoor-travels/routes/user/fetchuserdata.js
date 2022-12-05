@@ -36,13 +36,14 @@ router.post("/createVoucher", (req, res, next) => {
     totalChild,
     v_id,
     totalNight,
+    userID,
   } = req.body;
   console.log(req.body);
   const getVouchers = new Voucher({
     Depsector1: sector1,
     Depsector2: sector2,
-    returnsector1: returnsector1,
-    returnsector2: returnsector2,
+    returnSector1: returnsector1,
+    returnSector2: returnsector2,
     Deppnr: pnr1,
     returnpnr: pnr2,
     DepFilght1: flight1,
@@ -69,12 +70,13 @@ router.post("/createVoucher", (req, res, next) => {
     totalChildren: totalChild,
     totalInfants: totalInfant,
     totalNights: totalNight,
+    user_id: userID,
   });
 
   getVouchers.save(function (err, book) {
     if (err) return console.error(err);
-    console.log(book.name + " Saved");
-    res.redirect("/");
+    // console.log(book.name + " Saved");
+    res.redirect("/userdashboard");
   });
   // let id = "638c6d21f0f4eed3df8f178b";
   // Voucher.find().then((result) => {

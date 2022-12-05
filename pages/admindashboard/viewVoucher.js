@@ -22,6 +22,8 @@ const ViewVoucher = (props) => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+  const data = props.allData.payload;
+  // console.log(props.allData.payload);
   return (
     <>
       <Flex
@@ -41,7 +43,7 @@ const ViewVoucher = (props) => {
           padding={"5px 20px"}
           ml={"2rem"}
         >
-          VNO: BASMA5837
+          VNO: {data.v_id ? data.v_id : ""}
         </Box>
         <Flex>
           <Box>
@@ -87,12 +89,16 @@ const ViewVoucher = (props) => {
         >
           <Box ml={"1.5rem"}>
             <Center>
-              <Heading size={"md"}>ZAHOOR TOURS & TRAVEL</Heading>
+              <Heading size={"md"}>
+                {data.agentName ? data.agentName : ""}
+              </Heading>
             </Center>
           </Box>
           <Flex mx={"1.5rem"}>
             {/* <Box>img</Box> */}
-            <Box>BASMA EMAR GROUP FOR UMRAH SERVICES</Box>
+            <Text fontWeight={"semibold"} fontSize="3xl">
+              Zahore Travel Agency
+            </Text>
           </Flex>
         </Flex>
         <Flex
@@ -104,15 +110,28 @@ const ViewVoucher = (props) => {
         >
           <Flex>
             <Box ml={"1.5rem"} display={"flex"} fontWeight="semibold">
-              Service No : <Text fontWeight={"normal"}>IRAMSB</Text>
+              Service No :{" "}
+              <Text fontWeight={"normal"}>
+                {data.serviceNo ? data.serviceNo : ""}
+              </Text>
             </Box>
             <Box mx={"1rem"} display={"flex"} fontWeight="semibold">
-              Basma Vno : <Text fontWeight={"normal"}>BASMA5837</Text>
+              Basma Vno :{" "}
+              <Text fontWeight={"normal"}>{data.v_id ? data.v_id : ""}</Text>
             </Box>
           </Flex>
-          <Box display={"flex"} mx="2rem" fontWeight="semibold">
-            Date Created : <Text fontWeight={"normal"}>17-Nov-2022</Text>
-          </Box>
+          <Flex direction={"row-reverse"}>
+            <Box display={"flex"} mx="2rem" fontWeight="semibold">
+              Date Created :{" "}
+              <Text fontWeight={"normal"}>
+                {data.createdAt ? data.createdAt : ""}
+              </Text>
+            </Box>
+            <Box display={"flex"} mx="2rem" fontWeight="semibold">
+              IATA :{" "}
+              <Text fontWeight={"normal"}>{data.iata ? data.iata : ""}</Text>
+            </Box>
+          </Flex>
         </Flex>
         <Flex
           justify={"space-between"}
@@ -132,7 +151,7 @@ const ViewVoucher = (props) => {
           marginInline={"auto"}
           // border="1px"
         >
-          <Table size="sm">
+          <Table size="sm" colorScheme={"black"}>
             <Thead bg={"blue.400"}>
               <Tr>
                 <Th fontWeight={"semibold"} color="white">
@@ -155,14 +174,17 @@ const ViewVoucher = (props) => {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody border={"1px"} borderColor="gray.200">
+            <Tbody
+              border={"1px"}
+              //  borderColor="gray.200"
+            >
               <Tr>
-                <Td>1</Td>
-                <Td>0</Td>
-                <Td>0</Td>
-                <Td>25-Nov-2022</Td>
-                <Td>25-Nov-2022</Td>
-                <Td>21</Td>
+                <Td>{data.totalAdults ? data.totalAdults : ""}</Td>
+                <Td>{data.totalChildren ? data.totalChildren : ""}</Td>
+                <Td>{data.totalInfants ? data.totalInfants : ""}</Td>
+                <Td>{data.arrivalDate ? data.arrivalDate : ""}</Td>
+                <Td>{data.depDate ? data.depDate : ""}</Td>
+                <Td>{data.totalNights ? data.totalNights : ""}</Td>
               </Tr>
             </Tbody>
           </Table>
@@ -176,7 +198,7 @@ const ViewVoucher = (props) => {
           <Heading size={"md"}>KSA Arrival information</Heading>
         </Center>
         <TableContainer width="97%" marginInline={"auto"}>
-          <Table size="sm">
+          <Table size="sm" colorScheme="black">
             <Thead bg={"blue.400"}>
               <Tr>
                 <Th padding={"4px"} fontWeight={"semibold"} color="white">
@@ -205,16 +227,22 @@ const ViewVoucher = (props) => {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody border={"1px"} borderColor="gray.200">
+            <Tbody border={"1px"}>
               <Tr>
-                <Td>MUX</Td>
-                <Td>JED</Td>
-                <Td>PK730</Td>
-                <Td>25-Nov-2022</Td>
-                <Td>10:25 PM</Td>
-                <Td>25-Nov-2022</Td>
-                <Td>10:25 PM</Td>
-                <Td>BF2JT9</Td>
+                <Td>{data.arrivalport ? data.arrivalport : ""}</Td>
+                <Td>
+                  {data.Depsector1 ? data.Depsector1 : ""}
+                  {data.Depsector2 ? data.Depsector2 : ""}
+                </Td>
+                <Td>
+                  {data.DepFilght1 ? data.DepFilght1 : ""}
+                  {data.DepFilght2 ? data.DepFilght2 : ""}
+                </Td>
+                <Td>{data.depDate ? data.depDate : ""}</Td>
+                <Td>{data.depTime ? data.depTime : ""}</Td>
+                <Td>{data.arrivalDate ? data.arrivalDate : ""}</Td>
+                <Td>{data.arrivalTime ? data.arrivalTime : ""}</Td>
+                <Td>{data.returnpnr ? data.returnpnr : ""}</Td>
               </Tr>
             </Tbody>
           </Table>
@@ -228,7 +256,7 @@ const ViewVoucher = (props) => {
           <Heading size={"md"}>Departure Information</Heading>
         </Center>
         <TableContainer width="97%" marginInline={"auto"}>
-          <Table size="sm">
+          <Table size="sm" colorScheme="black">
             <Thead bg={"blue.400"}>
               <Tr>
                 <Th fontWeight={"semibold"} color="white">
@@ -252,14 +280,14 @@ const ViewVoucher = (props) => {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody border={"1px"} borderColor="gray.200">
+            <Tbody border={"1px"}>
               <Tr>
-                <Td>JED</Td>
-                <Td>MUX</Td>
-                <Td>PK730</Td>
-                <Td>25-Nov-2022</Td>
-                <Td>10:25 PM</Td>
-                <Td>BF2JT9</Td>
+                <Td>{data.depport ? data.depport : ""}</Td>
+                <Td>{data.returnSector1 ? data.returnSector1 : ""}</Td>
+                <Td>{data.returnFlight2 ? data.returnFlight2 : ""}</Td>
+                <Td>{data.depDate ? data.depDate : ""}</Td>
+                <Td>{data.depTime ? data.depTime : ""}</Td>
+                <Td>{data.Deppnr ? data.Deppnr : ""}</Td>
               </Tr>
             </Tbody>
           </Table>
@@ -273,7 +301,7 @@ const ViewVoucher = (props) => {
           <Heading size={"md"}>Transportation Detail</Heading>
         </Center>
         <TableContainer width="97%" marginInline={"auto"}>
-          <Table size="sm">
+          <Table size="sm" colorScheme="black">
             <Thead bg={"blue.400"}>
               <Tr>
                 <Th padding={"4px"} fontWeight={"semibold"} color="white">
@@ -287,17 +315,17 @@ const ViewVoucher = (props) => {
                 </Th>
               </Tr>
             </Thead>
-            <Tbody border={"1px"} borderColor="gray.200">
-              <Tr>
-                <Td>25-Nov-2022</Td>
-                <Td>JED-MAK</Td>
-                <Td>BUS</Td>
-              </Tr>
-              <Tr>
-                <Td>25-Nov-2022</Td>
-                <Td>JED-MAK</Td>
-                <Td>BUS</Td>
-              </Tr>
+            <Tbody border={"1px"}>
+              {data.tranportationDetail.map((item) => {
+                // console.log(item.date);
+                return (
+                  <Tr>
+                    <Td>{item.date ? item.date : ""}</Td>
+                    <Td>{item.from_to ? item.from_to : ""}</Td>
+                    <Td>{item.types ? item.types : ""}</Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>
@@ -310,26 +338,42 @@ const ViewVoucher = (props) => {
           <Heading size={"md"}>Mutamer&#39;s ( Pilgrims) Detail</Heading>
         </Center>
         <TableContainer width="97%" marginInline={"auto"}>
-          <Table size="sm">
+          <Table size="sm" colorScheme="black">
             <Thead bg={"blue.400"}>
               <Tr>
                 <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  Date
+                  PILGRIM NAME
                 </Th>
                 <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  Transport Trip
+                  PASSPORT NO
                 </Th>
                 <Th padding={"4px"} fontWeight={"semibold"} color="white">
-                  Transport By
+                  dob
+                </Th>
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
+                  AGE_GROUP
+                </Th>
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
+                  Visa_No
+                </Th>
+                <Th padding={"4px"} fontWeight={"semibold"} color="white">
+                  Issue_Date
                 </Th>
               </Tr>
             </Thead>
-            <Tbody border={"1px"} borderColor="gray.200">
-              <Tr>
-                <Td>25-Nov-2022</Td>
-                <Td>JED-MAK</Td>
-                <Td>BUS</Td>
-              </Tr>
+            <Tbody border={"1px"}>
+              {data.mutamers.map((item) => {
+                return (
+                  <Tr>
+                    <Td>{item.name ? item.name : ""}</Td>
+                    <Td>{item.passportname ? item.passportname : ""}</Td>
+                    <Td>{item.dob ? item.dob : ""}</Td>
+                    <Td></Td>
+                    <Td></Td>
+                    <Td></Td>
+                  </Tr>
+                );
+              })}
             </Tbody>
           </Table>
         </TableContainer>
@@ -355,12 +399,9 @@ const ViewVoucher = (props) => {
             >
               Ziarat
             </Box>
-            <Box
-              pl={"1rem"}
-              border={"1px"}
-              borderColor="gray.200"
-              w={"85%"}
-            ></Box>
+            <Box pl={"1rem"} border={"1px"} borderColor="black" w={"85%"}>
+              {data.ziarat ? data.ziarat : ""}
+            </Box>
           </Flex>
           <Box my={"0.7px"}></Box>
           <Flex>
@@ -375,8 +416,8 @@ const ViewVoucher = (props) => {
             >
               Remarks
             </Box>
-            <Box pl={"1rem"} border={"1px"} borderColor="gray.200" w={"85%"}>
-              RIAZ SB C/O IRAM SB
+            <Box pl={"1rem"} border={"1px"} borderColor="black" w={"85%"}>
+              {data.remarks ? data.remarks : ""}
             </Box>
           </Flex>
         </Flex>
