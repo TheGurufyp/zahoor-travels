@@ -9,20 +9,39 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // mutamers:[{
-  //     pilgrimName:String,
-  //     passportNo:String,
-  //     dob:String,
-  //     ageGroup:String,
-  //     childWithoutBed:String,
-  //     visaNo:String,
-  //     issueDate:String
-  //   }],
-
   token: {
     type: String,
   },
   mutamers: [],
+
+  totalVouchers:{
+   type: Number,
+   default:0
+  },
+  totalPendingVocuhers:{
+    type: Number,
+    default:0
+   },
+  totalApprovedVouchers:{
+    type: Number,
+    default:0
+   },
+  totalAdults:{
+    type: Number,
+    default:0
+   },
+  totalInfants:{
+    type: Number,
+    default:0
+   },
+  totalChild:{
+    type: Number,
+    default:0
+   },
+   totalPersons:{
+    type: Number,
+    default:0
+   }
 });
 var user = mongoose.model("user", UserSchema, "users");
 module.exports = mongoose.model("user", UserSchema);
