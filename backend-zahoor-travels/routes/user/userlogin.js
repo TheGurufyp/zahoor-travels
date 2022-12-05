@@ -36,6 +36,7 @@ router.post("/", userAlreadyExists, async (req, res) => {
                 payload: {
                   token,
                   username: req.user.username,
+                  id:req.user._id,
                   isAdmin: false,
                 },
               });

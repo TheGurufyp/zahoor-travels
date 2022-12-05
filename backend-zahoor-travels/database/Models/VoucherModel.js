@@ -12,6 +12,10 @@ const VoucherSchema = new mongoose.Schema(
       // ref: "user",
       required: true,
     },
+    agentId:{
+      type:mongoose.SchemaTypes.ObjectId,
+      ref:"user"
+    },
     arrivalDate: {
       type: String,
       // required:true

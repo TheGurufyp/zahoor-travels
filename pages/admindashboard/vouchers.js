@@ -33,7 +33,6 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import VoucherSearch from "../components/VoucherSearch";
 // import Link from "next/link";
 function Vouchers(props) {
-
   // console.log(typeof props.allData.payload);
   // let VoucherList = props.allData.payload;
   // let populationArr = Object.entries(props.allData.payload);
@@ -44,9 +43,10 @@ function Vouchers(props) {
   const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
 
   const [rendercomplete, setrendercomplete] = useState(false);
+  const [filterV, setfilterV] = useState([])
 
   useEffect(() => {
-    console.log(props)
+    
     setrendercomplete(true);
   }, []);
 
@@ -142,7 +142,7 @@ function Vouchers(props) {
         </Flex>
 
         <Box mt="20px">
-          <VoucherSearch />
+          <VoucherSearch vocuhers={props.allData.payload} filterV={filterV} setfilterV={setfilterV}/>
         </Box>
 
         <TableContainer mt="20px">
@@ -182,7 +182,69 @@ function Vouchers(props) {
               </Tr>
             </Thead>
             <Tbody>
-              {props.allData.payload.map((data) => {
+              { filterV?.length>0?
+               filterV?.map((data) => {
+                return (
+                  <Tr key={data._id}>
+                    <Td className="tableborder">
+                      <Text>{data.v_id}</Text>
+                    </Td>
+                    <Td className="tableborder">
+                      {data.agentName ? data.agentName : " "}{" "}
+                    </Td>
+                    <Td className="tableborder">
+                      {" "}
+                      {data.arrivalDate ? data.arrivalDate : " "}
+                    </Td>
+                    <Td className="tableborder">
+                      {" "}
+                      {data.returnDate ? data.returnDate : " "}
+                    </Td>
+                    <Td className="tableborder" textAlign={"center"}>
+                      {data.totalPersons ? data.totalPersons : " "}
+                    </Td>
+                    <Td className="tableborder" textAlign={"center"}>
+                      {data.totalAdults ? data.totalAdults : " "}
+                    </Td>
+                    <Td className="tableborder" textAlign={"center"}>
+                      {data.totalChildren ? data.totalChildren : " "}
+                    </Td>
+                    <Td className="tableborder" textAlign={"center"}>
+                      {data.totalInfants ? data.totalInfants : " "}
+                    </Td>
+                    <Td className="tableborder" textAlign={"center"}>
+                      {data.totalNights ? data.totalNights : " "}
+                    </Td>
+                    <Td className="tableborder" textAlign={"center"}>
+                      <Text fontWeight={"bold"} color="green">
+                        {data.status}
+                      </Text>{" "}
+                    </Td>
+
+                    <Td className="tableborder" textAlign={"center"}>
+                      {data.status === "Approved" ? (
+                        <Button size={"sm"} colorScheme="blue">
+                          <Link
+                            href={`/admindashboard/viewVoucher?id=${data._id}`}
+                          >
+                            View
+                          </Link>
+                        </Button>
+                      ) : (
+                        <Tooltip label={"Not approved"}>
+                          <Button size={"sm"} colorScheme="red" disabled>
+                            Disable
+                          </Button>
+                        </Tooltip>
+                      )}
+                    </Td>
+                  </Tr>
+                );
+              })
+
+
+              :
+              props.allData.payload?.map((data) => {
                 return (
                   <Tr key={data._id}>
                     <Td className="tableborder">
@@ -254,7 +316,7 @@ export default Vouchers;
 export async function getServerSideProps(context) {
   let data = await fetch(`${process.env.NEXT_PUBLIC_HOST}/getAdminVouchers`);
   let allData = await data.json();
-console.log(allData)
+
   return {
     props: { allData }, // will be passed to the page component as props
   };

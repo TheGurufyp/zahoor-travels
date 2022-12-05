@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie"
 
 function Login() {
 
-  const [cookie, setCookie] = useCookies(["token","username"])
+  const [cookie, setCookie] = useCookies(["token","username","id"])
   const [apiInProgress, setapiInProgress] = useState(false)
 
   const toast = useToast()
@@ -37,6 +37,10 @@ function Login() {
             sameSite: true,
           });
           setCookie("username",data.payload.username, {
+            path: "/",
+            sameSite: true,
+          });
+          setCookie("id",data.payload.id, {
             path: "/",
             sameSite: true,
           });
