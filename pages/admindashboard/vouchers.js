@@ -276,21 +276,13 @@ function Vouchers(props) {
                         </Td>
 
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.status === "Approved" ? (
-                            <Button size={"sm"} colorScheme="blue">
-                              <Link
-                                href={`/admindashboard/viewVoucher?id=${data._id}`}
-                              >
-                                View
-                              </Link>
-                            </Button>
-                          ) : (
-                            <Tooltip label={"Not approved"}>
-                              <Button size={"sm"} colorScheme="red" disabled>
-                                Disable
-                              </Button>
-                            </Tooltip>
-                          )}
+                          <Button size={"sm"} colorScheme="blue">
+                            <Link
+                              href={`/admindashboard/viewVoucher?id=${data._id}`}
+                            >
+                              View
+                            </Link>
+                          </Button>
                         </Td>
                       </Tr>
                     );
