@@ -53,7 +53,7 @@ function Menage() {
     fetch(`${process.env.NEXT_PUBLIC_HOST}/getUserVouchers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.payload);
+        console.log(data.payload[0]);
         setfilterV([data.payload[0]]);
       });
 
@@ -79,6 +79,7 @@ function Menage() {
     return <></>;
   }
   // console.log(props);
+  // console.log(filterV);
   return (
     <>
       <Box maxWidth={"1500px"} mx={"auto"} px="10px">

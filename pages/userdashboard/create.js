@@ -219,7 +219,7 @@ const Create = (props) => {
               totalChild: totalChilds,
               v_id: uniq,
               totalNight: count,
-              userID: cookie.id,
+              agentId: cookie.id,
             })
             .then(function (response) {
               let data = response.data;
@@ -314,9 +314,10 @@ const Create = (props) => {
                         // borderRadius={"2px"}
                         >
                           <Field
-                            type="date"
-                            borderColor="blue.300"
+                            type={"date"}
+                            border=" 1px"
                             as={Input}
+                            borderColor={"blue.400"}
                             name="depardate"
                             onChange={(event) => {
                               // console.log(event.target.value);

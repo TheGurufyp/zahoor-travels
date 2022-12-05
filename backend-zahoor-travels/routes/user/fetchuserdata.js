@@ -36,7 +36,7 @@ router.post("/createVoucher", (req, res, next) => {
     totalChild,
     v_id,
     totalNight,
-    userID,
+    agentId,
   } = req.body;
   console.log(req.body);
   const getVouchers = new Voucher({
@@ -70,7 +70,7 @@ router.post("/createVoucher", (req, res, next) => {
     totalChildren: totalChild,
     totalInfants: totalInfant,
     totalNights: totalNight,
-    user_id: userID,
+    agentId: agentId,
   });
 
   getVouchers.save(function (err, book) {

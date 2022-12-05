@@ -22,7 +22,7 @@ const ViewVoucher = (props) => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  const data = props.allData.payload;
+  const data = props.allData.payload[0];
   // console.log(props.allData.payload);
   return (
     <>
@@ -422,11 +422,11 @@ const ViewVoucher = (props) => {
           </Flex>
         </Flex>
       </Box>
-      {/* )}} */}
     </>
   );
 };
 
+export default ViewVoucher;
 export async function getServerSideProps(context) {
   // console.log(context.query);
   const id = context.query.id;
@@ -434,10 +434,9 @@ export async function getServerSideProps(context) {
     `${process.env.NEXT_PUBLIC_HOST}/adminviewvoucher?id=${id}`
   );
   let allData = await data.json();
+  console.log(allData);
 
   return {
     props: { allData }, // will be passed to the page component as props
   };
 }
-
-export default ViewVoucher;

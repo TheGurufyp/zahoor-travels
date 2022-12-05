@@ -3,9 +3,9 @@ const VoucherModel = require("../../database/Models/VoucherModel");
 const router = express.Router();
 
 router.post("/getUserVouchers", (req, res, next) => {
-  //   console.log(req.body.id);
+  // console.log(req.body.id);
   const id = req.body.id;
-  VoucherModel.find({ user_id: id })
+  VoucherModel.find({ agentId: id })
     .then((data) => {
       if (!data) {
         // console.log('empty');
