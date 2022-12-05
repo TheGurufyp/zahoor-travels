@@ -30,8 +30,14 @@ router.post("/createVoucher", (req, res, next) => {
     remark,
     transportation,
     agent,
+    mautamers,
+    totalAdult,
+    totalInfant,
+    totalChild,
+    v_id,
+    totalNight,
   } = req.body;
-  // console.log(req.body);
+  console.log(req.body);
   const getVouchers = new Voucher({
     Depsector1: sector1,
     Depsector2: sector2,
@@ -57,12 +63,18 @@ router.post("/createVoucher", (req, res, next) => {
     iata: iata,
     tranportationDetail: transportation,
     agentName: agent,
+    mutamers: mautamers,
+    v_id: v_id,
+    totalAdults: totalAdult,
+    totalChildren: totalChild,
+    totalInfants: totalInfant,
+    totalNights: totalNight,
   });
 
   getVouchers.save(function (err, book) {
     if (err) return console.error(err);
     console.log(book.name + " Saved");
-    res.send("success");
+    res.redirect("/");
   });
   // let id = "638c6d21f0f4eed3df8f178b";
   // Voucher.find().then((result) => {

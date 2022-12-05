@@ -36,7 +36,6 @@ import axios, { Axios } from "axios";
 // import parsecookie from "../../context/userState";
 
 const Create = (props) => {
-  const [mautamers, setmautamers] = useState([]);
   const [count, setcount] = useState(0);
 
   const [inputList, setInputList] = useState([
@@ -76,6 +75,7 @@ const Create = (props) => {
     transportation.push(items);
   });
   const [cookie, setCookie] = useCookies(["username"]);
+  // const mautamarField = [];
   // console.log(transportation);
 
   // Simple POST request with a JSON body using fetch
@@ -96,10 +96,39 @@ const Create = (props) => {
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
-  // console.log("mautamer", typeof mautamers);
+  const [mautamers, setmautamers] = useState([]);
+  const [mautamarField, setmautamarField] = useState([]);
+
+  let totalChilds = 0;
+  let totalInfants = 0;
+  let totalAdults = 0;
+  var uniq = "TA" + new Date().getTime();
+  // console.log("unique", uniq);
+
+  const [date, setdate] = useState([]);
+  // console.log(date);
+
+  // setmautamers([mautamarField]);
+  // console.log("mautamer", mautamarField);
+  for (let i = 0; i < mautamarField.length; i++) {
+    const realAge = mautamarField[i].age.trim().split(/\s+/);
+    // console.log(realAge[0]);
+    if (realAge[0] >= 4 && realAge[0] <= 10) {
+      // console.log("child");
+      totalChilds++;
+    } else if (realAge[0] > 10) {
+      // console.log("adults");
+      totalAdults++;
+    } else {
+      // console.log("infant");
+      totalInfants++;
+    }
+  }
+
+  // console.log;
+
   return (
     <>
-      {/* //main Heading */}
       <Center my={"1rem"}>
         <Heading color={"blue.500"}>Create / Update Voucher</Heading>
       </Center>
@@ -184,6 +213,12 @@ const Create = (props) => {
               remark: values.remark,
               transportation: transportation,
               agent: cookie.username,
+              mautamers: mautamarField,
+              totalAdult: totalAdults,
+              totalInfant: totalInfants,
+              totalChild: totalChilds,
+              v_id: uniq,
+              totalNight: count,
             })
             .then(function (response) {
               let data = response.data;
@@ -282,6 +317,13 @@ const Create = (props) => {
                             borderColor="blue.300"
                             as={Input}
                             name="depardate"
+                            onChange={(event) => {
+                              // console.log(event.target.value);
+                              setdate((current) => [
+                                ...current,
+                                event.target.value,
+                              ]);
+                            }}
                           />
                         </Box>
                       </Flex>
@@ -533,6 +575,10 @@ const Create = (props) => {
                       as={Input}
                       name="returndate"
                       borderColor={"blue.400"}
+                      onChange={(event) => {
+                        // console.log(event.target.value);
+                        setdate((current) => [...current, event.target.value]);
+                      }}
                     />
                   </Box>
                 </Flex>
@@ -671,7 +717,16 @@ const Create = (props) => {
                 <Button
                   colorScheme={"blue"}
                   onClick={(event) => {
-                    // console.log(depardate);
+                    // console.log(date[0]);
+                    const date1 = new Date(date[0]);
+                    const date2 = new Date(date[1]);
+                    const diffTime = Math.abs(date2 - date1);
+                    const diffDays = Math.ceil(
+                      diffTime / (1000 * 60 * 60 * 24)
+                    );
+
+                    // console.log(diffDays - 1 + " days");
+                    setcount(diffDays - 1);
                   }}
                 >
                   Count Night
@@ -763,39 +818,135 @@ const Create = (props) => {
             >
               Mautmamer's Information
             </Center>
-            <TableContainer my={"2rem"}>
-              <Table size="sm">
-                <Thead border={"1px"} borderColor="gray.300">
-                  <Tr>
-                    <Th>Sr#</Th>
-                    <Th>Pax Name</Th>
-                    <Th>Passport #</Th>
-                    <Th>Group Name(License)</Th>
-                    <Th>Agent Code</Th>
-                    <Th>Visa</Th>
-                    <Th></Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {mautamers.map((result,i) => {
-                   
-                    return (
-                      <Tr>
-                        <Td>{result["SrNo."]}</Td>
-                        <Td>{result["Pilgrim Name"]}</Td>
-                        <Td>{result["Passport No."]}</Td>
-                        <Td>{result["Group Name"]}</Td>
-                        <Td></Td>
-                        <Td>ADT</Td>
-                        <Td>
-                          <Checkbox defaultChecked></Checkbox>{" "}
-                        </Td>
-                      </Tr>
-                    );
-                  })}
-                </Tbody>
-              </Table>
-            </TableContainer>
+            <Flex justify={"end"} my="10px" width={"95%"}>
+              <Input
+                type={"search"}
+                placeholder="search"
+                border={"1px"}
+                borderColor="blue.400"
+                width={"30%"}
+              />
+            </Flex>
+            <Box overflow="scroll" maxHeight="300px">
+              <TableContainer
+              // my={"2rem"}
+              >
+                <Table size="sm">
+                  <Thead
+                    border={"1px"}
+                    borderColor="gray.300"
+                    position={"sticky"}
+                    bg="gray.100"
+                  >
+                    <Tr>
+                      <Th>Sr#</Th>
+                      <Th>Pax Name</Th>
+                      <Th>Passport #</Th>
+                      <Th>Group Name(License)</Th>
+                      <Th>Agent Code</Th>
+                      <Th>Visa</Th>
+                      <Th></Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {mautamers.map((result, i) => {
+                      return (
+                        <Tr>
+                          <Td>{result["SrNo."]}</Td>
+                          <Td>{result["Pilgrim Name"]}</Td>
+                          <Td>{result["Passport No."]}</Td>
+                          <Td>{result["Group Name"]}</Td>
+                          <Td></Td>
+                          <Td>ADT</Td>
+                          <Td>
+                            <Checkbox
+                              id="submit"
+                              onChange={(checkbox) => {
+                                // console.log(checkbox.target.checked);
+                                if (checkbox.target.checked == true) {
+                                  let variables = {};
+                                  variables.srno = result["SrNo."];
+                                  variables.name = result["Pilgrim Name"];
+                                  variables.passportname =
+                                    result["Passport No."];
+                                  variables.groupName = result["Group Name"];
+                                  variables.age = result["Age"];
+                                  // console.log(
+                                  //   i,
+                                  //   result["SrNo."],
+                                  //   result["Pilgrim Name"],
+                                  //   result["Passport No."],
+                                  //   result["Group Name"]
+                                  // );
+                                  // console.log(variables);
+
+                                  setmautamarField((current) => [
+                                    ...current,
+                                    variables,
+                                  ]);
+                                  // const realAge = result["Age"]
+                                  //   .trim()
+                                  //   .split(/\s+/);
+                                  // variables.age = parseInt(realAge[0]);
+                                  // // console.log(variables.age);
+                                  // if (
+                                  //   variables.age >= 4 &&
+                                  //   variables.age <= 10
+                                  // ) {
+                                  //   console.log("child");
+                                  //   totalChilds++;
+                                  // } else if (variables.age > 10) {
+                                  //   console.log("adults");
+                                  //   totalAdults++;
+                                  // } else {
+                                  //   console.log("infant");
+                                  //   totalInfants++;
+                                  // }
+                                  // // console.log("false");
+                                  // console.log(
+                                  //   totalChilds,
+                                  //   totalAdults,
+                                  //   totalInfants
+                                  // );
+                                  // console.log("hi1", mautamarField);
+                                } else {
+                                  // console.log("false");
+
+                                  const newArr = mautamarField.filter(
+                                    (object) => {
+                                      return object.srno !== result["SrNo."];
+                                    }
+                                  );
+
+                                  while (mautamarField.length > 0) {
+                                    mautamarField.pop();
+                                  }
+                                  // console.log("hi2", typeof mautamarField);
+                                  // console.log(newArr);
+                                  for (let i = 0; i < newArr.length; i++) {
+                                    // mautamarField.push(newArr[i]);
+                                    setmautamarField((current) => [
+                                      ...current,
+                                      newArr[i],
+                                    ]);
+                                  }
+                                }
+
+                                // const realAge = mautamarField.age
+                                //   .trim()
+                                //   .split(/\s+/);
+                                // consle.log(parseInt(realAge));
+                                // console.log(variables.age);
+                              }}
+                            ></Checkbox>
+                          </Td>
+                        </Tr>
+                      );
+                    })}
+                  </Tbody>
+                </Table>
+              </TableContainer>
+            </Box>
 
             <Center
               fontSize={"2rem"}
@@ -1012,6 +1163,7 @@ const Create = (props) => {
         </Form>
         {/* </Formik> */}
       </Formik>
+
       {/* {console.log(inputList)} */}
     </>
   );

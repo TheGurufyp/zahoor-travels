@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const VoucherSchema = new mongoose.Schema(
   {
+    v_id: {
+      type: String,
+      // required:true
+    },
     agentName: {
       // type: mongoose.Schema.Types.ObjectId,
       type: String,
