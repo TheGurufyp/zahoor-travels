@@ -39,25 +39,25 @@ const VoucherSchema = new mongoose.Schema(
     },
 
     totalPersons: {
-      type: String,
-      // required:true
-    },
+      type: Number,
+      default:0
+     },
     totalAdults: {
-      type: String,
-      // required:true
-    },
+      type: Number,
+      default:0
+     },
     totalChildren: {
-      type: String,
-      // required:true
-    },
+      type: Number,
+      default:0
+     },
     totalInfants: {
-      type: String,
-      // required:true
-    },
-    totalNights: {
-      type: String,
-      // required:true
-    },
+      type: Number,
+      default:0
+     },
+    totalNights:{
+      type: Number,
+      default:0
+     },
     status: {
       type: String,
       required: true,

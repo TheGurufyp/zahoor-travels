@@ -19,6 +19,9 @@ const userlogout = require("./routes/user/userlogout");
 const saveVoucher = require("./routes/user/fetchuserdata");
 const agentMautamar = require("./routes/user/getMautamers");
 const getUserVoucher = require("../backend-zahoor-travels/routes/user/userVoucher");
+const getpendingvouchers=require("./routes/admin/getpendingvouchers")
+const appovevoucher=require("./routes/admin/approvevocuher")
+const disapprovevoucher=require("./routes/admin/disapprovevoucher")
 
 connectTodatabase(); // connecting to Database
 const corsOptions = {
@@ -39,6 +42,10 @@ app.use("/createagent", createagent);
 app.use("/deleteagent", deleteagent);
 app.use("/updateagent", updateagent);
 app.use("/adminlogout", adminlogout);
+app.use("/getpendingvouchers",getpendingvouchers);
+app.use("/appovevoucher",appovevoucher)
+app.use("/disapprovevoucher",disapprovevoucher)
+
 
 // Routes for User
 app.use("/createuser", createuser);
@@ -61,3 +68,4 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log("listening to PORT ", PORT);
 });
+
