@@ -37,10 +37,11 @@ import axios, { Axios } from "axios";
 
 const Create = (props) => {
   const [count, setcount] = useState(0);
-
+  const [search, setsearch] = useState({ searchField: "" });
   const [inputList, setInputList] = useState([
     { date: "", from_to: "", types: "" },
   ]);
+  console.log(search);
 
   const transportation = [];
 
@@ -126,6 +127,12 @@ const Create = (props) => {
   }
 
   // console.log;
+  let mautamerItems = mautamers.filter((filterItem) => {
+    return (
+      filterItem["Pilgrim Name"].toLocaleLowerCase().includes(search) ||
+      filterItem["Passport No."].toLocaleLowerCase().includes(search)
+    );
+  });
 
   return (
     <>
@@ -827,6 +834,10 @@ const Create = (props) => {
                 border={"1px"}
                 borderColor="blue.400"
                 width={"30%"}
+                onChange={(e) => {
+                  let searchField = e.target.value.toLocaleLowerCase();
+                  setsearch(searchField);
+                }}
               />
             </Flex>
             <Box overflow="scroll" maxHeight="300px">
@@ -851,7 +862,7 @@ const Create = (props) => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {mautamers.map((result, i) => {
+                    {mautamerItems.map((result, i) => {
                       return (
                         <Tr>
                           <Td>{result["SrNo."]}</Td>
