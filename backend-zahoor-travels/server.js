@@ -19,9 +19,11 @@ const userlogout = require("./routes/user/userlogout");
 const saveVoucher = require("./routes/user/fetchuserdata");
 const agentMautamar = require("./routes/user/getMautamers");
 const getUserVoucher = require("../backend-zahoor-travels/routes/user/userVoucher");
-const getpendingvouchers=require("./routes/admin/getpendingvouchers")
-const appovevoucher=require("./routes/admin/approvevocuher")
-const disapprovevoucher=require("./routes/admin/disapprovevoucher")
+const getpendingvouchers = require("./routes/admin/getpendingvouchers");
+const appovevoucher = require("./routes/admin/approvevocuher");
+const disapprovevoucher = require("./routes/admin/disapprovevoucher");
+const indexVoucher = require("../backend-zahoor-travels/routes/user/indexVoucher");
+const editVoucher = require("../backend-zahoor-travels/routes/user/userEditVoucher");
 
 connectTodatabase(); // connecting to Database
 const corsOptions = {
@@ -42,10 +44,9 @@ app.use("/createagent", createagent);
 app.use("/deleteagent", deleteagent);
 app.use("/updateagent", updateagent);
 app.use("/adminlogout", adminlogout);
-app.use("/getpendingvouchers",getpendingvouchers);
-app.use("/appovevoucher",appovevoucher)
-app.use("/disapprovevoucher",disapprovevoucher)
-
+app.use("/getpendingvouchers", getpendingvouchers);
+app.use("/appovevoucher", appovevoucher);
+app.use("/disapprovevoucher", disapprovevoucher);
 
 // Routes for User
 app.use("/createuser", createuser);
@@ -59,6 +60,8 @@ app.use(adminviewvoucher);
 app.use(saveVoucher);
 app.use(agentMautamar);
 app.use(getUserVoucher);
+app.use(indexVoucher);
+app.use(editVoucher);
 
 // general route
 app.get("/", (req, res) => {
@@ -68,4 +71,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log("listening to PORT ", PORT);
 });
-

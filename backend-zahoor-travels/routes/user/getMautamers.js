@@ -9,7 +9,9 @@ router.post("/getAgentMautamers", (req, res, next) => {
   UserModel.find({ token: userId })
     .then((result) => {
       // console.log(result[0].mutamers);
-      res.send(result[0].mutamers);
+      const data = result[0].mutamers;
+      res.send({ success: true, payload: data });
+      // res.send(result[0].mutamers);
     })
     .catch((err) => console.log(err));
 });

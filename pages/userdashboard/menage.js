@@ -53,7 +53,7 @@ function Menage() {
     fetch(`${process.env.NEXT_PUBLIC_HOST}/getUserVouchers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.payload[0]);
+        // console.log(data.payload[0]);
         setfilterV([data.payload[0]]);
       });
 
@@ -255,13 +255,22 @@ function Menage() {
 
                         <Td className="tableborder" textAlign={"center"}>
                           {data.status === "Approved" ? (
-                            <Button size={"sm"} colorScheme="blue">
-                              <Link
-                                href={`/admindashboard/viewVoucher?id=${data._id}`}
-                              >
-                                View
-                              </Link>
-                            </Button>
+                            <Flex justify={"space-evenly"}>
+                              <Button size={"sm"} colorScheme="blue">
+                                <Link
+                                  href={`/admindashboard/viewVoucher?id=${data._id}`}
+                                >
+                                  View
+                                </Link>
+                              </Button>
+                              <Button colorScheme="red" size={"sm"}>
+                                <Link
+                                  href={`/userdashboard/editVoucher?id=${data.v_id}`}
+                                >
+                                  Edit
+                                </Link>
+                              </Button>
+                            </Flex>
                           ) : (
                             <Tooltip label={"Not approved"}>
                               <Button size={"sm"} colorScheme="red" disabled>

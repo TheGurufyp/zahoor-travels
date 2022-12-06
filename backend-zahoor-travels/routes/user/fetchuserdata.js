@@ -2,8 +2,9 @@ const express = require("express");
 // const VoucherModel = require("../../database/Models/VoucherModel");
 const Voucher = require("../../database/Models/VoucherModel");
 const router = express.Router();
+const User = require("../../database/Models/UserModel");
 
-router.post("/createVoucher", (req, res, next) => {
+router.post("/createVoucher", async (req, res, next) => {
   //   console.log(req.body);
   const {
     depardate,
@@ -37,8 +38,9 @@ router.post("/createVoucher", (req, res, next) => {
     v_id,
     totalNight,
     agentId,
+    totalPersons,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   const getVouchers = new Voucher({
     Depsector1: sector1,
     Depsector2: sector2,
@@ -71,17 +73,32 @@ router.post("/createVoucher", (req, res, next) => {
     totalInfants: totalInfant,
     totalNights: totalNight,
     agentId: agentId,
+    totalPersons: totalPersons,
   });
+  const user_id = agentId;
+  getVouchers
+    .save()
+    .then()
+    .catch((err) => {
+      console.log(err);
+    });
+  let no = 100;
 
-  getVouchers.save(function (err, book) {
-    if (err) return console.error(err);
-    // console.log(book.name + " Saved");
-    res.redirect("/userdashboard");
-  });
-  // let id = "638c6d21f0f4eed3df8f178b";
-  // Voucher.find().then((result) => {
-  //   console.log(result[0].tranportationDetail);
-  // });
+  try {
+    await User.findByIdAndUpdate(
+      { _id: user_id },
+      {
+        $inc: {
+          totalPendingVocuhers: +1,
+        },
+      }
+    );
+
+    res.send({ success: true, payload: "Voucher Approved" });
+  } catch (error) {
+    console.log(error);
+    res.send({ success: false, payload: "Error While fething data" });
+  }
 });
 
 module.exports = router;

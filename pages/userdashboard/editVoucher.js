@@ -35,7 +35,10 @@ import axios, { Axios } from "axios";
 
 // import parsecookie from "../../context/userState";
 
-const Create = (props) => {
+const editVoucher = (props) => {
+  const data = props.allData.payload[0];
+
+  console.log("new data", data.mutamers);
   const [count, setcount] = useState(0);
   const [search, setsearch] = useState({ searchField: "" });
   const [inputList, setInputList] = useState([
@@ -91,7 +94,7 @@ const Create = (props) => {
     fetch(`${process.env.NEXT_PUBLIC_HOST}/getAgentMautamers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.payload);
+        // console.log(data.payload);
         setmautamers(data.payload);
       });
 
@@ -129,12 +132,13 @@ const Create = (props) => {
 
   // console.log;
   let mautamerItems = mautamers.filter((filterItem) => {
-    console.log(filterItem);
+    // console.log(filterItem);
     return (
       filterItem["Pilgrim Name"].toLocaleLowerCase().includes(search) ||
       filterItem["Passport No."].toLocaleLowerCase().includes(search)
     );
   });
+  //   setmautamers(mautamerItems);
 
   return (
     <>
@@ -171,28 +175,28 @@ const Create = (props) => {
       {/* main Box */}
       <Formik
         initialValues={{
-          depardate: "",
-          departime: "",
-          sector1: "",
-          sector2: "",
-          flight1: "",
-          flight2: "",
-          arrivedate: "",
-          arrivetime: "",
-          pnr1: "",
-          returndate: "",
-          returntime: "",
-          returnsector1: "",
-          returnsector2: "",
-          returnflight1: "",
-          returnflight2: "",
-          pnr2: "",
-          shirka: "",
-          party: "",
-          iata: "",
-          service: "",
-          radio: "",
-          remark: "",
+          depardate: `${data.depDate}`,
+          departime: `${data.depTime}`,
+          sector1: `${data.Depsector1}`,
+          sector2: `${data.Depsector2}`,
+          flight1: `${data.DepFilght1}`,
+          flight2: `${data.DepFilght2}`,
+          arrivedate: `${data.arrivalDate}`,
+          arrivetime: `${data.arrivalTime}`,
+          pnr1: `${data.Deppnr}`,
+          returndate: `${data.returnDate}`,
+          returntime: `${data.returnTime}`,
+          returnsector1: `${data.returnSector1}`,
+          returnsector2: `${data.returnSector2}`,
+          returnflight1: `${data.returnFlight1}`,
+          returnflight2: `${data.returnFlight2}`,
+          pnr2: `${data.returnpnr}`,
+          shirka: `${data.shirka}`,
+          party: `${data.party}`,
+          iata: `${data.iata}`,
+          service: `${data.serviceNo}`,
+          radio: `${data.ziarat}`,
+          remark: `${data.remarks}`,
         }}
         onSubmit={async (values) => {
           // console.log(values);
@@ -868,7 +872,7 @@ const Create = (props) => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {mautamerItems.map((result, i) => {
+                    {mautamers.map((result, i) => {
                       return (
                         <Tr>
                           <Td>{result["SrNo."]}</Td>
@@ -1188,4 +1192,18 @@ const Create = (props) => {
   );
 };
 
-export default Create;
+export default editVoucher;
+
+export async function getServerSideProps(context) {
+  // console.log(context.query);
+  const id = context.query.id;
+  let data = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST}/userdashboard/editVoucher?id=${id}`
+  );
+  let allData = await data.json();
+  console.log(allData);
+
+  return {
+    props: { allData }, // will be passed to the page component as props
+  };
+}

@@ -13,35 +13,37 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
   mutamers: [],
-
-  totalVouchers:{
-   type: Number,
-   default:0
+  v_id: {
+    type: String,
   },
-  totalPendingVocuhers:{
+  totalVouchers: {
     type: Number,
-    default:0
-   },
-  totalApprovedVouchers:{
+    default: 0,
+  },
+  totalPendingVocuhers: {
     type: Number,
-    default:0
-   },
-  totalAdults:{
+    default: 0,
+  },
+  totalApprovedVouchers: {
     type: Number,
-    default:0
-   },
-  totalInfants:{
+    default: 0,
+  },
+  totalAdults: {
     type: Number,
-    default:0
-   },
-  totalChild:{
+    default: 0,
+  },
+  totalInfants: {
     type: Number,
-    default:0
-   },
-   totalPersons:{
+    default: 0,
+  },
+  totalChild: {
     type: Number,
-    default:0
-   }
+    default: 0,
+  },
+  totalPersons: {
+    type: Number,
+    default: 0,
+  },
 });
 var user = mongoose.model("user", UserSchema, "users");
 module.exports = mongoose.model("user", UserSchema);
