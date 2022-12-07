@@ -37,13 +37,15 @@ import axios, { Axios } from "axios";
 
 const Create = (props) => {
   const router = useRouter();
+  const [mautamers, setmautamers] = useState([]);
   const [count, setcount] = useState(0);
-  const [search, setsearch] = useState({ searchField: "" });
+  const [search, setsearch] = useState("");
   const [inputList, setInputList] = useState([
     { date: "", from_to: "", types: "" },
   ]);
   // console.log(search);
-
+  const [mautamarField, setmautamarField] = useState([]);
+  const [filterMautramField, setfilterMautramField] = useState([]);
   const transportation = [];
 
   // handle input change
@@ -81,7 +83,6 @@ const Create = (props) => {
   // console.log(transportation);
 
   // Simple POST request with a JSON body using fetch
-  const [mautamers, setmautamers] = useState([]);
 
   useEffect(() => {
     // POST request using fetch inside useEffect React hook
@@ -93,14 +94,12 @@ const Create = (props) => {
     fetch(`${process.env.NEXT_PUBLIC_HOST}/getAgentMautamers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.payload);
+        // console.log(data.payload);
         setmautamers(data.payload);
       });
 
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
-
-  const [mautamarField, setmautamarField] = useState([]);
 
   let totalChilds = 0;
   let totalInfants = 0;
@@ -112,7 +111,7 @@ const Create = (props) => {
   // console.log(date);
 
   // setmautamers([mautamarField]);
-  // console.log("mautamer", mautamarField);
+  console.log("mautamer", mautamarField);
   for (let i = 0; i < mautamarField.length; i++) {
     const realAge = mautamarField[i].age.trim().split(/\s+/);
     // console.log(realAge[0]);
@@ -129,14 +128,21 @@ const Create = (props) => {
   }
 
   // console.log;
-  let mautamerItems = mautamers.filter((filterItem) => {
-    console.log(filterItem);
-    return (
-      filterItem["Pilgrim Name"].toLocaleLowerCase().includes(search) ||
-      filterItem["Passport No."].toLocaleLowerCase().includes(search)
-    );
-  });
-
+  useEffect(() => {
+    let mautamerItems = mautamers.filter((filterItem) => {
+      // console.log(filterItem.Age);
+      return (
+        filterItem["Pilgrim Name"].toLocaleLowerCase().includes(search) ||
+        filterItem["Passport No."].toLocaleLowerCase().includes(search)
+      );
+    });
+    setfilterMautramField(mautamerItems);
+  }, [search, mautamers]);
+  // console.log(mautamarField);
+  const changeDateHandler = (event) => {
+    setdate((current) => [...current, event.target.value]);
+  };
+  // console.log(mautamarField);
   return (
     <>
       <Center my={"1rem"}>
@@ -151,10 +157,9 @@ const Create = (props) => {
         justify="space-between"
         marginInline={"auto"}
       >
-       
         <Box>
           {" "}
-          <Link href={`/userdashboard`} >
+          <Link href={`/userdashboard`}>
             <Button
               leftIcon={<ArrowLeftIcon color={"blue.400"} />}
               bg="whiteAlpha.700"
@@ -197,7 +202,7 @@ const Create = (props) => {
           // console.log(values);
           axios
             .post(`${process.env.NEXT_PUBLIC_HOST}/createVoucher`, {
-              depardate: values.depardate,
+              depardate: date[0],
               departime: values.departime,
               sector1: values.sector1,
               sector2: values.sector2,
@@ -206,7 +211,7 @@ const Create = (props) => {
               arrivedate: values.arrivedate,
               arrivetime: values.arrivetime,
               pnr1: values.pnr1,
-              returndate: values.returndate,
+              returndate: date[1],
               returntime: values.returntime,
               returnsector1: values.returnsector1,
               returnsector2: values.returnsector2,
@@ -322,22 +327,16 @@ const Create = (props) => {
                         <Box
                         // border={"1px"}
                         // borderColor="blue.300"
-                        // //  p={"0.4rem"}
+                        //  p={"0.4rem"}
                         // borderRadius={"2px"}
                         >
-                          <Field
-                            type={"date"}
+                          <Input
+                            type="date"
                             border=" 1px"
-                            as={Input}
+                            // as={Input}
                             borderColor={"blue.400"}
                             name="depardate"
-                            onChange={(event) => {
-                              // console.log(event.target.value);
-                              setdate((current) => [
-                                ...current,
-                                event.target.value,
-                              ]);
-                            }}
+                            onChange={changeDateHandler}
                           />
                         </Box>
                       </Flex>
@@ -582,8 +581,8 @@ const Create = (props) => {
                   //  direction={"column"}
                 >
                   <Box>
-                    Return Date :{" "}
-                    <Field
+                    Return Date :
+                    <Input
                       type={"date"}
                       border=" 1px"
                       as={Input}
@@ -867,7 +866,7 @@ const Create = (props) => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {mautamerItems.map((result, i) => {
+                    {filterMautramField.map((result, i) => {
                       return (
                         <Tr>
                           <Td>{result["SrNo."]}</Td>
@@ -889,47 +888,12 @@ const Create = (props) => {
                                     result["Passport No."];
                                   variables.groupName = result["Group Name"];
                                   variables.age = result["Age"];
-                                  // console.log(
-                                  //   i,
-                                  //   result["SrNo."],
-                                  //   result["Pilgrim Name"],
-                                  //   result["Passport No."],
-                                  //   result["Group Name"]
-                                  // );
-                                  // console.log(variables);
 
                                   setmautamarField((current) => [
                                     ...current,
                                     variables,
                                   ]);
-                                  // const realAge = result["Age"]
-                                  //   .trim()
-                                  //   .split(/\s+/);
-                                  // variables.age = parseInt(realAge[0]);
-                                  // // console.log(variables.age);
-                                  // if (
-                                  //   variables.age >= 4 &&
-                                  //   variables.age <= 10
-                                  // ) {
-                                  //   console.log("child");
-                                  //   totalChilds++;
-                                  // } else if (variables.age > 10) {
-                                  //   console.log("adults");
-                                  //   totalAdults++;
-                                  // } else {
-                                  //   console.log("infant");
-                                  //   totalInfants++;
-                                  // }
-                                  // // console.log("false");
-                                  // console.log(
-                                  //   totalChilds,
-                                  //   totalAdults,
-                                  //   totalInfants
-                                  // );
-                                  // console.log("hi1", mautamarField);
                                 } else {
-                                  // console.log("false");
-
                                   const newArr = mautamarField.filter(
                                     (object) => {
                                       return object.srno !== result["SrNo."];
@@ -949,12 +913,6 @@ const Create = (props) => {
                                     ]);
                                   }
                                 }
-
-                                // const realAge = mautamarField.age
-                                //   .trim()
-                                //   .split(/\s+/);
-                                // consle.log(parseInt(realAge));
-                                // console.log(variables.age);
                               }}
                             ></Checkbox>
                           </Td>
