@@ -116,7 +116,7 @@ const ViewVoucher = (props) => {
               </Text>
             </Box>
             <Box mx={"1rem"} display={"flex"} fontWeight="semibold">
-              Basma Vno :{" "}
+              Zah Vno :{" "}
               <Text fontWeight={"normal"}>{data.v_id ? data.v_id : ""}</Text>
             </Box>
           </Flex>

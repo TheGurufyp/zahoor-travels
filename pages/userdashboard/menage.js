@@ -1,44 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
+  Table,Thead,Tbody,Tfoot,Tr,Th,
   Td,
-  TableCaption,
   TableContainer,
   Text,
   Box,
   Button,
   Heading,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
   Tooltip,
-  disabledReason,
-  MenuOptionGroup,
-  MenuDivider,
-  Divider,
   Flex,
   useMediaQuery,
-  Spinner,
-  filter,
+  
 } from "@chakra-ui/react";
 import { Cookies, useCookies } from "react-cookie";
 import Link from "next/link";
-import ConfirmDialog from "../components/ConfirmDialog";
 import VoucherSearch from "../components/VoucherSearch";
-import parsecookie from "../../context/userState";
 
-// console.log(parsecookie);
-//
 
-// import Link from "next/link";
 function Menage() {
   const [cookie, setCookie] = useCookies(["username"]);
   // console.log("cookie", cookie.id);
@@ -61,17 +39,9 @@ function Menage() {
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
-  // console.log(typeof props.alldata?.payload);
-  // let VoucherList = props.alldata?.payload;
-  // let populationArr = Object.entries(props.alldata?.payload);
-  // // populationArr.map((data) => {
-  // //   console.log(data);
-  // // });
+  
 
   const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
-
-  // console.log(props);
-  // console.log(filterV);
   return (
     <>
       <Box maxWidth={"1500px"} mx={"auto"} px="10px">
@@ -86,79 +56,7 @@ function Menage() {
           Manage Vouchers
         </Heading>
 
-        {/* <Flex
-          mt="20px"
-          align={"center"}
-          justify={"space-around"}
-          direction={isLargerThan620 ? "row" : "column"}
-          h={isLargerThan620 ? "" : "240px"}
-        >
-          <Box
-            borderRadius={"8px"}
-            borderTopRadius={"10px"}
-            textAlign={"center"}
-            fontWeight={"semibold"}
-            fontSize="1.3rem"
-            w={isLargerThan620 ? "" : "100%"}
-            border="1px"
-            borderColor={"gray.400"}
-          >
-            <Text
-              borderTopRadius={"8px"}
-              color={"white"}
-              bg="blue.500"
-              px="40px"
-            >
-              {" "}
-              Total Vouchers
-            </Text>
-            <Text> 0</Text>
-          </Box>
-
-          <Box
-            borderRadius={"8px"}
-            borderTopRadius={"10px"}
-            textAlign={"center"}
-            fontWeight={"semibold"}
-            fontSize="1.3rem"
-            w={isLargerThan620 ? "" : "100%"}
-            border="1px"
-            borderColor={"gray.400"}
-          >
-            <Text
-              borderTopRadius={"8px"}
-              color={"white"}
-              bg="blue.500"
-              px="40px"
-            >
-              {" "}
-              Approved Vouchers
-            </Text>
-            <Text> 0</Text>
-          </Box>
-
-          <Box
-            borderRadius={"8px"}
-            borderTopRadius={"10px"}
-            textAlign={"center"}
-            fontWeight={"semibold"}
-            fontSize="1.3rem"
-            w={isLargerThan620 ? "" : "100%"}
-            border="1px"
-            borderColor={"gray.400"}
-          >
-            <Text
-              borderTopRadius={"8px"}
-              color={"white"}
-              bg="blue.500"
-              px="40px"
-            >
-              {" "}
-              Pending Vouchers
-            </Text>
-            <Text> 0</Text>
-          </Box>
-        </Flex> */}
+      
 
         <Box mt="20px">
           <VoucherSearch
@@ -207,7 +105,7 @@ function Menage() {
             <Tbody>
               {filterV?.length > 0
                 ? filterV?.map((data) => {
-                    console.log(data);
+                  
                     return (
                       <Tr key={data?._id}>
                         <Td className="tableborder">
@@ -316,7 +214,7 @@ function Menage() {
                           {data?.status === "Approved" ? (
                             <Button size={"sm"} colorScheme="blue">
                               <Link
-                                href={`/admindashboard/viewVoucher?id=${data?._id}`}
+                                href={`/userdashboard/viewVoucher?id=${data?._id}`}
                               >
                                 View
                               </Link>
