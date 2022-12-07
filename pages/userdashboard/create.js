@@ -26,7 +26,7 @@ import { Formik, Field, Form } from "formik";
 
 import Link from "next/link";
 import { React, useEffect } from "react";
-
+import { useRouter } from "next/router";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 
 import { useState } from "react";
@@ -36,6 +36,7 @@ import axios, { Axios } from "axios";
 // import parsecookie from "../../context/userState";
 
 const Create = (props) => {
+  const router = useRouter();
   const [count, setcount] = useState(0);
   const [search, setsearch] = useState({ searchField: "" });
   const [inputList, setInputList] = useState([
@@ -80,6 +81,7 @@ const Create = (props) => {
   // console.log(transportation);
 
   // Simple POST request with a JSON body using fetch
+  const [mautamers, setmautamers] = useState([]);
 
   useEffect(() => {
     // POST request using fetch inside useEffect React hook
@@ -98,7 +100,6 @@ const Create = (props) => {
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
-  const [mautamers, setmautamers] = useState([]);
   const [mautamarField, setmautamarField] = useState([]);
 
   let totalChilds = 0;
@@ -150,12 +151,10 @@ const Create = (props) => {
         justify="space-between"
         marginInline={"auto"}
       >
-        <Box ml={"1rem"}>
-          <Button>Status : Closed</Button>
-        </Box>
+       
         <Box>
           {" "}
-          <Link href="/client">
+          <Link href={`/userdashboard`} >
             <Button
               leftIcon={<ArrowLeftIcon color={"blue.400"} />}
               bg="whiteAlpha.700"

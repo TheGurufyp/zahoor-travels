@@ -35,14 +35,12 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import VoucherSearch from "../components/VoucherSearch";
 import parsecookie from "../../context/userState";
 
-// console.log(parsecookie);
-//
-
-// import Link from "next/link";
 function Menage() {
+  const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
   const [cookie, setCookie] = useCookies(["username"]);
-  // console.log("cookie", cookie.id);
+
   const [filterV, setfilterV] = useState([]);
+  const [vocuhers, setvocuhers] = useState()
   useEffect(() => {
     // POST request using fetch inside useEffect React hook
     const requestOptions = {
@@ -53,33 +51,14 @@ function Menage() {
     fetch(`${process.env.NEXT_PUBLIC_HOST}/getUserVouchers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.payload[0]);
-        setfilterV([data.payload[0]]);
+   
+        setvocuhers(data?.payload);
       });
 
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
-  // console.log(typeof props.allData.payload);
-  // let VoucherList = props.allData.payload;
-  // let populationArr = Object.entries(props.allData.payload);
-  // // populationArr.map((data) => {
-  // //   console.log(data);
-  // // });
+  
 
-  const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
-
-  const [rendercomplete, setrendercomplete] = useState(false);
-
-  useEffect(() => {
-    setrendercomplete(true);
-  }, []);
-
-  if (!rendercomplete) {
-    return <></>;
-  }
-  // console.log(props);
-  // console.log(filterV);
   return (
     <>
       <Box maxWidth={"1500px"} mx={"auto"} px="10px">
@@ -217,55 +196,55 @@ function Menage() {
                 ? filterV?.map((data) => {
                     console.log("data", data);
                     return (
-                      <Tr key={data._id}>
+                      <Tr key={data?._id}>
                         <Td className="tableborder">
-                          <Text>{data.v_id}</Text>
+                          <Text>{data?.v_id}</Text>
                         </Td>
                         <Td className="tableborder">
-                          {data.agentName ? data.agentName : " "}{" "}
-                        </Td>
-                        <Td className="tableborder">
-                          {" "}
-                          {data.arrivalDate ? data.arrivalDate : " "}
+                          {data?.agentName ? data?.agentName : " "}{" "}
                         </Td>
                         <Td className="tableborder">
                           {" "}
-                          {data.returnDate ? data.returnDate : " "}
+                          {data?.arrivalDate ? data?.arrivalDate : " "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data?.returnDate ? data?.returnDate : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalPersons ? data.totalPersons : " "}
+                          {data?.totalPersons ? data?.totalPersons : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalAdults ? data.totalAdults : " "}
+                          {data?.totalAdults ? data?.totalAdults : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalChildren ? data.totalChildren : " "}
+                          {data?.totalChildren ? data?.totalChildren : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalInfants ? data.totalInfants : " "}
+                          {data?.totalInfants ? data?.totalInfants : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalNights ? data.totalNights : " "}
+                          {data?.totalNights ? data?.totalNights : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
                           <Text fontWeight={"bold"} color="green">
-                            {data.status}
+                            {data?.status}
                           </Text>{" "}
                         </Td>
 
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.status === "Approved" ? (
+                          {data?.status === "Approved" ? (
                             <Flex justify={"space-evenly"}>
                               <Button size={"sm"} colorScheme="blue">
                                 <Link
-                                  href={`/admindashboard/viewVoucher?id=${data._id}`}
+                                  href={`/admindashboard/viewVoucher?id=${data?._id}`}
                                 >
                                   View
                                 </Link>
                               </Button>
                               <Button colorScheme="red" size={"sm"}>
                                 <Link
-                                  href={`/userdashboard/editVoucher?id=${data.v_id}`}
+                                  href={`/userdashboard/editVoucher?id=${data?.v_id}`}
                                 >
                                   Edit
                                 </Link>
@@ -282,49 +261,49 @@ function Menage() {
                       </Tr>
                     );
                   })
-                : filterV?.map((data) => {
+                : vocuhers?.map((data) => {
                     return (
-                      <Tr key={data._id}>
+                      <Tr key={data?._id}>
                         <Td className="tableborder">
-                          <Text>{data.v_id}</Text>
+                          <Text>{data?.v_id}</Text>
                         </Td>
                         <Td className="tableborder">
-                          {data.agentName ? data.agentName : " "}{" "}
-                        </Td>
-                        <Td className="tableborder">
-                          {" "}
-                          {data.arrivalDate ? data.arrivalDate : " "}
+                          {data?.agentName ? data?.agentName : " "}{" "}
                         </Td>
                         <Td className="tableborder">
                           {" "}
-                          {data.returnDate ? data.returnDate : " "}
+                          {data?.arrivalDate ? data?.arrivalDate : " "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data?.returnDate ? data?.returnDate : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalPersons ? data.totalPersons : " "}
+                          {data?.totalPersons ? data?.totalPersons : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalAdults ? data.totalAdults : " "}
+                          {data?.totalAdults ? data?.totalAdults : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalChildren ? data.totalChildren : " "}
+                          {data?.totalChildren ? data?.totalChildren : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalInfants ? data.totalInfants : " "}
+                          {data?.totalInfants ? data?.totalInfants : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalNights ? data.totalNights : " "}
+                          {data?.totalNights ? data?.totalNights : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
                           <Text fontWeight={"bold"} color="green">
-                            {data.status}
+                            {data?.status}
                           </Text>{" "}
                         </Td>
 
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.status === "Approved" ? (
+                          {data?.status === "Approved" ? (
                             <Button size={"sm"} colorScheme="blue">
                               <Link
-                                href={`/admindashboard/viewVoucher?id=${data._id}`}
+                                href={`/admindashboard/viewVoucher?id=${data?._id}`}
                               >
                                 View
                               </Link>

@@ -13,7 +13,9 @@ router.post("/getAgentMautamers", (req, res, next) => {
       res.send({ success: true, payload: data });
       // res.send(result[0].mutamers);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      res.send({ success: false, payload: "error" });
+    });
 });
 
 module.exports = router;
