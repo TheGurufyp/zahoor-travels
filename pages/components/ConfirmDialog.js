@@ -8,7 +8,7 @@ import {
   AlertDialogOverlay,useDisclosure,Button,
   AlertDialogCloseButton,Box
   } from '@chakra-ui/react'
-function ConfirmDialog({children,head,desc,clickedYes,user_id,id}) {
+function ConfirmDialog({children,head,desc,clickedYes,user_id,id,agentId}) {
     
     const { isOpen, onOpen, onClose } = useDisclosure();
     const cancelRef = React.useRef()
@@ -32,7 +32,7 @@ function ConfirmDialog({children,head,desc,clickedYes,user_id,id}) {
           </AlertDialogBody>
           <AlertDialogFooter>
            
-            <Button onClick={()=>{ onClose();clickedYes(id)}} colorScheme='red' ml={3}>
+            <Button onClick={()=>{ onClose();clickedYes(id,agentId)}} colorScheme='red' ml={3}>
               Yes
             </Button>
           </AlertDialogFooter>

@@ -5,11 +5,12 @@ const router = express.Router();
 
 router.post("/", async (req, res, next) => {
   const { vid, user_id } = req.body;
-  if (!vid) {
+  console.log(user_id)
+  if (!vid || !user_id) {
     res.send({ success: false, payload: "id not found in body" });
   }
-
-  try {
+  else
+ { try {
     let data = await VoucherModel.findById(
       { _id: vid },
       "status agentId totalPersons totalAdults totalChildren totalInfants"
@@ -44,7 +45,7 @@ router.post("/", async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.send({ success: false, payload: "Error While fething data" });
-  }
+  }}
 });
 
 module.exports = router;

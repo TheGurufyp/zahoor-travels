@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
 
-  VoucherModel.find({status:"Pending"},"v_id agentName arrivalDate returnDate totalPersons totalAdults totalChildren totalInfants totalNights status")
+  VoucherModel.find({status:"Pending"},"v_id agentName arrivalDate returnDate totalPersons totalAdults totalChildren totalInfants totalNights status agentId")
     .then((data) => {
       if (!data) {
        

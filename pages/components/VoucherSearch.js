@@ -45,22 +45,24 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
   }, []);
 
   const filterbyvid = () => {
-    // filterV=  vocuhers.map((v,i)=>{
-    //     return (
-    //       ""
-    //     )
-    //   })
+    if (!vid) return;
+
+    let f=  vocuhers.filter((v,i)=>{
+        return ( v.v_id.toLocaleLowerCase().includes(vid.toLocaleLowerCase())
+        )
+      })
+      return f
   };
 
-  const filterbyagent = () => {
+  const filterbyagent = (result) => {
     if (!agentname) return;
 
-    const filterresult = vocuhers.filter((v, i) => {
+    const filterresult = result.filter((v, i) => {
       return v.agentName
         .toLocaleLowerCase()
         .includes(agentname.toLocaleLowerCase());
     });
-    setfilterV(filterresult);
+  
 
     return filterresult;
   };
@@ -88,9 +90,13 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
   };
 
   const searchVouchers = () => {
-    // filterbyvid();
-    filterbyagent();
-    filterbykeyword();
+    let result;
+    result=filterbyvid();
+    filterbyagent(result);
+    // filterbykeyword();
+    
+    console.log("result: ",result);
+    setfilterV(result);
   };
 
   return (
@@ -110,6 +116,9 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
               type={"search"}
               placeholder="Voucher #"
               value={vid}
+              onChange={(e) => {
+                setvid(e.target.value);
+              }}
             />
           </Box>
 

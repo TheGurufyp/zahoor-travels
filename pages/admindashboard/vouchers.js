@@ -42,16 +42,10 @@ function Vouchers(props) {
 
   const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
 
-  const [rendercomplete, setrendercomplete] = useState(false);
+  
   const [filterV, setfilterV] = useState([]);
 
-  useEffect(() => {
-    setrendercomplete(true);
-  }, []);
-
-  if (!rendercomplete) {
-    return <></>;
-  }
+ 
   // console.log(props);
   return (
     <>
@@ -67,7 +61,7 @@ function Vouchers(props) {
           Manage Vouchers
         </Heading>
 
-        <Flex
+        {/* <Flex
           mt="20px"
           align={"center"}
           justify={"space-around"}
@@ -139,7 +133,7 @@ function Vouchers(props) {
             </Text>
             <Text> 0</Text>
           </Box>
-        </Flex>
+        </Flex> */}
 
         <Box mt="20px">
           <VoucherSearch

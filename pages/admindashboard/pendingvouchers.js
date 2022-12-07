@@ -35,23 +35,25 @@ function Pendingvouchers({ responseFromServer }) {
   const [filterVouchers, setfilterVouchers] = useState();
   const [searchInProgress, setsearchInProgress] = useState(false);
   const [vouchers, setvouchers] = useState(responseFromServer);
+  console.log(vouchers)
 
-  const handleApprove = async (id) => {
+  const handleApprove = async (id,agentId) => {
+    console.log(agentId)
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_HOST}/appovevoucher`,
-        { vid: id, user_id: cookie.id },
+        { vid: id, user_id:agentId },
         { headers: { token: cookie.token } }
       );
       console.log(res.data);
     } catch (error) {}
   };
 
-  const clickedYes = async (id) => {
+  const clickedYes = async (id,agentId) => {
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_HOST}/disapprovevoucher`,
-        { vid: id, user_id: cookie.id },
+        { vid: id, user_id: agentId },
         { headers: { token: cookie.token } }
       );
       console.log(res.data);
@@ -170,7 +172,7 @@ function Pendingvouchers({ responseFromServer }) {
                           </MenuItem>
 
                           <MenuItem
-                            onClick={() => handleApprove(v._id)}
+                            onClick={() => handleApprove(v._id,v.agentId)}
                             bg="green.400"
                             py="15px"
                             color={"white"}
@@ -181,6 +183,7 @@ function Pendingvouchers({ responseFromServer }) {
 
                           <ConfirmDialog
                             id={v._id}
+                            agentId={v.agentId}
                             head="Disapprove ?"
                             desc="Are you sure you want to disapprove the voucher."
                             clickedYes={clickedYes}
@@ -243,7 +246,7 @@ export async function getServerSideProps(context) {
     }
   } catch (error) {
     console.log(error);
-    responseFromServer = { success: false };
+    responseFromServer = [];
   }
 
   return {
