@@ -352,7 +352,7 @@ function Index() {
 
                     <Thead>
                       <Tr>
-                        <Th>Agent Code</Th>
+                        {/* <Th>Agent Code</Th> */}
                         <Th>Agent</Th>
                         <Th>vouchers</Th>
                         <Th>Approved</Th>
@@ -365,7 +365,7 @@ function Index() {
                     </Thead>
                     <Tbody>
                       <Tr>
-                        <Td>{filter._v}</Td>
+                        {/* <Td>{filter._v}</Td> */}
                         <Td>{filter.username}</Td>
                         <Td>{filter.totalVouchers}</Td>
                         <Td>{filter.totalApprovedVouchers}</Td>

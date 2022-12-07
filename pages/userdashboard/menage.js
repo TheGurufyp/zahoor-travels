@@ -43,6 +43,7 @@ function Menage() {
   const [cookie, setCookie] = useCookies(["username"]);
   // console.log("cookie", cookie.id);
   const [filterV, setfilterV] = useState([]);
+  const [vocuhers, setvocuhers] = useState([]);
   useEffect(() => {
     // POST request using fetch inside useEffect React hook
     const requestOptions = {

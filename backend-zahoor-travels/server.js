@@ -24,7 +24,7 @@ const appovevoucher = require("./routes/admin/approvevocuher");
 const disapprovevoucher = require("./routes/admin/disapprovevoucher");
 const indexVoucher = require("../backend-zahoor-travels/routes/user/indexVoucher");
 const editVoucher = require("../backend-zahoor-travels/routes/user/userEditVoucher");
-
+const userviewvoucher = require("./routes/user/userviewvoucher");
 connectTodatabase(); // connecting to Database
 const corsOptions = {
   origin: true,
@@ -53,6 +53,7 @@ app.use("/createuser", createuser);
 app.use("/userlogin", userlogin);
 app.use("/uploadmutamers", uploadmutamers);
 app.use("/userlogout", userlogout);
+app.use(userviewvoucher);
 
 // Routes for Vouchers
 app.use(VoucherRoute);
