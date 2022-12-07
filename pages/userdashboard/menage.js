@@ -149,7 +149,7 @@ function Menage() {
 
         <Box mt="20px">
           <VoucherSearch
-            vocuhers={filterV}
+            vocuhers={vocuhers}
             filterV={filterV}
             setfilterV={setfilterV}
           />

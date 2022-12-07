@@ -5,7 +5,7 @@ const router = express.Router();
 router.post("/getUserVouchers", (req, res, next) => {
   // console.log(req.body.id);
   const id = req.body.id;
-  VoucherModel.find({ agentId: id }.sort({createdAt:-1}))
+  VoucherModel.find({ agentId: id }).sort({createdAt:-1})
     .then((data) => {
       if (!data) {
         // console.log('empty');

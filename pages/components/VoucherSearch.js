@@ -23,8 +23,14 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
   const [keyword, setkeyword] = useState("");
   const [agentname, setagentname] = useState("");
 
+  const handleReset=()=>{
+    setvid()
+    setkeyword()
+    setagentname()
+    setfilterV();
+  }
+
   useEffect(() => {
-    console.log(vocuhers);
     const fetchagents = async () => {
       try {
         const response = await axios.get(
@@ -45,19 +51,20 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
   }, []);
 
   const filterbyvid = () => {
-    if (!vid) return;
+    if (!vid) return vocuhers;
 
     let f=  vocuhers.filter((v,i)=>{
         return ( v.v_id.toLocaleLowerCase().includes(vid.toLocaleLowerCase())
         )
       })
+   
       return f
   };
 
   const filterbyagent = (result) => {
-    if (!agentname) return;
-
-    const filterresult = result.filter((v, i) => {
+    if (!agentname) return result;
+ 
+    const filterresult = vocuhers.filter((v, i) => {
       return v.agentName
         .toLocaleLowerCase()
         .includes(agentname.toLocaleLowerCase());
@@ -67,33 +74,42 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
     return filterresult;
   };
 
-  const filterbykeyword = () => {
-    if (!keyword) return;
+  const filterbykeyword = (result) => {
+    if (!keyword) return result; 
+    let final=[];
 
-    let filteredData = vocuhers?.filter((v, i) => {
-      return v.agentName.toLocaleLowerCase().includes(keyword);
+    let filteredData =  result.filter((v, i) => {
+      return v.agentName
+        .toLocaleLowerCase()
+        .includes(keyword.toLocaleLowerCase());
     });
-    console.log(filteredData);
-    //  filterresult=  vocuhers?.filter((v,i)=>{
-    //   return  v.v_id?.includes(keyword);
-    // })
-
-    let filterresult = filteredData?.filter((v, i) => {
-      return v.arrivalDate?.includes(keyword);
+   
+ 
+    let filteredData2= filteredData?.filter((v,i)=>{
+      return ( v.v_id.toLocaleLowerCase().includes(keyword.toLocaleLowerCase())
+      )
+    })
+  
+    let filteredData3 = filteredData2?.filter((v, i) => {
+      return v.arrivalDate?.includes(keyword.toLocaleLowerCase());
+    });
+   
+    let filteredData4 = filteredData3?.filter((v, i) => {
+      return v.returnDate?.includes(keyword.toLocaleLowerCase());
     });
 
-    filteredData = filterresult?.filter((v, i) => {
-      return v.returnDate?.includes(keyword);
-    });
+final=final.concat(filteredData,filteredData2,filteredData3,filteredData4)
+const unique = [...new Map(final.map((m) => [m.v_id, m])).values()];
 
-    setfilterV(filteredData);
+  return unique;
   };
 
   const searchVouchers = () => {
     let result;
+    
     result=filterbyvid();
-    filterbyagent(result);
-    // filterbykeyword();
+    result=filterbyagent(result);
+    result=filterbykeyword(result);
     
     console.log("result: ",result);
     setfilterV(result);
@@ -131,8 +147,8 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
                 setagentname(e.target.value);
               }}
             >
-              {agentslist?.map((agent) => {
-                return <option value={agent.username}>{agent.username}</option>;
+              {agentslist?.map((agent,i) => {
+                return <option key={i} value={agent.username}>{agent.username}</option>;
               })}
             </Select>
           </Box>
@@ -159,7 +175,7 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
               >
                 Search
               </Button>
-              <Button colorScheme={"red"}>Reset</Button>
+              <Button onClick={handleReset} colorScheme={"red"}>Reset</Button>
             </ButtonGroup>
           </Box>
         </Stack>
