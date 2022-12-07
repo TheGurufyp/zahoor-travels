@@ -70,7 +70,6 @@ function Menage() {
 
   const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
 
- 
   // console.log(props);
   // console.log(filterV);
   return (
@@ -87,7 +86,7 @@ function Menage() {
           Manage Vouchers
         </Heading>
 
-        <Flex
+        {/* <Flex
           mt="20px"
           align={"center"}
           justify={"space-around"}
@@ -159,7 +158,7 @@ function Menage() {
             </Text>
             <Text> 0</Text>
           </Box>
-        </Flex>
+        </Flex> */}
 
         <Box mt="20px">
           <VoucherSearch
@@ -208,7 +207,7 @@ function Menage() {
             <Tbody>
               {filterV?.length > 0
                 ? filterV?.map((data) => {
-                    
+                    console.log(data);
                     return (
                       <Tr key={data?._id}>
                         <Td className="tableborder">

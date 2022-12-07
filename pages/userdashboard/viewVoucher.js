@@ -434,7 +434,6 @@ export async function getServerSideProps(context) {
     `${process.env.NEXT_PUBLIC_HOST}/userviewvoucher?id=${id}`
   );
   let allData = await data.json();
-  console.log(allData);
 
   return {
     props: { allData }, // will be passed to the page component as props

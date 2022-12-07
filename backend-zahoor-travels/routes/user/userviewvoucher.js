@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/userviewvoucher", (req, res, next) => {
   const id2 = req.query.id;
   //   res.send({ payload: id });
-  console.log(id2);
+  // console.log(id2);
 
   VoucherModel.find({ _id: id2 })
     .then((result) => {
@@ -15,7 +15,6 @@ router.get("/userviewvoucher", (req, res, next) => {
       } else {
         res.send({ success: false });
       }
-      console.log(result);
     })
     .catch((err) => {
       res.send({ success: false, payload: "internal server error" });
