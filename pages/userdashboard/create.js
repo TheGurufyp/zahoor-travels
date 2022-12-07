@@ -97,8 +97,6 @@ const Create = (props) => {
         // console.log(data.payload);
         setmautamers(data.payload);
       });
-
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
   let totalChilds = 0;
