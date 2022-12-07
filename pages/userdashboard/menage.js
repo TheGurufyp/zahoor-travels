@@ -55,7 +55,7 @@ function Menage() {
       .then((response) => response.json())
       .then((data) => {
         // console.log(data.payload[0]);
-        setfilterV([data.payload[0]]);
+        setvocuhers(data.payload);
       });
 
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
@@ -70,15 +70,7 @@ function Menage() {
 
   const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
 
-  const [rendercomplete, setrendercomplete] = useState(false);
-
-  useEffect(() => {
-    setrendercomplete(true);
-  }, []);
-
-  if (!rendercomplete) {
-    return <></>;
-  }
+ 
   // console.log(props);
   // console.log(filterV);
   return (
@@ -283,7 +275,7 @@ function Menage() {
                       </Tr>
                     );
                   })
-                : filterV?.map((data) => {
+                : vocuhers?.map((data) => {
                     return (
                       <Tr key={data._id}>
                         <Td className="tableborder">
