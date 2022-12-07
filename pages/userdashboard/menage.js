@@ -54,16 +54,16 @@ function Menage() {
     fetch(`${process.env.NEXT_PUBLIC_HOST}/getUserVouchers`, requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data.payload[0]);
-        setvocuhers(data.payload);
+        // console.log(data?.payload[0]);
+        setvocuhers(data?.payload);
       });
 
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
-  // console.log(typeof props.allData.payload);
-  // let VoucherList = props.allData.payload;
-  // let populationArr = Object.entries(props.allData.payload);
+  // console.log(typeof props.alldata?.payload);
+  // let VoucherList = props.alldata?.payload;
+  // let populationArr = Object.entries(props.alldata?.payload);
   // // populationArr.map((data) => {
   // //   console.log(data);
   // // });
@@ -208,57 +208,57 @@ function Menage() {
             <Tbody>
               {filterV?.length > 0
                 ? filterV?.map((data) => {
-                    console.log("data", data);
+                    
                     return (
-                      <Tr key={data._id}>
+                      <Tr key={data?._id}>
                         <Td className="tableborder">
-                          <Text>{data.v_id}</Text>
+                          <Text>{data?.v_id}</Text>
                         </Td>
                         <Td className="tableborder">
-                          {data.agentName ? data.agentName : " "}{" "}
-                        </Td>
-                        <Td className="tableborder">
-                          {" "}
-                          {data.arrivalDate ? data.arrivalDate : " "}
+                          {data?.agentName ? data?.agentName : " "}{" "}
                         </Td>
                         <Td className="tableborder">
                           {" "}
-                          {data.returnDate ? data.returnDate : " "}
+                          {data?.arrivalDate ? data?.arrivalDate : " "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data?.returnDate ? data?.returnDate : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalPersons ? data.totalPersons : " "}
+                          {data?.totalPersons ? data?.totalPersons : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalAdults ? data.totalAdults : " "}
+                          {data?.totalAdults ? data?.totalAdults : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalChildren ? data.totalChildren : " "}
+                          {data?.totalChildren ? data?.totalChildren : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalInfants ? data.totalInfants : " "}
+                          {data?.totalInfants ? data?.totalInfants : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalNights ? data.totalNights : " "}
+                          {data?.totalNights ? data?.totalNights : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
                           <Text fontWeight={"bold"} color="green">
-                            {data.status}
+                            {data?.status}
                           </Text>{" "}
                         </Td>
 
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.status === "Approved" ? (
+                          {data?.status === "Approved" ? (
                             <Flex justify={"space-evenly"}>
                               <Button size={"sm"} colorScheme="blue">
                                 <Link
-                                  href={`/admindashboard/viewVoucher?id=${data._id}`}
+                                  href={`/admindashboard/viewVoucher?id=${data?._id}`}
                                 >
                                   View
                                 </Link>
                               </Button>
                               {/* <Button colorScheme="red" size={"sm"}>
                                 <Link
-                                  href={`/userdashboard/editVoucher?id=${data.v_id}`}
+                                  href={`/userdashboard/editVoucher?id=${data?.v_id}`}
                                 >
                                   Edit
                                 </Link>
@@ -277,47 +277,47 @@ function Menage() {
                   })
                 : vocuhers?.map((data) => {
                     return (
-                      <Tr key={data._id}>
+                      <Tr key={data?._id}>
                         <Td className="tableborder">
-                          <Text>{data.v_id}</Text>
+                          <Text>{data?.v_id}</Text>
                         </Td>
                         <Td className="tableborder">
-                          {data.agentName ? data.agentName : " "}{" "}
-                        </Td>
-                        <Td className="tableborder">
-                          {" "}
-                          {data.arrivalDate ? data.arrivalDate : " "}
+                          {data?.agentName ? data?.agentName : " "}{" "}
                         </Td>
                         <Td className="tableborder">
                           {" "}
-                          {data.returnDate ? data.returnDate : " "}
+                          {data?.arrivalDate ? data?.arrivalDate : " "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data?.returnDate ? data?.returnDate : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalPersons ? data.totalPersons : " "}
+                          {data?.totalPersons ? data?.totalPersons : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalAdults ? data.totalAdults : " "}
+                          {data?.totalAdults ? data?.totalAdults : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalChildren ? data.totalChildren : " "}
+                          {data?.totalChildren ? data?.totalChildren : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalInfants ? data.totalInfants : " "}
+                          {data?.totalInfants ? data?.totalInfants : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.totalNights ? data.totalNights : " "}
+                          {data?.totalNights ? data?.totalNights : " "}
                         </Td>
                         <Td className="tableborder" textAlign={"center"}>
                           <Text fontWeight={"bold"} color="green">
-                            {data.status}
+                            {data?.status}
                           </Text>{" "}
                         </Td>
 
                         <Td className="tableborder" textAlign={"center"}>
-                          {data.status === "Approved" ? (
+                          {data?.status === "Approved" ? (
                             <Button size={"sm"} colorScheme="blue">
                               <Link
-                                href={`/admindashboard/viewVoucher?id=${data._id}`}
+                                href={`/admindashboard/viewVoucher?id=${data?._id}`}
                               >
                                 View
                               </Link>
