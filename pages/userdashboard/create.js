@@ -25,7 +25,7 @@ import { Cookies, useCookies } from "react-cookie";
 import { Formik, Field, Form } from "formik";
 
 import Link from "next/link";
-import { React, useEffect } from "react";
+import { React, useEffect,useMemo } from "react";
 import { useRouter } from "next/router";
 import { ArrowLeftIcon } from "@chakra-ui/icons";
 
@@ -33,11 +33,13 @@ import { useState } from "react";
 
 import axios, { Axios } from "axios";
 
+
 // import parsecookie from "../../context/userState";
 
 const Create = (props) => {
   const router = useRouter();
   const [mautamers, setmautamers] = useState([]);
+  const [selectedmautamers, setselectedmautamers] = useState([])
   const [count, setcount] = useState(0);
   const [search, setsearch] = useState("");
   const [inputList, setInputList] = useState([
@@ -50,6 +52,7 @@ const Create = (props) => {
 
   // handle input change
   const handleInputChange = (e, index) => {
+ 
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
@@ -58,6 +61,7 @@ const Create = (props) => {
 
   // handle click event of the Remove button
   const handleRemoveClick = (index) => {
+
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
@@ -66,6 +70,7 @@ const Create = (props) => {
 
   // handle click event of the Add button
   const handleAddClick = () => {
+   
     setInputList([...inputList, { date: "", from_to: "", types: "" }]);
   };
 
@@ -75,6 +80,7 @@ const Create = (props) => {
 
   inputList.map((items) => {
     // console.log(items);
+   
     transportation.push(items);
   });
   const [cookie, setCookie] = useCookies(["username"]);
@@ -85,6 +91,7 @@ const Create = (props) => {
   // Simple POST request with a JSON body using fetch
 
   useEffect(() => {
+   
     // POST request using fetch inside useEffect React hook
     const requestOptions = {
       method: "POST",
@@ -95,38 +102,70 @@ const Create = (props) => {
       .then((response) => response.json())
       .then((data) => {
         // console.log(data.payload);
-        setmautamers(data.payload);
+        let temp=data.payload.map((m,i)=>{
+          return {...m,checked:false}
+        })
+        setmautamers(temp);
+      setfilterMautramField(temp)
       });
   }, []);
 
   let totalChilds = 0;
   let totalInfants = 0;
   let totalAdults = 0;
-  var uniq = "TA" + "-" + new Date().getTime();
+  // var uniq = "TA" + "-" + new Date().getTime();
   // console.log("unique", uniq);
 
   const [date, setdate] = useState([]);
   // console.log(date);
 
   // setmautamers([mautamarField]);
-  console.log("mautamer", mautamarField);
-  for (let i = 0; i < mautamarField.length; i++) {
-    const realAge = mautamarField[i].age.trim().split(/\s+/);
-    // console.log(realAge[0]);
-    if (realAge[0] >= 4 && realAge[0] <= 10) {
-      // console.log("child");
-      totalChilds++;
-    } else if (realAge[0] > 10) {
-      // console.log("adults");
-      totalAdults++;
-    } else {
-      // console.log("infant");
-      totalInfants++;
-    }
-  }
+ 
+  // for (let i = 0; i < mautamarField.length; i++) {
+  //   const realAge = mautamarField[i].age.trim().split(/\s+/);
+  //   console.log(realAge[0]);
+  //   if (realAge[0] >= 4 && realAge[0] <= 10) {
+  //     // console.log("child");
+  //     totalChilds++;
+  //   } else if (realAge[0] > 10) {
+  //     // console.log("adults");
+  //     totalAdults++;
+  //   } else {
+  //     // console.log("infant");
+  //     totalInfants++;
+  //   }
+  // }
 
-  // console.log;
-  useEffect(() => {
+  // useEffect(() => {
+   
+  //   let mautamerItems = mautamers.filter((filterItem) => {
+  //     // console.log(filterItem.Age);
+  //     return (
+  //       filterItem["Pilgrim Name"].toLocaleLowerCase().includes(search) ||
+  //       filterItem["Passport No."].toLocaleLowerCase().includes(search)
+  //     );
+  //   });
+  //   setfilterMautramField(mautamerItems);
+  // }, [search]);
+
+ 
+  
+  // console.log(mautamarField);
+  const changeDateHandler = (event) => {
+ 
+    setdate((current) => [...current, event.target.value]);
+  };
+
+  // useEffect(() => {
+  // console.log(selectedmautamers)
+
+  // }, [selectedmautamers,mautamers])
+
+  
+  const handlesearchchange=(e)=>{
+    // let s=e.target.value.toLocaleLowerCase();
+    // setsearch( e.target.value.toLocaleLowerCase());
+
     let mautamerItems = mautamers.filter((filterItem) => {
       // console.log(filterItem.Age);
       return (
@@ -135,12 +174,121 @@ const Create = (props) => {
       );
     });
     setfilterMautramField(mautamerItems);
-  }, [search, mautamers]);
-  // console.log(mautamarField);
-  const changeDateHandler = (event) => {
-    setdate((current) => [...current, event.target.value]);
-  };
-  // console.log(mautamarField);
+  }
+  
+  let Showlist=useMemo(()=>{
+
+   return (
+    filterMautramField.length>0? filterMautramField.map((result, i) => { return (
+        <Tr key={result["Passport No."]}>
+          <Td>{result["SrNo."]}</Td>
+          <Td>{result["Pilgrim Name"]}</Td>
+          <Td>{result["Passport No."]}</Td>
+          <Td>{result["Group Name"]}</Td>
+          <Td></Td>
+          <Td>ADT</Td>
+          <Td>
+            <Checkbox defaultChecked={result.checked}
+              id="submit"
+              onChange={(checkbox) => {
+               if(checkbox.target.checked=== true){
+               let temp=mautamers.map((m,i)=>{
+
+                 if(m["Passport No."]=== result["Passport No."])
+                 {
+               
+                  return {...m,checked:true}
+                }
+                  return m
+               })
+
+               setmautamers(temp);
+               let temp2={...result}
+                setselectedmautamers([...selectedmautamers,temp2])
+          
+               }
+               else{
+                let temp=mautamers.map((m,i)=>{
+
+                  if(m["Passport No."]=== result["Passport No."])
+                  {
+                
+                   return {...m,checked:false}
+                 }
+                   return m
+                })
+
+                let temp2=selectedmautamers.filter((m,i)=>{
+                   return m["Passport No."]!== result["Passport No."]
+                    
+                })
+                setmautamers(temp);
+                setselectedmautamers(temp2);
+               }
+               
+              }}
+            ></Checkbox>
+          </Td>
+        </Tr>
+      );
+    })
+    :
+    mautamers.map((result, i) => {  return (
+      <Tr key={result["Passport No."]}>
+        <Td>{result["SrNo."]}</Td>
+        <Td>{result["Pilgrim Name"]}</Td>
+        <Td>{result["Passport No."]}</Td>
+        <Td>{result["Group Name"]}</Td>
+        <Td></Td>
+        <Td>ADT</Td>
+        <Td>
+          <Checkbox defaultChecked={result.checked}
+            id="submit"
+            onChange={(checkbox) => {
+             if(checkbox.target.checked=== true){
+             let temp=mautamers.map((m,i)=>{
+
+               if(m["Passport No."]=== result["Passport No."])
+               {
+             
+                return {...m,checked:true}
+              }
+                return m
+             })
+
+             setmautamers(temp);
+             let temp2={...result}
+              setselectedmautamers([...selectedmautamers,temp2])
+        
+             }
+             else{
+              let temp=mautamers.map((m,i)=>{
+
+                if(m["Passport No."]=== result["Passport No."])
+                {
+              
+                 return {...m,checked:false}
+               }
+                 return m
+              })
+
+              let temp2=selectedmautamers.filter((m,i)=>{
+                 return m["Passport No."]!== result["Passport No."]
+                  
+              })
+              setmautamers(temp);
+              setselectedmautamers(temp2);
+             }
+             
+            }}
+          ></Checkbox>
+        </Td>
+      </Tr>
+    );
+  })
+    
+    )
+  },[mautamers,filterMautramField])
   return (
     <>
       <Center my={"1rem"}>
@@ -197,7 +345,23 @@ const Create = (props) => {
           remark: "",
         }}
         onSubmit={async (values) => {
-          // console.log(values);
+          var uniq = "TA" + "-" + new Date().getTime();
+         
+          for (let i = 0; i < selectedmautamers.length; i++) {
+            const realAge = selectedmautamers[i].Age.trim().split(/\s+/);
+         
+            if (realAge[0] >= 4 && realAge[0] <= 10) {
+              // console.log("child");
+              totalChilds++;
+            } else if (realAge[0] > 10) {
+              // console.log("adults");
+              totalAdults++;
+            } else {
+              // console.log("infant");
+              totalInfants++;
+            }
+          }
+          
           axios
             .post(`${process.env.NEXT_PUBLIC_HOST}/createVoucher`, {
               depardate: date[0],
@@ -224,7 +388,7 @@ const Create = (props) => {
               remark: values.remark,
               transportation: transportation,
               agent: cookie.username,
-              mautamers: mautamarField,
+              mautamers: selectedmautamers,
               totalAdult: totalAdults,
               totalInfant: totalInfants,
               totalChild: totalChilds,
@@ -829,18 +993,19 @@ const Create = (props) => {
             >
               Mautmamer's Information
             </Center>
-            <Flex justify={"end"} my="10px" width={"95%"}>
+            <Flex justify={"end"} my="10px" width={"95%"} align="center" >
               <Input
                 type={"search"}
                 placeholder="search"
                 border={"1px"}
                 borderColor="blue.400"
                 width={"30%"}
-                onChange={(e) => {
-                  let searchField = e.target.value.toLocaleLowerCase();
-                  setsearch(searchField);
-                }}
+              value={search}
+                onChange={(e) => { setsearch(e.target.value.toLowerCase())}}
               />
+              <Button ml="5px" colorScheme={"blue"} onClick={handlesearchchange}>search</Button>
+              <Button onClick={()=>{setfilterMautramField([]);setsearch("")}} colorScheme={"red"} ml="5px" >reset</Button>
+             
             </Flex>
             <Box overflow="scroll" maxHeight="300px">
               <TableContainer
@@ -864,59 +1029,7 @@ const Create = (props) => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {filterMautramField.map((result, i) => {
-                      return (
-                        <Tr>
-                          <Td>{result["SrNo."]}</Td>
-                          <Td>{result["Pilgrim Name"]}</Td>
-                          <Td>{result["Passport No."]}</Td>
-                          <Td>{result["Group Name"]}</Td>
-                          <Td></Td>
-                          <Td>ADT</Td>
-                          <Td>
-                            <Checkbox
-                              id="submit"
-                              onChange={(checkbox) => {
-                                // console.log(checkbox.target.checked);
-                                if (checkbox.target.checked == true) {
-                                  let variables = {};
-                                  variables.srno = result["SrNo."];
-                                  variables.name = result["Pilgrim Name"];
-                                  variables.passportname =
-                                    result["Passport No."];
-                                  variables.groupName = result["Group Name"];
-                                  variables.age = result["Age"];
-
-                                  setmautamarField((current) => [
-                                    ...current,
-                                    variables,
-                                  ]);
-                                } else {
-                                  const newArr = mautamarField.filter(
-                                    (object) => {
-                                      return object.srno !== result["SrNo."];
-                                    }
-                                  );
-
-                                  while (mautamarField.length > 0) {
-                                    mautamarField.pop();
-                                  }
-                                  // console.log("hi2", typeof mautamarField);
-                                  // console.log(newArr);
-                                  for (let i = 0; i < newArr.length; i++) {
-                                    // mautamarField.push(newArr[i]);
-                                    setmautamarField((current) => [
-                                      ...current,
-                                      newArr[i],
-                                    ]);
-                                  }
-                                }
-                              }}
-                            ></Checkbox>
-                          </Td>
-                        </Tr>
-                      );
-                    })}
+                   { Showlist}
                   </Tbody>
                 </Table>
               </TableContainer>
