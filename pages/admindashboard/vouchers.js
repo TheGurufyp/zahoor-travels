@@ -90,6 +90,7 @@ function Vouchers(props) {
 
   const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
 
+  const [filterV, setfilterV] = useState( props.allData.payload);
   const [itemsPerPage , setitemsPerPage ] = useState(30);
   const [pagenumber, setpagenumber] = useState(0)
   const [pagesvisited, setpagesvisited] = useState(()=>{return pagenumber*itemsPerPage})
@@ -98,7 +99,6 @@ function Vouchers(props) {
       return Math.ceil(props.allData.payload.length/itemsPerPage);
     }
   })
-  const [filterV, setfilterV] = useState( props.allData.payload);
   const [dislpayitems, setdislpayitems] = useState([]);
 
 useEffect(() => {
@@ -287,10 +287,18 @@ const changePage=({selected})=>{
 export default Vouchers;
 
 export async function getServerSideProps(context) {
-  let data = await fetch(`${process.env.NEXT_PUBLIC_HOST}/getAdminVouchers`);
-  let allData = await data.json();
-
-  return {
-    props: { allData }, // will be passed to the page component as props
-  };
+  try {
+    
+    let data = await fetch(`${process.env.NEXT_PUBLIC_HOST}/getAdminVouchers`);
+    let allData = await data.json();
+  
+    return {
+      props: { allData }, // will be passed to the page component as props
+    };
+  } catch (error) {
+    let allData={payload:[]};
+    return {
+      props: { allData }, // will be passed to the page component as props
+    };
+  }
 }
