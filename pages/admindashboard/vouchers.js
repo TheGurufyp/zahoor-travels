@@ -7,49 +7,125 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
   Text,
   Box,
   Button,
   Heading,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  Tooltip,
-  disabledReason,
-  MenuOptionGroup,
-  MenuDivider,
-  Divider,
-  Flex,
   useMediaQuery,
-  Spinner,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import ConfirmDialog from "../components/ConfirmDialog";
 import VoucherSearch from "../components/VoucherSearch";
-// import Link from "next/link";
+import ReactPaginate from 'react-paginate';
+
+
+
+function Items({ dislpayitems }) {
+  return (
+    <>
+      {dislpayitems?.length > 0
+                ? dislpayitems?.map((data) => {
+                    return (
+                      <Tr key={data._id}>
+                        <Td className="tableborder">
+                          <Text>{data.v_id}</Text>
+                        </Td>
+                        <Td className="tableborder">
+                          {data.agentName ? data.agentName : " "}{" "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data.arrivalDate ? data.arrivalDate : " "}
+                        </Td>
+                        <Td className="tableborder">
+                          {" "}
+                          {data.returnDate ? data.returnDate : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalPersons ? data.totalPersons : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalAdults ? data.totalAdults : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalChildren ? data.totalChildren : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalInfants ? data.totalInfants : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          {data.totalNights ? data.totalNights : " "}
+                        </Td>
+                        <Td className="tableborder" textAlign={"center"}>
+                          <Text fontWeight={"bold"} color="green">
+                            {data.status}
+                          </Text>{" "}
+                        </Td>
+
+                        <Td className="tableborder" textAlign={"center"}>
+                          <Button size={"sm"} colorScheme="blue">
+                            <Link
+                              href={`/admindashboard/viewVoucher?id=${data._id}`}
+                            >
+                              View
+                            </Link>
+                          </Button>
+                        </Td>
+                      </Tr>
+                    );
+                  }):""
+               
+                  }
+    </>
+  );
+}
+
+
+
+
+
+
 function Vouchers(props) {
-  // console.log(typeof props.allData.payload);
-  // let VoucherList = props.allData.payload;
-  // let populationArr = Object.entries(props.allData.payload);
-  // // populationArr.map((data) => {
-  // //   console.log(data);
-  // // });
+  
 
   const [isLargerThan620] = useMediaQuery("(min-width: 620px)");
 
+  const [itemsPerPage , setitemsPerPage ] = useState(30);
+  const [pagenumber, setpagenumber] = useState(0)
+  const [pagesvisited, setpagesvisited] = useState(()=>{return pagenumber*itemsPerPage})
+  const [totalpages, settotalpages] = useState(()=>{
+    if( props.allData.payload){
+      return Math.ceil(props.allData.payload.length/itemsPerPage);
+    }
+  })
+  const [filterV, setfilterV] = useState( props.allData.payload);
+  const [dislpayitems, setdislpayitems] = useState([]);
+
+useEffect(() => {
+  setdislpayitems(filterV.slice(pagesvisited,pagesvisited+itemsPerPage));
+
+}, [filterV,pagesvisited])
+
+
+useEffect(() => {
   
-  const [filterV, setfilterV] = useState([]);
+  setpagesvisited(pagenumber*itemsPerPage);
+
+}, [pagenumber])
+
+
+const changePage=({selected})=>{
+
+  setpagenumber(selected);
+
+
+}
 
  
-  // console.log(props);
+
   return (
     <>
-      <Box maxWidth={"1500px"} mx={"auto"} px="10px">
+      <Box maxWidth={"1500px"} mx={"auto"} px="10px" mb="20px" >
         <Heading
           bg={"blue.500"}
           color="white"
@@ -60,8 +136,7 @@ function Vouchers(props) {
         >
           Manage Vouchers
         </Heading>
-
-        {/* <Flex
+  {/* <Flex
           mt="20px"
           align={"center"}
           justify={"space-around"}
@@ -134,6 +209,7 @@ function Vouchers(props) {
             <Text> 0</Text>
           </Box>
         </Flex> */}
+      
 
         <Box mt="20px">
           <VoucherSearch
@@ -180,111 +256,29 @@ function Vouchers(props) {
               </Tr>
             </Thead>
             <Tbody>
-              {filterV?.length > 0
-                ? filterV?.map((data) => {
-                    return (
-                      <Tr key={data._id}>
-                        <Td className="tableborder">
-                          <Text>{data.v_id}</Text>
-                        </Td>
-                        <Td className="tableborder">
-                          {data.agentName ? data.agentName : " "}{" "}
-                        </Td>
-                        <Td className="tableborder">
-                          {" "}
-                          {data.arrivalDate ? data.arrivalDate : " "}
-                        </Td>
-                        <Td className="tableborder">
-                          {" "}
-                          {data.returnDate ? data.returnDate : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalPersons ? data.totalPersons : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalAdults ? data.totalAdults : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalChildren ? data.totalChildren : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalInfants ? data.totalInfants : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalNights ? data.totalNights : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          <Text fontWeight={"bold"} color="green">
-                            {data.status}
-                          </Text>{" "}
-                        </Td>
-
-                        <Td className="tableborder" textAlign={"center"}>
-                          <Button size={"sm"} colorScheme="blue">
-                            <Link
-                              href={`/admindashboard/viewVoucher?id=${data._id}`}
-                            >
-                              View
-                            </Link>
-                          </Button>
-                        </Td>
-                      </Tr>
-                    );
-                  })
-                : props.allData.payload?.map((data) => {
-                    return (
-                      <Tr key={data._id}>
-                        <Td className="tableborder">
-                          <Text>{data.v_id}</Text>
-                        </Td>
-                        <Td className="tableborder">
-                          {data.agentName ? data.agentName : " "}{" "}
-                        </Td>
-                        <Td className="tableborder">
-                          {" "}
-                          {data.arrivalDate ? data.arrivalDate : " "}
-                        </Td>
-                        <Td className="tableborder">
-                          {" "}
-                          {data.returnDate ? data.returnDate : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalPersons ? data.totalPersons : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalAdults ? data.totalAdults : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalChildren ? data.totalChildren : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalInfants ? data.totalInfants : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          {data.totalNights ? data.totalNights : " "}
-                        </Td>
-                        <Td className="tableborder" textAlign={"center"}>
-                          <Text fontWeight={"bold"} color="green">
-                            {data.status}
-                          </Text>{" "}
-                        </Td>
-
-                        <Td className="tableborder" textAlign={"center"}>
-                          <Button size={"sm"} colorScheme="blue">
-                            <Link
-                              href={`/admindashboard/viewVoucher?id=${data._id}`}
-                            >
-                              View
-                            </Link>
-                          </Button>
-                        </Td>
-                      </Tr>
-                    );
-                  })}
+              <Items dislpayitems={dislpayitems}/>
             </Tbody>
             <Tfoot></Tfoot>
           </Table>
         </TableContainer>
+           
+           <ReactPaginate
+           breakLabel="..."
+           pageRangeDisplayed={3}
+             previousLabel={"< Previous"}
+             nextLabel={"Next >"}
+             pageCount={totalpages}
+             onPageChange={changePage}
+             pageLinkClassName={"page-num"}
+             containerClassName={"paginationBtns"}
+             previousLinkClassName={"previousBtn"}
+             nextLinkClassName={"nextBtn"}
+             disabledClassName={"pagiantionDisabled"}
+             activeClassName={"paginationActive"}
+
+           />
+
+
       </Box>
     </>
   );

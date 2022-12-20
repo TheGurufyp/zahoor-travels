@@ -27,7 +27,10 @@ function VoucherSearch({ filterV, setfilterV, vocuhers }) {
     setvid()
     setkeyword()
     setagentname()
-    setfilterV();
+    setfilterV(vocuhers);
+    setvid("");
+    setkeyword("");
+    setagentname("");
   }
 
   useEffect(() => {
@@ -111,7 +114,7 @@ const unique = [...new Map(final.map((m) => [m.v_id, m])).values()];
     result=filterbyagent(result);
     result=filterbykeyword(result);
     
-    console.log("result: ",result);
+    // console.log("result: ",result);
     setfilterV(result);
   };
 
