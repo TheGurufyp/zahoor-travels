@@ -262,7 +262,8 @@ const changePage=({selected})=>{
           </Table>
         </TableContainer>
            
-           <ReactPaginate
+        {!totalpages<=0 &&
+        <ReactPaginate
            breakLabel="..."
            pageRangeDisplayed={3}
              previousLabel={"< Previous"}
@@ -277,6 +278,7 @@ const changePage=({selected})=>{
              activeClassName={"paginationActive"}
 
            />
+          }
 
 
       </Box>
