@@ -3,7 +3,7 @@ import { Cookies, useCookies } from "react-cookie";
 
 import Link from "next/link";
 import Router from "next/router";
-import { React, useEffect } from "react";
+import { React, useEffect, useMemo } from "react";
 
 import { useState } from "react";
 
@@ -101,11 +101,25 @@ const Create = (props) => {
     );
   }, [FieldValue]);
 
-  MautamarsRowData.map((items) => {
-    // console.log(items);
+  useMemo(() => {
+    MautamarsRowData.map((items) => {
+      // MautamarsList.push(items);
+    });
+  }, [MautamarsRowData]);
 
-    MautamarsList.push(items);
-  });
+  const content = useMemo(
+    () => (
+      <>
+        <Mautamars
+          listMautamers={MautamarsList}
+          getData={setMautamarsRowData}
+          sendData={MautamarsRowData}
+        />
+      </>
+    ),
+    [MautamarsList]
+  );
+
   const [cookie, setCookie] = useCookies(["username"]);
 
   // Simple POST request with a JSON body using fetch
@@ -125,8 +139,6 @@ const Create = (props) => {
         let temp = data.payload.map((m, i) => {
           return { ...m, checked: false };
         });
-        // setmautamers(temp);
-        // setfilterMautramField(temp);
       });
   }, []);
   // console.log(MautamarsList);
@@ -155,17 +167,26 @@ const Create = (props) => {
       });
   };
 
-  // useEffect(() => {
-  //   MautamarsRowData.map((item) => {
-  //     // MautamarsRowData2(item.original);
+  useEffect(() => {
+    MautamarsRowData.map((item) => {
+      // MautamarsRowData2(item.original);
 
-  //     MautamarsRowData2.push(item.original);
-  //   });
-  // });
+      MautamarsRowData2.push(item.original);
+    });
+  });
 
   const changeDateHandler = (event) => {
     setdate((current) => [...current, event.target.value]);
   };
+
+  const flight = useMemo(
+    () => (
+      <>
+        <Flight handleInput={handleInputField} date={countDate} />
+      </>
+    ),
+    [MautamarsList, countDate]
+  );
 
   return (
     <>
@@ -178,13 +199,10 @@ const Create = (props) => {
           width={"90%"}
           marginInline="auto"
         >
-          <Flight handleInput={handleInputField} date={countDate} />
+          <Box>{flight}</Box>
 
-          <Mautamars
-            listMautamers={MautamarsList}
-            getData={setMautamarsRowData}
-            sendData={MautamarsRowData}
-          />
+          <Box>{content}</Box>
+
           <Transportation
             handleInput={handleInputField2}
             FieldValue={transport}

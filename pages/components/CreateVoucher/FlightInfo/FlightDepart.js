@@ -36,7 +36,14 @@ const FlightDepart = (props) => {
           width="95%"
           marginInline={"auto"}
         >
-          <Wrap className="fl-1">
+          <Wrap
+            className="fl-1"
+            // border={"1px"}
+            align={"center"}
+            justify="center"
+            // justify={"space-evenly"}
+            wrap="wrap"
+          >
             <WrapItem>
               <Center h="80px">
                 <Flex direction="column">
@@ -116,7 +123,7 @@ const FlightDepart = (props) => {
                 //  w="280px"
                 h="80px"
               >
-                <Flex mx={"1.5rem"} className="Flex-7" direction={"column"}>
+                <Flex className="Flex-7" direction={"column"}>
                   <Box>Flight No : </Box>
                   <Flex>
                     <Box>
@@ -176,7 +183,7 @@ const FlightDepart = (props) => {
                 // w="250px"
                 h="80px"
               >
-                <Flex mx={"2rem"} direction={"column"}>
+                <Flex direction={"column"}>
                   <Box>Arrival Time :</Box>
                   <Box>
                     <Input
