@@ -5,10 +5,21 @@ body {
 box-sizing: border-box;
 }
 
-.tableborder{
-
-  border: 1px solid rgb(160, 160, 160) !important;
+/* table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+} */
 
 /* .nav:hover{
   background-color: #63B3ED;

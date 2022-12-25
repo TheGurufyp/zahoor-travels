@@ -250,7 +250,7 @@ function Menage() {
                             <Flex justify={"space-evenly"}>
                               <Button size={"sm"} colorScheme="blue">
                                 <Link
-                                  href={`/admindashboard/viewVoucher?id=${data?._id}`}
+                                  href={`/userdashboard/viewVoucher?id=${data?._id}`}
                                 >
                                   View
                                 </Link>
@@ -314,13 +314,22 @@ function Menage() {
 
                         <Td className="tableborder" textAlign={"center"}>
                           {data?.status === "Approved" ? (
-                            <Button size={"sm"} colorScheme="blue">
-                              <Link
-                                href={`/admindashboard/viewVoucher?id=${data?._id}`}
-                              >
-                                View
-                              </Link>
-                            </Button>
+                            <>
+                              <Button size={"sm"} colorScheme="blue">
+                                <Link
+                                  href={`/userdashboard/viewVoucher?id=${data?._id}`}
+                                >
+                                  View
+                                </Link>
+                              </Button>
+                              <Button mx={"1rem"} colorScheme="red" size={"sm"}>
+                                <Link
+                                  href={`/userdashboard/editVoucher?id=${data?.v_id}`}
+                                >
+                                  Edit
+                                </Link>
+                              </Button>
+                            </>
                           ) : (
                             <Tooltip label={"Not approved"}>
                               <Button size={"sm"} colorScheme="red" disabled>

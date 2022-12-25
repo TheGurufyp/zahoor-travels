@@ -3,9 +3,22 @@ const express = require("express");
 const Voucher = require("../../database/Models/VoucherModel");
 const router = express.Router();
 const User = require("../../database/Models/UserModel");
+const { redirect } = require("next/dist/server/api-utils");
+const moment = require("moment");
 
 router.post("/createVoucher", async (req, res, next) => {
-  //   console.log(req.body);
+  // console.log(req.body);
+  const {
+    FieldValue,
+    MautamarsRowData2,
+    transport,
+    agentId,
+    agent,
+    v_id,
+    totalNights,
+  } = req.body;
+  // console.log(FieldValue, transport, MautamarsRowData2);
+
   const {
     depardate,
     departime,
@@ -29,18 +42,33 @@ router.post("/createVoucher", async (req, res, next) => {
     service,
     radio,
     remark,
-    transportation,
-    agent,
-    mautamers,
     totalAdult,
     totalInfant,
     totalChild,
-    v_id,
     totalNight,
-    agentId,
     totalPersons,
-  } = req.body;
-  // console.log(req.body);
+  } = FieldValue;
+  // console.log(MautamarsRowData2);
+  console.log(moment().format());
+  let totalChilds = 0;
+  let totalInfants = 0;
+  let totalAdults = 0;
+
+  MautamarsRowData2.map((item) => {
+    const realAge = parseInt(item.Age.trim().split(/\s+/));
+    // console.log(realAge);
+    if (realAge >= 4 && realAge <= 10) {
+      // console.log("child");
+      totalChilds++;
+    } else if (realAge > 10) {
+      // console.log("adults");
+      totalAdults++;
+    } else {
+      // console.log("infant");
+      totalInfants++;
+    }
+    // console.log(realAge);
+  });
   const getVouchers = new Voucher({
     Depsector1: sector1,
     Depsector2: sector2,
@@ -64,21 +92,23 @@ router.post("/createVoucher", async (req, res, next) => {
     shirka: shirka,
     party: party,
     iata: iata,
-    tranportationDetail: transportation,
+    tranportationDetail: transport,
     agentName: agent,
-    mutamers: mautamers,
+    mutamers: MautamarsRowData2,
     v_id: v_id,
-    totalAdults: totalAdult,
-    totalChildren: totalChild,
-    totalInfants: totalInfant,
-    totalNights: totalNight,
+    totalAdults: totalAdults,
+    totalChildren: totalChilds,
+    totalInfants: totalInfants,
+    totalNights: totalNights,
+    totalPersons: totalAdults + totalChilds + totalInfants,
     agentId: agentId,
-    totalPersons: totalPersons,
   });
   const user_id = agentId;
   getVouchers
     .save()
-    .then()
+    .then((result) => {
+      // res.redirect("/");
+    })
     .catch((err) => {
       console.log(err);
     });

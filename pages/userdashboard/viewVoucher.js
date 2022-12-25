@@ -322,7 +322,7 @@ const ViewVoucher = (props) => {
                   <Tr>
                     <Td>{item.date ? item.date : ""}</Td>
                     <Td>{item.from_to ? item.from_to : ""}</Td>
-                    <Td>{item.types ? item.types : ""}</Td>
+                    <Td>{item.type ? item.type : ""}</Td>
                   </Tr>
                 );
               })}
@@ -365,9 +365,9 @@ const ViewVoucher = (props) => {
               {data.mutamers.map((item) => {
                 return (
                   <Tr>
-                    <Td>{item.name ? item.name : ""}</Td>
-                    <Td>{item.passportname ? item.passportname : ""}</Td>
-                    <Td>{item.dob ? item.dob : ""}</Td>
+                    <Td>{item["Pilgrim Name"] ? item["Pilgrim Name"] : ""}</Td>
+                    <Td>{item["Passport No."] ? item["Passport No."] : ""}</Td>
+                    <Td>{item["Birth Date"] ? item["Birth Date"] : ""}</Td>
                     <Td></Td>
                     <Td></Td>
                     <Td></Td>
