@@ -51,6 +51,8 @@ const Create = (props) => {
       type: "",
     },
   ]);
+
+  const [search, setsearch] = useState("");
   const [countDate, setcountDate] = useState(0);
 
   const handleInputField = (event) => {
@@ -63,6 +65,13 @@ const Create = (props) => {
     data[index][event.target.name] = event.target.value;
     settransport(data);
   };
+  // handle click event of the Remove button
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+    // arr.push(list);
+  };
 
   const addFields = () => {
     let newfield = {
@@ -71,6 +80,10 @@ const Create = (props) => {
       type: "",
     };
     settransport([...transport, newfield]);
+  };
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { date: "", from_to: "", types: "" }]);
   };
 
   const removeFields = (index) => {
@@ -88,6 +101,11 @@ const Create = (props) => {
     );
   }, [FieldValue]);
 
+  MautamarsRowData.map((items) => {
+    // console.log(items);
+
+    MautamarsList.push(items);
+  });
   const [cookie, setCookie] = useCookies(["username"]);
 
   // Simple POST request with a JSON body using fetch
@@ -104,15 +122,20 @@ const Create = (props) => {
       .then((data) => {
         // console.log(data.payload);
         setMautamarsList(data.payload);
+        let temp = data.payload.map((m, i) => {
+          return { ...m, checked: false };
+        });
+        // setmautamers(temp);
+        // setfilterMautramField(temp);
       });
   }, []);
+  // console.log(MautamarsList);
 
   var uniq = "TA" + "-" + new Date().getTime();
 
   const handleOnsubmission = (e) => {
     e.preventDefault();
-    // console.log(transport, FieldValue, MautamarsRowData);
-    // url: `${process.env.NEXT_PUBLIC_HOST}/createVoucher`,
+
     axios
       .post(`${process.env.NEXT_PUBLIC_HOST}/createVoucher`, {
         FieldValue,
@@ -132,13 +155,18 @@ const Create = (props) => {
       });
   };
 
-  useEffect(() => {
-    MautamarsRowData.map((item) => {
-      // MautamarsRowData2(item.original);
+  // useEffect(() => {
+  //   MautamarsRowData.map((item) => {
+  //     // MautamarsRowData2(item.original);
 
-      MautamarsRowData2.push(item.original);
-    });
-  }, [MautamarsRowData, FieldValue, transport]);
+  //     MautamarsRowData2.push(item.original);
+  //   });
+  // });
+
+  const changeDateHandler = (event) => {
+    setdate((current) => [...current, event.target.value]);
+  };
+
   return (
     <>
       <MainHead />
@@ -169,5 +197,4 @@ const Create = (props) => {
     </>
   );
 };
-
 export default Create;

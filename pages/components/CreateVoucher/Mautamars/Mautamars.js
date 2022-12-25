@@ -28,6 +28,7 @@ import {
 } from "@chakra-ui/react";
 import Styles from "./Mautamars.module.css";
 import { Checkbox } from "./Checkbox";
+
 const Mautamars = ({ listMautamers, getData, sendData }) => {
   const [SearchField, setSearchField] = useState("");
 
@@ -47,7 +48,7 @@ const Mautamars = ({ listMautamers, getData, sendData }) => {
       },
       {
         Header: "PASSPORT #",
-        accessor: "[Passport No.]",
+        accessor: "Passport No.",
       },
       {
         Header: "GROUP NAME(LICENSE)",
@@ -100,7 +101,12 @@ const Mautamars = ({ listMautamers, getData, sendData }) => {
       ]);
     }
   );
+  listMautamers.map((items) => {
+    const myJson = JSON.stringify(items);
+    console.log(myJson["Age"]);
+  });
 
+  // console.log(listMautamers);
   const { globalFilter } = state;
   return (
     <>

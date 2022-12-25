@@ -35,18 +35,20 @@ function Pendingvouchers({ responseFromServer }) {
   const [filterVouchers, setfilterVouchers] = useState();
   const [searchInProgress, setsearchInProgress] = useState(false);
   const [vouchers, setvouchers] = useState(responseFromServer);
-  console.log(vouchers)
+
 
   const handleApprove = async (id,agentId) => {
-    console.log(agentId)
+   
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_HOST}/appovevoucher`,
         { vid: id, user_id:agentId },
         { headers: { token: cookie.token } }
       );
-      console.log(res.data);
-    } catch (error) {}
+     
+    } catch (error) {
+
+    }
   };
 
   const clickedYes = async (id,agentId) => {
@@ -56,7 +58,7 @@ function Pendingvouchers({ responseFromServer }) {
         { vid: id, user_id: agentId },
         { headers: { token: cookie.token } }
       );
-      console.log(res.data);
+   
     } catch (error) {
       console.log(error);
     }

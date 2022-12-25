@@ -49,5 +49,46 @@ align-items: center;
 
 }
 
+ /* pagination CSS */
+
+
+ .paginationBtns {
+  width: 100%;
+  /* height: 40px; */
+  list-style: none;
+  display: flex;
+  justify-content: center;
+ 
+  margin-top: 40px;
+  
+}
+
+.paginationBtns a {
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #3182ce;
+  color: #3182ce;
+  cursor: pointer;
+}
+
+.paginationBtns a:hover {
+  color: white;
+  background-color: #3182ce;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #3182ce;
+}
+
+.pagiantionDisabled a {
+  display: none;
+}
+
+
+
+ /* pagination CSS */
+
 
 

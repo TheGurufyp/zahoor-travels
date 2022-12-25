@@ -26,7 +26,7 @@ await User.findByIdAndUpdate({_id:user_id},
 
               res.send({ success: true, payload: "Voucher Approved" });
     } catch (error) {
-        console.log(error)
+       
         res.send({ success: false, payload: "Error While fething data" });
         
     }

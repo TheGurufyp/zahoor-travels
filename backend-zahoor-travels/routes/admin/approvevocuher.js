@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/", async (req, res, next) => {
   const { vid, user_id } = req.body;
-  console.log(user_id)
+  
   if (!vid || !user_id) {
     res.send({ success: false, payload: "id not found in body" });
   }
@@ -14,7 +14,7 @@ router.post("/", async (req, res, next) => {
     let data = await VoucherModel.findById(
       { _id: vid },
       "status agentId totalPersons totalAdults totalChildren totalInfants"
-    );
+    ).where("status").equals("Pending");
 
     data = await data.populate("agentId", "-mutamers -password -token");
     //  console.log(data.agentId.totalAdults)
@@ -43,7 +43,7 @@ router.post("/", async (req, res, next) => {
 
     res.send({ success: true, payload: "Voucher Approved" });
   } catch (error) {
-    console.log(error);
+ 
     res.send({ success: false, payload: "Error While fething data" });
   }}
 });

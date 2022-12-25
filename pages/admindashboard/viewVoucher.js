@@ -116,7 +116,7 @@ const ViewVoucher = (props) => {
               </Text>
             </Box>
             <Box mx={"1rem"} display={"flex"} fontWeight="semibold">
-              Basma Vno :{" "}
+            Zah Vno :{" "}
               <Text fontWeight={"normal"}>{data.v_id ? data.v_id : ""}</Text>
             </Box>
           </Flex>
@@ -434,7 +434,7 @@ export async function getServerSideProps(context) {
     `${process.env.NEXT_PUBLIC_HOST}/adminviewvoucher?id=${id}`
   );
   let allData = await data.json();
-  console.log(allData);
+
 
   return {
     props: { allData }, // will be passed to the page component as props
