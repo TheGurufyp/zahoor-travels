@@ -52,7 +52,6 @@ const Create = (props) => {
     },
   ]);
 
-  const [search, setsearch] = useState("");
   const [countDate, setcountDate] = useState(0);
 
   const handleInputField = (event) => {
@@ -92,7 +91,6 @@ const Create = (props) => {
     settransport(data);
   };
 
-  // console.log("data ", FieldValue, transport);
   useEffect(() => {
     setcountDate(
       FieldValue.returndate.split("-")[2] -
@@ -100,12 +98,6 @@ const Create = (props) => {
         1
     );
   }, [FieldValue]);
-
-  useMemo(() => {
-    MautamarsRowData.map((items) => {
-      // MautamarsList.push(items);
-    });
-  }, [MautamarsRowData]);
 
   const content = useMemo(
     () => (
@@ -147,7 +139,7 @@ const Create = (props) => {
 
   const handleOnsubmission = (e) => {
     e.preventDefault();
-
+    // console.log(transport, FieldValue, MautamarsRowData2);
     axios
       .post(`${process.env.NEXT_PUBLIC_HOST}/createVoucher`, {
         FieldValue,
@@ -185,7 +177,7 @@ const Create = (props) => {
         <Flight handleInput={handleInputField} date={countDate} />
       </>
     ),
-    [MautamarsList, countDate]
+    [FieldValue]
   );
 
   return (

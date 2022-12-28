@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Center } from "@chakra-ui/react";
 import FlightDepart from "./FlightDepart";
 import FlightReturn from "./FlightReturn";
 
 const Flight = ({ handleInput, date, data }) => {
+  useEffect(() => {
+    console.log("render F");
+  }, []);
   // console.log("1", date);
   return (
     <>

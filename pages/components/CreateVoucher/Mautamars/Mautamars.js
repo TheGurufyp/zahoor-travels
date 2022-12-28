@@ -29,6 +29,9 @@ import {
 import Styles from "./Mautamars.module.css";
 import { Checkbox } from "./Checkbox";
 const Mautamars = ({ listMautamers, getData, sendData }) => {
+  useEffect(() => {
+    console.log("render M");
+  }, []);
   const [SearchField, setSearchField] = useState("");
 
   const HandleSearch = (event) => {
