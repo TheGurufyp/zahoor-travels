@@ -61,9 +61,34 @@ const Transportation = (props) => {
                   name="from_to"
                   value={items.from_to}
                 >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  <option value="JED CITY-JED APT">JED CITY-JED APT</option>
+                  <option value="JED(APT)-JED(CITY)">JED(APT)-JED(CITY)</option>
+                  <option value="JED-MAK">JED-MAK</option>
+                  <option value="JED-MED">JED-MED</option>
+                  <option value="MAD APT-MAD HTL">MAD APT-MAD HTL</option>
+                  <option value="MAD HTL-MAD TRAIN STATION">
+                    MAD HTL-MAD TRAIN STATION
+                  </option>
+                  <option value="MAD HTL-MAD TRAIN STATION">
+                    MAD HTL-MAD TRAIN STATION
+                  </option>
+                  <option value="MAD TRAIN STATION - MAD HTL">
+                    MAD TRAIN STATION - MAD HTL
+                  </option>
+                  <option value="MAD-JED">MAD-JED</option>
+                  <option value="MAD-MAK">MAD-MAK</option>
+                  <option value="MADINAH ZIARAT">MADINAH ZIARAT</option>
+                  <option value="MAK HTL-MAK TRAIN STATION">
+                    MAK HTL-MAK TRAIN STATION
+                  </option>
+                  <option value="MAK TRAIN STATION-MAK HTL">
+                    MAK TRAIN STATION-MAK HTL
+                  </option>
+                  <option value="MAK-JED">MAK-JED</option>
+                  <option value="MAK-MAD">MAK-MAD</option>
+                  <option value="MAKKAH ZIARAT">MAKKAH ZIARAT</option>
+                  <option value="MED ( HTL -APT )">MED ( HTL -APT )</option>
+                  <option value="Self">Self</option>
                 </Select>
               </Box>
               <Box w={"25%"}>
@@ -73,9 +98,13 @@ const Transportation = (props) => {
                   name="type"
                   value={items.type}
                 >
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  <option value="BUS">BUS</option>
+                  <option value="CAR">CAR</option>
+                  <option value="COASTER">COASTER</option>
+                  <option value="GMC">GMC</option>
+                  <option value="H-1">H-1</option>
+                  <option value="HIACE">HIACE</option>
+                  <option value="SELF">SELF</option>
                 </Select>
               </Box>
               {props.FieldValue.length > 1 ? (
